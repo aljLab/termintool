@@ -4,7 +4,7 @@ const timeRegEx="([0-2]?[0-9]\.[0-5][0-9])";
 
 function setUpTimeManagement(){//called onload of body, 
     fetchTermine(()=>{
-        console.log("termine gefetched altaaa.");
+        console.log("termine gefetched.");
         });
     fetchKunden();
     setUpTimeTable();

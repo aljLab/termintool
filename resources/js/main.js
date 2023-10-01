@@ -7,8 +7,7 @@ var sunday = new Date(today.getFullYear(), today.getMonth(), today.getDate()+(6-
 var currentDay=today.getDate(), currentMonth=today.getMonth(), currentYear=today.getFullYear();
 //hier werden alle arrays etc. durch db anfragen gefüllt
 var termine =[]//[new Termin("09", "30", "19.9.2023","Anamnese", 4), new Termin("11", "30", "19.9.2023", "Untersuchung", 6), new Termin("10", "30", "21.9.2023", "Hallo", 5)];
-var slots= ["09.30", "09.45", "10.00", "10.15", "10.30", "10.45", "11.00", "11.15", "11.30", "11.45","12.00", "15.00", "15.15", "15.30", "15.45", "16.00", "16.15", "16.30",
-            "16.45", "17.00", "17.15", "17.30", "17.45", "18.00"];
+
 const leistungen=[
     new Leistung("Esalenmassage (60 Minuten)", 4, "65€"), new Leistung("Esalenmassage (75 Minuten)", 5, "80€"),
     new Leistung("Esalenmassage (90 Minuten)", 6, "95€"), new Leistung("Homöopathische Erstanamnese", 6, "175€"),
@@ -71,11 +70,6 @@ function setUpDays(){
         a.setAttribute("id", bhweekdays[i]);
         a.style.height= "100%";
         a.style.width= "20%";
-        /*if(i<5){//hardcoded, dass Mo-Mi frei ist!!!
-            a.style.backgroundColor="#3b8e9b";
-        }else{
-            a.style.backgroundColor="var(--lightest-color)";
-        }*/
         c.appendChild(a);
     }
     fillDaySlots(new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()));

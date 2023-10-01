@@ -32,16 +32,6 @@ function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
     })
     prepareSubmission(terminstring);
 }
-function closeModal(){
-    let mb =document.getElementById("modalBack");
-    let m = document.getElementById("bookingbox");
-    mb.style.display="none";
-    m.style.display="none";
-    let b = document.body;
-    b.style.height="auto";
-    b.style.overflow="scroll";
-    window.location.reload();
-}
 function displayDateChosen(){
     let flag = document.getElementById("zeitpunkt");
     flag.innerHTML=terminstring;
@@ -164,11 +154,16 @@ function noTerminConflicts(termin, terminList){//returns true, if termin does no
    return true;
 
 }
-function convertToMoSo(x){
-    //getDay() gibt für Sonntag 0 aus -> gewollt ist Mo = 0 -> So = 6 ---> alle außer So dekrementieren, so 6 mal inkrementieren
-    return x != 0? x-1: 6;//returns 0-6(Mo-So)
+function closeModal(){
+    let mb =document.getElementById("modalBack");
+    let m = document.getElementById("bookingbox");
+    mb.style.display="none";
+    m.style.display="none";
+    let b = document.body;
+    b.style.height="auto";
+    b.style.overflow="scroll";
+    window.location.reload();
 }
-
 
 /*---------------------------------------Validation and Sanitization help methods-----------------------------------*/
 function validPhone(str){
@@ -191,4 +186,3 @@ function sanitizePhone(str){
     clean = clean.replaceAll(/( |\.|-)/gi, "");
     return clean;
 }
-console.log(convertToTermin("01.03.2023, 10:30 Uhr", "Esalenmassage (60 Minuten)"));
