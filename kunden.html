@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <link href="resources/css/styles.css" rel = "stylesheet">
+        <script src="resources/js/main.js" defer></script>
+        <script src="resources/js/kunden.js" defer></script>
+        <title>Kundenübersicht</title>
+    </header>
+    <body onload="fillKundenTabelle()">
+    <div id="back">
+        <div id="container">
+        <div id="navbar">
+            <div id="logo"><p style="margin-left:15px;font-weight: bold;">Naturheilpraxis Martina La Bonté</p></div>
+            <div id="login"><a href="./index.html"><img style = "width:25px;height:30px;margin:15px;" src="resources/images/logout_icon.png"></a></div>
+        </div>
+        <div id="maincontainer">
+            <div id="sidebar">
+                <br />
+                    <a class="listItem" href="index_admin.html">• Kalender</a><br />
+                    <a class="listItem" href="time_management.html">• Zeitmanagement</a><br />
+                    <a class="listItem" href="termine.html">• Termine</a><br />
+                    <a class="listItem" id="currentItem">• Kunden</a><br />
+                    <a class="listItem" href="leistungen.html">• Leistungen</a><br />
+                    <button onclick = "checkFetching()">testen</button>
+            </div>
+            <div id="kundenContainer">
+                <table id="kundenTabelle">
+                    <tr>
+                        <th>Anrede</th>
+                        <th>Vorname</th>
+                        <th>Nachname</th>
+                        <th>Email</th>
+                        <th>Telefonnummer</th>
+                    </tr>
+                </table>       
+            </div>
+        </div>
+    </div>
+    </div>
+    </body> 
+</html>

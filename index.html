@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <link href="./resources/css/styles.css" rel = "stylesheet">
+        <script src="./resources/js/main.js" defer></script>
+        <script src="./resources/js/requesting.js" defer></script>
+        <script src="./resources/js/request_handler.js" defer></script>
+        <title>Termintool</title>
+    </header>
+    <body onload ="setUp()">
+    <div id="back">
+        <div id="container">
+            <div id="navbar">
+                <div id="logo"><p style="margin-left:15px;font-weight: bold;">Naturheilpraxis Martina La Bonté</p></div>
+                <div id="login"><a href="./server-side-php/login.php"><img style = "width:25px;height:30px;margin:15px;" src="./resources/images/person.png"></a></div>
+            </div>
+            <div id="maincontainer">
+                <div id="calcontainer">
+                    <div id="calnav">
+                        <div id="lbutton"></div>
+                        <div id="weeksign"></div>
+                        <div id="rbutton"></div>
+                    </div>
+                    <div id="days">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    <div id="modalBack">
+
+    </div>
+    <div id="modal">
+        <div id="bookingbox">
+            <span id = "closeSpan"><button onclick="closeModal()">X</button></span>
+            <h3>Terminbuchung</h3>
+            <p id="zeitpunkt"></p>
+            <form id="bform" method = "POST">
+                Anrede:<br /><select name="anrede" id="anredeselect">
+                    <option value="Herr">Herr</option>
+                    <option value="Frau">Frau</option>
+                    <option value="Dr.">Dr.</option>
+                </select>
+                Vorname:<br /><input type = "text" name="vorname" id ="vornameinput" pattern="\w*"><br />
+                Nachname:<br /><input type="text" name = "nachname" id ="nachnameinput"><br />
+                E-Mail-Adresse: <br /><input type="text" name = "mail" id ="mailinput"><br />
+                Telefonnummer: <br /><input type="text" name = "phone" id ="phoneinput"><br />
+                Leistung: <br /> <select name="leistung" id="leistungsselect">
+                </select><br/>
+                <input type="submit" name="submit" value = "Verbindlich buchen" id = "submitButton"><br/>
+             </form>
+                <span id="feedback"></span><br />
+            </div>
+    </div>
+</html>
