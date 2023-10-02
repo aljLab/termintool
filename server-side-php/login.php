@@ -1,7 +1,7 @@
 <?php
     session_start();
-    $n = $_SERVER['REDIRECT_admin'];//env Variable
-    $p = $_SERVER['REDIRECT_adminpassword'];
+    $n = $_SERVER['admin'];//env Variable
+    $p = $_SERVER['adminpassword'];
     $name = "";
     $ErrorMessage="";
     if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -18,6 +18,8 @@
             $ErrorMessage="* Falscher Nutzername";
             echo "ist: $n und {$_SERVER['admin']} ist die env";
             echo "ist: $p und {$_SERVER['adminpassword']} ist die env";
+            $host = $_SERVER["HTTP_HOST"];
+            echo "Der Host sollte 443 sein, er ist $host";
         }
     }
 ?>
