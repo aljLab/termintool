@@ -12,14 +12,10 @@
                     $_SESSION["name"]=$name;
                     header("Location: ../index_admin.html");
             }else{
-                $ErrorMessage="* Falsches Passwort";
+                $ErrorMessage="* Falscher Nutzername oder falsches Passwort";
             }
         }else{
-            $ErrorMessage="* Falscher Nutzername";
-            echo "ist: $n und {$_SERVER['admin']} ist die env";
-            echo "ist: $p und {$_SERVER['adminpassword']} ist die env";
-            $host = $_SERVER["HTTP_HOST"];
-            echo "Der Host sollte 443 sein, er ist $host";
+            $ErrorMessage="* Falscher Nutzername oder falsches Passwort";
         }
     }
 ?>
