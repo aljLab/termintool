@@ -1,7 +1,7 @@
 <?php
     session_start();
-    $n = $_SERVER['admin'];//env Variable
-    $p = $_SERVER['adminpassword'];
+    $n = getenv('admin');//env Variable
+    $p = getenv('adminpassword');
     $name = "";
     $ErrorMessage="";
     if($_SERVER["REQUEST_METHOD"]=="POST"){
