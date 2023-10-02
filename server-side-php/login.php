@@ -4,8 +4,6 @@
     $p = $_SERVER["adminpassword"];
     $name = "";
     $ErrorMessage="";
-    echo $n;
-    echo $p;
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         $name = $_POST["name"];
         if($_POST["name"]==$n){
@@ -18,6 +16,8 @@
             }
         }else{
             $ErrorMessage="* Falscher Nutzername";
+            echo $n;
+            echo $p;
         }
     }
 ?>
