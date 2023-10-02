@@ -16,8 +16,8 @@
             }
         }else{
             $ErrorMessage="* Falscher Nutzername";
-            echo $n;
-            echo $p;
+            echo "ist: $n und {$_SERVER['admin']} ist die env";
+            echo "ist: $p und {$_SERVER['adminpassword']} ist die env";
         }
     }
 ?>
