@@ -1,7 +1,7 @@
 <?php
     session_start();
-    $n = $_SERVER['admin'];//env Variable
-    $p = $_SERVER['adminpassword'];
+    $n = $_SERVER['REDIRECT_admin'];//env Variable
+    $p = $_SERVER['REDIRECT_adminpassword'];
     $name = "";
     $ErrorMessage="";
     if($_SERVER["REQUEST_METHOD"]=="POST"){
