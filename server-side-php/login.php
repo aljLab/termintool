@@ -12,10 +12,10 @@
                     $_SESSION["name"]=$name;
                     header("Location: ../index_admin.html");
             }else{
-                $ErrorMessage="* Falscher Nutzername oder falsches Passwort";
+                $ErrorMessage="* Falsches Passwort";
             }
         }else{
-            $ErrorMessage="* Falscher Nutzername oder falsches Passwort";
+            $ErrorMessage="* Falscher Nutzername";
         }
     }
 ?>
