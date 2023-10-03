@@ -31,6 +31,9 @@ function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
         select.appendChild(opt);
     })
     prepareSubmission(terminstring);
+    if ("virtualKeyboard" in navigator) {
+        navigator.virtualKeyboard.overlaysContent = true;
+      }
 }
 function displayDateChosen(){
     let flag = document.getElementById("zeitpunkt");
