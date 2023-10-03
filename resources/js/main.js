@@ -58,9 +58,9 @@ function setUp(){
         fetchKunden();
         console.log("Tablet set up finished.");
     }else{
-        fetchTermine();//(setUpDays);
+        fetchTermine(setUpDays);
         fetchKunden();
-        console.log("Desktop set up finished.");
+        console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);
     }
 }
 

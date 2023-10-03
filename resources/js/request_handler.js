@@ -1,4 +1,4 @@
-function fetchTermine(callback){
+/*function fetchTermine(callback){
     fetch('./server-side-php/termin_handle.php')
     .then(response =>{
         if(!response.ok){
@@ -18,8 +18,29 @@ function fetchTermine(callback){
     .catch(error=>{
         console.error('Fetch error', error);
     });
+}*/
+function fetchTermine(callback) {
+    console.log(`Termine: ${termine}`);
+    fetch('./server-side-php/termin_handle.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not okay.");
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            // No need to parse JSON again, as it's already parsed {termin: JSON-String}
+            data.forEach(obj=>{
+                termine.push(JSON.parse(obj.termin));
+            })
+            console.log("Data received and assigned to termine");
+            callback();
+        })
+        .catch(error => {
+            console.error('Fetch error', error);
+        });
 }
-
 function fetchKunden(){
     fetch('server-side-php/kunden_handle.php')
     .then(response =>{
@@ -30,9 +51,9 @@ function fetchKunden(){
         }
     })
     .then(data =>{
-        const k=data.map(item => JSON.parse(item));
-        k.forEach(e=>{
-            kunden.push(e);
+        data.forEach(e=>{
+            kunden.push(JSON.parse(e.kunde));
+            console.log(JSON.parse(e.kunde));
         })
     })
     .catch(error=>{
@@ -68,32 +89,4 @@ function insertTermin(termin){//Takes Termin-Objekt als Input und stellt POST-RE
         console.error('Fetch error:', error);
     });
 }
-function fetchTermine() {
-    console.log(`Termine: ${termine}`);
-    fetch('./server-side-php/termin_handle.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not okay.");
-            } else {
-                console.log(response.json);
-                return response.json();
-            }
-        })
-        .then(data => {
-            // No need to parse JSON again, as it's already parsed
-            {termin: JSON-String}
-            console.log(`Termine${termine}`);
-            console.log(`Data: ${data}`);
-            console.log(data);
-            data.forEach(obj=>{
-                termine.push(JSON.parse(obj.termin));
-            })
-            console.log("Data received and assigned to termine");
-            termine.forEach(termin =>{
-                console.log(termin.leistung);
-            });
-        })
-        .catch(error => {
-            console.error('Fetch error', error);
-        });
-}
+
