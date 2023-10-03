@@ -99,7 +99,7 @@ function fillDaySlots(){
                         let minutes=`0${d.getMinutes()}`.slice(-2);
                         let temp=document.createElement("div");
                         if(checkIfTaken(date, hour, minutes)!=false){
-                            d=new Date(d.getTime()+(15*(checkIfTaken(date, hour, minutes)-1)*60*1000));
+                            d=new Date(d.getTime()+((checkIfTaken(date, hour, minutes))*15*60*1000));
                         }else{
                             temp.innerHTML=`${hour}:${minutes}`;
                             temp.setAttribute("class", "timeSlot");
