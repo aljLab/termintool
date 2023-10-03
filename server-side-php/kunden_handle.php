@@ -1,6 +1,6 @@
 <?php
-$dbuser=getenv("dbuser");
-$dbuserpassword = getenv("dbuserpassword");
+$dbuser=$_SERVER["dbuser"];
+$dbuserpassword =$_SERVER["dbuserpassword"];
 $dns = "mysql:host=localhost;dbname=termintool";
 
 try{
@@ -12,7 +12,7 @@ try{
     if($stmnt){
         $stmnt->execute();
         $stmnt = $conn->prepare($sql);
-        $data = $stmnt.fetchAll(PDO::FETCH_ASSOC); //[kunde => [JSON-String]]
+        $data = $stmnt->fetchAll(PDO::FETCH_ASSOC); //[kunde => [JSON-String]]
         header("Content-Type:application/json");
         echo json_encode($data);// echos [{kunde:JSON-STring},{kunde:JSON-STring}, etc.]
     }
