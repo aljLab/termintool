@@ -83,7 +83,7 @@ function fetchTermine() {
             // Assuming the response from PHP is already an array of objects
             termine = data; // Assign the data directly to termine
             console.log("Data received and assigned to termine");
-            console.log(`Termine: ${termine}`);
+            console.log(`Termine: ${termine}, erste Property ist ${termine[0].date}`);
         })
         .catch(error => {
             console.error('Fetch error', error);
