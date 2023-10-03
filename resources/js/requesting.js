@@ -23,17 +23,18 @@ function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
     terminstring = e.id;
     displayDateChosen();
     var select = document.getElementById("leistungsselect");
-    console.log(select);
+    fillLeistungsSelect(select);
+    select.value = document.getElementById("chooseLeistung").value;
+    prepareSubmission(terminstring);
+}
+function fillLeistungsSelect(select){
+    select.innerHTML="<option selected>--</option>";
     leistungen.forEach(l=>{
         let opt = document.createElement("option");
         opt.innerHTML=`${l.name}: ${l.preis}`;
         opt.value=`${l.name}`;
         select.appendChild(opt);
     })
-    prepareSubmission(terminstring);
-    if ("virtualKeyboard" in navigator) {
-        navigator.virtualKeyboard.overlaysContent = true;
-      }
 }
 function displayDateChosen(){
     let flag = document.getElementById("zeitpunkt");

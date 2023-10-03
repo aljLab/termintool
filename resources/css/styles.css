@@ -120,6 +120,30 @@ hr{
     width: 20%;
     justify-content: end;
 }
+#calnavbarselect{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#leistungsformcontainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#leistungsform{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    background-color: var(--lightest-color);
+    border-radius: 7px;
+}
+#chooseLeistung{
+    width: 60%;
+    font-size: 30px;
+    height: auto;
+    margin: 3px;
+}
 #days{
     display: flex;
     flex-direction: row;
@@ -152,6 +176,20 @@ hr{
 .timeSlot:hover{
     background-color:#a1d8e0;
     cursor: pointer;
+}
+.invalidTimeSlot{
+    color: white;
+    border: 2px solid white;
+    display: flex;
+    height: 30px;
+    background-color: gray;
+    text-align: center;
+    font-size: larger;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    box-shadow: #000;
+    pointer-events: none;
 }
 /*--------------------loginPage------------------------*/
 
