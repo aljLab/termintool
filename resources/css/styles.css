@@ -362,6 +362,7 @@ form:invalid > button{
     #bookingbox{
         left: 10%;
         width: 80%;
+        height: 40%;
     }
     #bform{
         font-size: 20px;
