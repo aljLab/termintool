@@ -192,6 +192,7 @@ form{
     justify-content: flex-start;
     top: 50px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 #modalBack{
     display:none;
