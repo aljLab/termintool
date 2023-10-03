@@ -81,7 +81,7 @@ function fetchTermine() {
         .then(data => {
             // No need to parse JSON again, as it's already parsed
             // Assuming the response from PHP is already an array of objects
-            termine = data; // Assign the data directly to termine
+            termine = JSON.parse(data);
             console.log("Data received and assigned to termine");
             termine.forEach(termin =>{
                 console.log(termin.leistung);
