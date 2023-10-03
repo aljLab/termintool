@@ -83,6 +83,7 @@ function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an 
         c.appendChild(a);
     }
     fillDaySlots();
+    console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);
 }
 function fillDaySlots(){
     for(l=0;l<5;l++){

@@ -42,7 +42,7 @@ function fetchTermine(callback) {
         });
 }
 function fetchKunden(){
-    fetch('server-side-php/kunden_handle.php')
+    fetch('./server-side-php/kunden_handle.php')
     .then(response =>{
         if(!response.ok){
             throw new Error("Network response was not okay.");
