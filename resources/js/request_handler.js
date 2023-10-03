@@ -86,7 +86,7 @@ function fetchTermine() {
             console.log(`Data: ${data}`);
             console.log(data);
             data.forEach(obj=>{
-                termine.push(JSON.parse(obj[termin]));
+                termine.push(JSON.parse(obj.termin));
             })
             console.log("Data received and assigned to termine");
             termine.forEach(termin =>{
