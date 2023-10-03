@@ -68,25 +68,24 @@ function insertTermin(termin){//Takes Termin-Objekt als Input und stellt POST-RE
         console.error('Fetch error:', error);
     });
 }
-function fetchTermine(){
+function fetchTermine() {
     console.log(`Termine: ${termine}`);
     fetch('./server-side-php/termin_handle.php')
-    .then(response =>{
-        if(!response.ok){
-            throw new Error("Network response was not okay.");
-        }else{
-            return response.json();
-        }
-    })
-    .then(data =>{
-        const t=data.map(item => JSON.parse(item));
-        t.forEach(termin =>{
-            termine.push(termin);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not okay.");
+            } else {
+                return response.json();
+            }
         })
-        console.log("everything has been pushed");
-        console.log(`Termine: ${termine}`);
-    })
-    .catch(error=>{
-        console.error('Fetch error', error);
-    });
+        .then(data => {
+            // No need to parse JSON again, as it's already parsed
+            // Assuming the response from PHP is already an array of objects
+            termine = data; // Assign the data directly to termine
+            console.log("Data received and assigned to termine");
+            console.log(`Termine: ${termine}`);
+        })
+        .catch(error => {
+            console.error('Fetch error', error);
+        });
 }
