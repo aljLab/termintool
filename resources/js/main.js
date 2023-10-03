@@ -49,12 +49,22 @@ function Kunde(vorname, nachname, mail, phone, termine){
 
 /*------------------------Index Page handling------------------------------*/
 function setUp(){
-    fetchTermine(setUpDays);
-    fetchKunden();
-    console.log("set up finished.");
+    if(window.innerWidth<=767){
+        fetchTermine(setUpSmartphoneDays);
+        fetchKunden();
+        console.log("Smartphone set up finished.");
+    }else if(window.innerWidth<=1024){
+        fetchTermine(setUpDays);
+        fetchKunden();
+        console.log("Tablet set up finished.");
+    }else{
+        fetchTermine(setUpDays);
+        fetchKunden();
+        console.log("Desktop set up finished.");
+    }
 }
 
-function setUpDays(){
+function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an #days, erstellt header und setzt id auf =bhweekdays[i]
     setUpNavbar();
     //Tageslots setup------------------------------------------------------------------------
     c.innerHTML="";
@@ -72,7 +82,7 @@ function setUpDays(){
         a.style.width= "20%";
         c.appendChild(a);
     }
-    fillDaySlots(new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()));
+    fillDaySlots();
 }
 function fillDaySlots(){
     for(l=0;l<5;l++){
@@ -83,20 +93,20 @@ function fillDaySlots(){
                 let ed = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
                 let d = new Date(sd.getTime());
                 while(d<ed){
-                    let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;
-                    let hour=d.getHours();
-                    let minutes=`0${d.getMinutes()}`.slice(-2);
-                    let temp=document.createElement("div");
-                    if(checkIfTaken(date, hour, minutes)!=false){
-                        d+=new Date(d.getTime()+(15*(checkIfTaken(date, hour, minutes)-1)*60*1000));
-                    }else{
-                        temp.innerHTML=`${hour}:${minutes}`;
-                        temp.setAttribute("class", "timeSlot");
-                        temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
-                        temp.setAttribute("onclick","deliverBooking(this)");
-                        div.appendChild(temp);
-                        d = new Date(d.getTime()+(15*60*1000));
-                    }
+                        let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;
+                        let hour=d.getHours();
+                        let minutes=`0${d.getMinutes()}`.slice(-2);
+                        let temp=document.createElement("div");
+                        if(checkIfTaken(date, hour, minutes)!=false){
+                            d=new Date(d.getTime()+(15*(checkIfTaken(date, hour, minutes)-1)*60*1000));
+                        }else{
+                            temp.innerHTML=`${hour}:${minutes}`;
+                            temp.setAttribute("class", "timeSlot");
+                            temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
+                            temp.setAttribute("onclick","deliverBooking(this)");
+                            if(pastToday(d)){div.appendChild(temp);}
+                            d = new Date(d.getTime()+(15*60*1000));
+                        }
             }
         });
     }
@@ -154,12 +164,106 @@ function incrementWeek(){
     setUpDays();
 }
 function decrementWeek(){
-    today = new Date(today.getFullYear(), today.getMonth(), today.getDate()-7);
-    monday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()-7);
-    sunday = new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate()-7);
-    uptodate();
-    setUpDays();
+    if(pastToday(new Date(monday.getTime()-3*24*60*60*1000))){//nur dekrementieren wenn mindestens der Freitag letzter Woche noch in der Zukunft liegt
+        today = new Date(today.getFullYear(), today.getMonth(), today.getDate()-7);
+        monday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()-7);
+        sunday = new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate()-7);
+        uptodate();
+        setUpDays();
+    }
 }
 function uptodate(){//day, month (1-12;Jan-Dez) und year an aktuelles Datum anpassen
     day=today.getDate(); month=today.getMonth()+1; year= today.getFullYear();
+}
+
+/*--------mobile Set up()---------------- */
+/*--------------------smartphone-------------*/
+function setUpSmartphoneDays(){
+    setUpNavbarSmartphone();
+    fillDaySlot();
+}
+function fillDaySlot(){
+    c.innerHTML="";
+    let bhprop = bhweekdays[convertToMoSo(today.getDay())];
+    let div = document.createElement("div");
+    div.style.width="100%";
+    div.style.display="flex";
+    div.style.flexDirection="column";
+    div.style.alignItems="center";
+    div.id = bhprop;
+    c.appendChild(div);
+    //durch timeslots für entsprechenden Wochentag loopen und Terminslots erstellen
+    let bhArray = bh[bhprop];
+    bhArray.forEach(timeslot=>{
+        //pro timeslot: ein Start- (sd) und Enddatum (ed), ein Counterdatum (d)
+        let sd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
+        let ed = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
+        let d = new Date(sd.getTime());
+        while(d<ed){
+                let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;
+                let hour=d.getHours();
+                let minutes=`0${d.getMinutes()}`.slice(-2);
+                let temp=document.createElement("div");
+                if(checkIfTaken(date, hour, minutes)!=false){
+                    d=new Date(d.getTime()+(15*(checkIfTaken(date, hour, minutes)-1)*60*1000));
+                }else{
+                    temp.innerHTML=`${hour}:${minutes}`;
+                    temp.setAttribute("class", "timeSlot");
+                    temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
+                    temp.setAttribute("onclick","deliverBooking(this)");
+                    if(pastToday(d)){div.appendChild(temp);}
+                    d = new Date(d.getTime()+(15*60*1000));
+                }
+            }
+        });
+        console.log("Everything set up.");
+}
+function setUpNavbarSmartphone(){
+    //navbar setup smartphone-------------------------------------------
+    //get Divs from HTMl file
+    var l = document.getElementById("lbutton");
+    l.innerHTML="";
+    var w = document.getElementById("weeksign");
+    w.innerHTML="";
+    var r = document.getElementById("rbutton");
+    r.innerHTML="";
+    //create Button und day dísplay + initiate
+    var lbutton = document.createElement("button");
+    lbutton.innerHTML="<";
+    lbutton.style.margin="5px";
+    lbutton.setAttribute("onclick", "decrementDay()");
+    var week = document.createElement("div");
+    week.innerHTML= `${today.getDate()}.${today.getMonth()+1}.${today.getFullYear()}`;
+    var rbutton = document.createElement("button");
+    rbutton.innerHTML=">";
+    rbutton.style.margin="5px";
+    rbutton.setAttribute("onclick", "incrementDay()");
+    //appending new Items to parent container
+    l.appendChild(lbutton);
+    w.appendChild(week);
+    r.appendChild(rbutton); 
+}
+function incrementDay(){
+    if(convertToMoSo(today.getDay())==4){
+        today = new Date(today.getFullYear(), today.getMonth(), today.getDate()+3);
+        uptodate();
+        setUpSmartphoneDays();
+    }else{
+        today = new Date(today.getFullYear(), today.getMonth(), today.getDate()+1);
+        uptodate();
+        setUpSmartphoneDays();
+    }
+}
+function decrementDay(){
+    if(pastToday(new Date(today.getTime()-1*24*60*60*1000))){//nur dekrementieren wenn der vorherige Tag noch in der Zukunft liegt
+        if(convertToMoSo(today.getDay())==0){
+            today = new Date(today.getFullYear(), today.getMonth(), today.getDate()-3);
+            uptodate();
+            setUpSmartphoneDays();
+        }else{
+            today = new Date(today.getFullYear(), today.getMonth(), today.getDate()-1);
+            uptodate();
+            setUpSmartphoneDays();
+        }
+    }
 }

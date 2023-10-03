@@ -5,6 +5,7 @@
         <script src="./resources/js/main.js" defer></script>
         <script src="./resources/js/requesting.js" defer></script>
         <script src="./resources/js/request_handler.js" defer></script>
+        <script src="./resources/js/timemanagement.js" defer></script>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,10 +36,9 @@
     <div id="modalBack">
 
     </div>
-    <div id="modal">
         <div id="bookingbox">
             <span id = "closeSpan"><button onclick="closeModal()">X</button></span>
-            <h3>Terminbuchung</h3>
+            <h2>Terminbuchung</h2>
             <p id="zeitpunkt"></p>
             <form id="bform" method = "POST">
                 Anrede:<br /><select name="anrede" id="anredeselect">
@@ -53,8 +53,7 @@
                 Leistung: <br /> <select name="leistung" id="leistungsselect">
                 </select><br/>
                 <input type="submit" name="submit" value = "Verbindlich buchen" id = "submitButton"><br/>
-             </form>
                 <span id="feedback"></span><br />
+             </form>
             </div>
-    </div>
 </html>
