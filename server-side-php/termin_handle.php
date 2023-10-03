@@ -12,13 +12,12 @@ try {
     if ($stmt) {
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo "Data fetched successfully.";
     } else {
-        echo "Error: " . $conn->errorInfo()[2];
+        console.log( "Error: " . $conn->errorInfo()[2]);
     }
 } catch (PDOException $e) {
     console.log($e->getMessage());
-    echo "Error: " . $e->getMessage();
+    console.log("Error: " . $e->getMessage());
 }
 
 header('Content-Type: application/json'); // Set the response header
