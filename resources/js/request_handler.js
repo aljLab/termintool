@@ -75,12 +75,15 @@ function fetchTermine() {
             if (!response.ok) {
                 throw new Error("Network response was not okay.");
             } else {
+                console.log(response.json);
                 return response.json();
             }
         })
         .then(data => {
             // No need to parse JSON again, as it's already parsed
             // Assuming the response from PHP is already an array of objects
+            console.log(termine);
+            console.log(data);
             data.forEach(entry=>{
                 termine.push(entry);
             })

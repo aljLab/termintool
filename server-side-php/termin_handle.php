@@ -11,7 +11,9 @@ try {
 
     if ($stmt) {
         $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);//contains associative Array, where the json-strings are the values
+        header('Content-Type: application/json'); // Set the response header
+        echo json_encode($data);//echos array of json-objects
     } else {
         error_log( "Error: " . $conn->errorInfo()[2]);
     }
@@ -19,8 +21,5 @@ try {
     error_log($e->getMessage());
     error_log("Error: " . $e->getMessage());
 }
-
-header('Content-Type: application/json'); // Set the response header
-echo json_encode($data);
 ?>
 
