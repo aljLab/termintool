@@ -12,7 +12,7 @@
         $stmt = $conn->prepare($sql);
     
         if ($stmt) {
-            $stmt->execute($t);
+            $data=$stmt->execute($t);
             echo "Data fetched successfully.";
         } else {
             echo "Error: " . $conn->errorInfo()[2];
