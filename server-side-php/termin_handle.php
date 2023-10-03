@@ -1,9 +1,3 @@
-
-    /*$data =[
-        '{"hourValue":"09","minuteValue":"30","date":"19.9.2023","leistung":"Anamnese", "dauer":4}',
-        '{"hourValue":"11","minuteValue":"30","date":"29.9.2023","leistung":"Anamnese", "dauer":4}',
-        '{"hourValue":"15","minuteValue":"00","date":"5.10.2023","leistung":"Anamnese", "dauer":4}'
-    ];//to be replaced by database <request>*/
 <?php
 require_once("conn.php");
 
