@@ -34,8 +34,6 @@ function fetchKunden(){
         k.forEach(e=>{
             kunden.push(e);
         })
-        console.log("Alle Kunden gepushed.");
-        console.log(kunden);
     })
     .catch(error=>{
         console.error('Fetch error', error);
