@@ -58,7 +58,7 @@ function setUp(){
         fetchKunden();
         console.log("Tablet set up finished.");
     }else{
-        fetchTermine(setUpDays);
+        fetchTermine();//(setUpDays);
         fetchKunden();
         console.log("Desktop set up finished.");
     }
