@@ -326,6 +326,9 @@ function equipFormInputsForMobile(){
     elArray.forEach(inp =>{
         inp.addEventListener("focus", ()=>{
             window.scroll(0,0);
+            window.resizeTo(500);
+            window.style.overflowY="scroll";
+            window.style.overflowX="hidden";
         })
     })
 }

@@ -493,6 +493,17 @@ form:invalid > button{
     #makeReservationForm input, #blockDateSubmits, #feedbackBlockTermin{
         font-size: 16px;
     }
+    /*------------------------------Termine ----------------------------------------------*/
+    .terminkunde{
+        flex-direction: column;
+        align-items: center;
+    }
+    .kundenDisplay, .terminDisplay, .modBox{
+        width: 95%;
+    }
+    .modBox button{
+        margin: 10px;
+    }
   }
  
     
