@@ -320,3 +320,12 @@ function decrementDay(){
         }
     }
 }
+function equipFormInputsForMobile(){
+    let form=document.getElementById("bform");
+    let elArray = form.elements;
+    elArray.forEach(inp =>{
+        inp.addEventListener("focus", ()=>{
+            window.scroll(0,0);
+        })
+    })
+}
