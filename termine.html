@@ -4,12 +4,15 @@
         <link href="resources/css/styles.css" rel = "stylesheet">
         <script src="resources/js/main.js" defer></script>
         <script src="resources/js/leistungen.js" defer></script>
+        <script src="resources/js/request_handler.js" defer></script>
+        <script src="resources/js/requesting.js" defer></script>
+        <script src="resources/js/termine.js" defer></script>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Termintool</title>
     </header>
-    <body onload="fillLeistungsTabelle()">
+    <body onload="displayTermine()">
     <div id="back">
         <div id="container">
         <div id="navbar">
@@ -27,14 +30,7 @@
                     <!--button onclick = "checkFetching()">testen</button-->
             </div>
             <div id="terminContainer">
-                <table id="terminTabelle">
-                    <tr>
-                        <th>Datum</th>
-                        <th>Startzeit</th>
-                        <th>Leistung</th>
-                        <th>Kunde</th>
-                    </tr>
-                </table>       
+                
             </div>
         </div>
     </div>

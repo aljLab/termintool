@@ -107,7 +107,7 @@ function convertToTermin(tstr, l){//macht aus den Inputdaten einen Termin, Forma
             leiObj = lei;
         }
     })
-    return new Termin(h, m, date, l, leiObj.dauer);
+    return new Termin(h, m, date, l, leiObj.dauer, "");
 }
 function terminPossible(termin){
     //check if within businesshours

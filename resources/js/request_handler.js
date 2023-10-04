@@ -32,7 +32,7 @@ function fetchTermine(callback) {
         .then(data => {
             // No need to parse JSON again, as it's already parsed {termin: JSON-String}
             data.forEach(obj=>{
-                termine.push(JSON.parse(obj.termin));
+                orderInAsc(JSON.parse(obj.termin));
             })
             console.log("Data received and assigned to termine");
             callback();
@@ -89,4 +89,3 @@ function insertTermin(termin){//Takes Termin-Objekt als Input und stellt POST-RE
         console.error('Fetch error:', error);
     });
 }
-

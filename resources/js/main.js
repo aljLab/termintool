@@ -6,7 +6,10 @@ var sunday = new Date(today.getFullYear(), today.getMonth(), today.getDate()+(6-
 //echtzeitliches Heute
 var currentDay=today.getDate(), currentMonth=today.getMonth(), currentYear=today.getFullYear();
 //hier werden alle arrays etc. durch db anfragen gefüllt
-var termine =[]//[new Termin("09", "30", "19.9.2023","Anamnese", 4), new Termin("11", "30", "19.9.2023", "Untersuchung", 6), new Termin("10", "30", "21.9.2023", "Hallo", 5)];
+var termine =[new Termin("09", "30", "12.10.2023","Anamnese", 5, new Kunde("Dr.", "Aljoscha", "Lustig", "a@b.com", "017623559949", [])), 
+new Termin("11", "30", "5.10.2023", "Untersuchung", 7, new Kunde("Herr","Wolfram", "Ebert", "w.ebert@web.com", "+49 1982736475")), 
+new Termin("09", "30", "19.10.2023","Herzyoga", 5, new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", [])), 
+new Termin("15", "30", "24.10.2023","Telefontermin", 2, new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", []))];//, new Termin("10", "30", "21.9.2023", "Hallo", 5)];
 
 const leistungen=[
     new Leistung("Esalenmassage (60 Minuten)", 5, "65€"), new Leistung("Esalenmassage (75 Minuten)", 6, "80€"),
@@ -21,12 +24,13 @@ const bhweekdays =["mo", "di", "mi", "don", "fr"];
 var currentDauer = 4;
 /*------------------------------------------Konstruktoren--------------------------------------------*/
 //Constructor für Termin
-function Termin(h, m, date, leistung, dauer){
+function Termin(h, m, date, leistung, dauer, kunde){
     this.hourValue = h;
     this.minuteValue= m;
     this.date = date;
     this.leistung = leistung;//
     this.dauer = dauer;
+    this.kunde = kunde;
 }
 function Leistung(name, dauer, preis){
     this.name = name;
@@ -40,7 +44,8 @@ function BusinessHours(mo, di, mi, don, fr){//expects Array with timeslots
     this.don=don;//Obacht
     this.fr=fr;
 }
-function Kunde(vorname, nachname, mail, phone, termine){
+function Kunde(anrede, vorname, nachname, mail, phone, termine){
+    this.anrede = anrede;
     this.vorname=vorname;
     this.nachname=nachname;
     this.mail=mail;
