@@ -215,6 +215,7 @@ function uptodate(){//day, month (1-12;Jan-Dez) und year an aktuelles Datum anpa
 /*--------------------smartphone-------------*/
 function setUpSmartphoneDays(){
     setUpNavbarSmartphone();
+//	equipFormInputsForMobile();
     //Leistungsselect
     var sel = document.getElementById("chooseLeistung");
     setUpLeistungsDropDown();
@@ -308,7 +309,7 @@ function incrementDay(){
     }
 }
 function decrementDay(){
-    if(pastToday(new Date(today.getTime()-12*60*60*1000))){//nur dekrementieren wenn der vorherige Tag noch in der Zukunft liegt, der Wert ist aber relativ arbiträr
+    if(pastToday(new Date(today.getTime()-18*60*60*1000))){//nur dekrementieren wenn der vorherige Tag noch in der Zukunft liegt, der Wert ist aber relativ arbiträr
         if(convertToMoSo(today.getDay())==0){
             today = new Date(today.getFullYear(), today.getMonth(), today.getDate()-3);
             uptodate();
@@ -327,8 +328,6 @@ function equipFormInputsForMobile(){
         inp.addEventListener("focus", ()=>{
             window.scroll(0,0);
             window.resizeTo(500);
-            window.style.overflowY="scroll";
-            window.style.overflowX="hidden";
         })
     })
 }
