@@ -144,6 +144,18 @@ hr{
     height: auto;
     margin: 3px;
 }
+/*@keyframes blink-animation{
+    0%{
+        background-color: #3b8e9b;
+    }
+    100%{
+        background-color: #c6e8ed;
+    }
+}
+#leistungsformcontainer:hover{
+    animation: blink-animation 1s infinite;
+}*/
+
 #days{
     display: flex;
     flex-direction: row;
@@ -309,13 +321,16 @@ form{
 #timeTable{
     width: 95%;
     height: auto;
-    border: 1px solid black;
+    border-radius: 8px;
+    background-color: var(--light-color);
+    box-shadow: 3px 2px var(--darkest-color);
 }
 th{
     text-align: left;
 }
-td{
-    border: 1px solid black;
+#timeTable td{
+    background-color: var(--lightest-color);
+    border-radius: 8px;
 }
 .tableInput{
     margin: 3px;
