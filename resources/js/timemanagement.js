@@ -3,10 +3,10 @@ const timeRegEx="([0-2]?[0-9]\.[0-5][0-9])";
 //business hours werden in db gespeichert: spalten=timeSlots, zeilen=weekdays?
 
 function setUpTimeManagement(){//called onload of body, 
-    fetchTermine(()=>{
+    /*fetchTermine(()=>{
         console.log("termine gefetched.");
         });
-    fetchKunden();
+    fetchKunden();*/
     setUpTimeTable();
     setUpBlockTermin();
 }
@@ -87,7 +87,6 @@ function checkTermin(){
     fb.innerHTML = message;
 }
 function provideTerminFeedback(termin){
-    console.log(termin);
     let fb="";
     let d = termin.date.split(".")[0];
     let m = termin.date.split(".")[1];
@@ -95,9 +94,13 @@ function provideTerminFeedback(termin){
     if(pastToday(new Date(y, m-1, d))){
         if(withinBusinessHours(termin, bh)){
             if(noTerminConflicts(termin, termine)){
-                //safeToDB
-                saveTerminToDB(termin);
-                fb = "Termin erfolgreich blockiert.";
+                if(termin.dauer>0){
+                    //safeToDB
+                    saveTerminToDB(termin);
+                    fb = "Termin erfolgreich blockiert.";
+                }else{
+                    fb="Endzeit kann nicht vor der Startzeit liegen.";
+                }
             }else{
                 fb="Termin wurde schon gebucht oder überschneidet sich mit einem bereits gebuchten Termin.";
             }
@@ -137,7 +140,7 @@ function updateBusinessHours(){//erstellt und speichert neues BusinessHours-Obje
             let in2=document.getElementById(`${dayName}schluss${i}`);//id z.B. moschluss0
             bh[dayName][i]=`${in1.value}-${in2.value}`;//input an stelle im Array (über)schreiben
         }
-        bh[dayName]=bh[dayName].filter(function(str){
+        bh[dayName]=bh[dayName].filter(function(str){//entfernen von "-"
             return str!== "-";
         })
         if(bh[dayName][i-1]!=="-"){

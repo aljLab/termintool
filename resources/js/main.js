@@ -215,7 +215,7 @@ function uptodate(){//day, month (1-12;Jan-Dez) und year an aktuelles Datum anpa
 /*--------------------smartphone-------------*/
 function setUpSmartphoneDays(){
     setUpNavbarSmartphone();
-//	equipFormInputsForMobile();
+    //equipFormInputsForMobile();
     //Leistungsselect
     var sel = document.getElementById("chooseLeistung");
     setUpLeistungsDropDown();
@@ -328,6 +328,8 @@ function equipFormInputsForMobile(){
         inp.addEventListener("focus", ()=>{
             window.scroll(0,0);
             window.resizeTo(500);
+            window.style.overflowY="scroll";
+            window.style.overflowX="hidden";
         })
     })
 }

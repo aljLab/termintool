@@ -118,14 +118,25 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
     let endDate = new Date(startDate.getTime() +termin.dauer*15*60*1000);
     let weekday=bhweekdays[convertToMoSo(startDate.getDay())];//get weekday string to identify corresponding BusinessHours.property
     var compareDates=[];//Aufbauen von Datum-Paaren (für jeden Timeslot im BusinessHourArray ein Paar)
-    bh[weekday].forEach(timeslot => {
-        if(timeslot!=="-"){
-        let start=timeslot.split("-")[0];
-        let end=timeslot.split("-")[1];
-        let ts = [new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], start.split(".")[0], start.split(".")[1]),
-                  new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], end.split(".")[0], end.split(".")[1])];
-        compareDates.push(ts);}
-    });
+    console.log(bh);
+    console.log(bh["mo"]);
+    console.log(bh[weekday]);
+    console.log(`Weekday variable: ${weekday};`);
+    console.log(convertToMoSo(startDate.getDay()));
+    console.log(bhweekdays[convertToMoSo(startDate.getDay())]);
+
+    if(!weekday){
+        return false;
+    }else{
+        bh[weekday].forEach(timeslot => {
+            if(timeslot!=="-"){
+            let start=timeslot.split("-")[0];
+            let end=timeslot.split("-")[1];
+            let ts = [new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], start.split(".")[0], start.split(".")[1]),
+                      new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], end.split(".")[0], end.split(".")[1])];
+            compareDates.push(ts);}
+        });
+    }
     if(!compareDates.length){return false;}
     let absUpper=compareDates[compareDates.length-1][1];//oberste timeslot grenze
     let absLower=compareDates[0][0];//untere timeSlotGrenze
