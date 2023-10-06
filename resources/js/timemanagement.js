@@ -17,7 +17,7 @@ function setUpTimeTable(){//sets up time Table for Business hours
         let tr = document.getElementById(`t${e}`);
         tr.innerHTML=`<td>${e.charAt(0).toUpperCase()}${e.charAt(1)}</td>`;
         let dayArray = bh[e];
-            let i = 0;
+        let i = 0;
             dayArray.forEach(timeslot=>{
                 let start = timeslot.split("-")[0];
                 let schluss = timeslot.split("-")[1];
@@ -30,7 +30,7 @@ function setUpTimeTable(){//sets up time Table for Business hours
                 in2.size="5";
                 in1.setAttribute("class", "tableInput");
                 in2.setAttribute("class", "tableInput");
-                in1.setAttribute("id", `${e}start${i}`);
+                in1.setAttribute("id", `${e}start${i}`);//eg. mostart0 für ersten Input in erster inputzelle in montag row (id="tmo")
                 in2.setAttribute("id", `${e}schluss${i}`);
                 in1.setAttribute("pattern", timeRegEx);
                 in2.setAttribute("pattern", timeRegEx);
@@ -121,7 +121,9 @@ function saveTerminToDB(termin){
     console.log("Termin erfolgreich in der Datenbank 'Termine' gespeichert.");
 }
 function changeSubmitButtonAppearance(e, but){//Function für EventListener ("blur") für Inputs: wenn ein Input invalid verlassen wird, ändert sich submitbutton
-        if(!e.currentTarget.validity.valid){
+        console.log(correctOrder(e.target));
+        console.log(noOverlaps(e.target))
+        if(!e.currentTarget.validity.valid || !correctOrder(e.target)|| !noOverlaps(e.target)){
             but.style.backgroundColor="rgb(0,0,0,0.2)";
             but.style.border="2px solid black";
             but.style.pointerEvents="none";
@@ -132,13 +134,50 @@ function changeSubmitButtonAppearance(e, but){//Function für EventListener ("bl
             but.style.cursor="pointer";
         }
 }
+function noOverlaps(inp){
+    let row = document.getElementById(`t${inp.id.split("s")[0]}`);
+    let compArray = [];
+    row.childNodes.forEach(inbox=>{
+        inbox.childNodes.forEach(input =>{
+            compArray.push(input.value);
+        })
+        
+    });
+    console.log(`comp Array:${compArray}`);
+    for(i =0;i<compArray.length;i++){
+        if(i!=compArray.length&&!(Number(compArray[i])<Number(compArray[i+1]))){
+            return false;
+        }
+    }
+    return true;
+}
+function orderInputRow(inp){
+    let dayArray=bh[inp.id.split("s")[0]];
+    let row = document.getElementById(`t${inp.id.split("s")[0]}`);
+    sortDayArray()
+
+}
+function sortDayArray(arr){//NOT READY NOT FUNCTIONAL
+    let returnArray = [];
+    for(i =0;i<arr.length;i++){
+    if(Number(arr[i].split("-")[0])){
+        if(i!=arr.length-1){
+           if(Number(arr[i].split("-")[0])<Number(arr[i+1].split("-")[0])){
+                returnArray.push(arr[i]);
+           }
+        }else
+    }
+   }
+   return returnArray;
+}
 function updateBusinessHours(){//erstellt und speichert neues BusinessHours-Object mit den eingegebenen Werten und passt Layout an
     var dayNames=["mo","di","mi","don","fr"];
+    let fb=document.getElementById("feedbackBusinessHours");
     dayNames.forEach(dayName=>{
         for(i=0; i<bh[dayName].length;i++){
             let in1=document.getElementById(`${dayName}start${i}`);//id z.B. mostart0
             let in2=document.getElementById(`${dayName}schluss${i}`);//id z.B. moschluss0
-            bh[dayName][i]=`${in1.value}-${in2.value}`;//input an stelle im Array (über)schreiben
+            bh[dayName][i]=`${in1.value}-${in2.value}`;//input an stelle im Array (über)schreiben; Format: "HH.MM-HH.MM"
         }
         bh[dayName]=bh[dayName].filter(function(str){//entfernen von "-"
             return str!== "-";
@@ -149,10 +188,24 @@ function updateBusinessHours(){//erstellt und speichert neues BusinessHours-Obje
         }
     })
     //Safe to Database!!!!
-
     setUpTimeTable();
-    let fb=document.getElementById("feedbackBusinessHours");
     fb.innerHTML="Geschäftszeiten erfolgreich aktualisiert.";
+}
+function correctOrder(inp){//expects 1 inputs
+    //gets the corresponding input
+    if(inp.id.match(new RegExp("start"))!=null){
+        in1=inp;
+        in2=document.getElementById(in1.id.replace(new RegExp("start"), "schluss"));
+    }else{
+        in2=inp;
+        in1=document.getElementById(in2.id.replace(new RegExp("schluss"), "start"));
+    }
+    if(in1.value===in2.value){
+        return true;
+    }else
+    console.log(`i1 mit ${in1.value} ist kleiner als in2 mit ${in2.value}?${Number(in1.value)<Number(in2.value)}`);
+    return Number(in1.value)<Number(in2.value);
+
 }
 
 function getBlockedTermin(){//returns new Termin mit den Eingabewerten der Inputs der Termin-Reservierungsform
