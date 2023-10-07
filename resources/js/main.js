@@ -18,7 +18,7 @@ const leistungen=[
     new Leistung("Beratung/Gespräch", 5, "65€"),new Leistung("Yoga/Atemsitzung", 5, "65€"), new Leistung("Tsa Lung", 5, "65€"), 
     new Leistung("Telefontermin akut", 2, "25€")
     ]; 
-const bh= new BusinessHours(["15.00-16.00", "-"],["-"],["10.15-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"]);
+const bh= new BusinessHours(["15.00-16.00", "12.00-13.00", "-"],["-"],["10.15-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"]);
 const kunden =[];
 const bhweekdays =["mo", "di", "mi", "don", "fr"];
 var currentDauer = 4;

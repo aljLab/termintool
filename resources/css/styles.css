@@ -354,6 +354,11 @@ span{
 form:invalid > button{
     background-color: #3b8e9b;
 }
+#feedbackBusinessHours{
+    display: none;
+    background-color: var(--lightest-color);
+    border-radius: 5px;
+}
 /*------------------------------Leistungen Styles-------------------------------*/
 #leistungsContainer, #kundenContainer, #terminContainer{
     width: 100%;

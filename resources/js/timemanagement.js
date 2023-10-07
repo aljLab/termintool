@@ -16,7 +16,7 @@ function setUpTimeTable(){//sets up time Table for Business hours
     dayNames.forEach(e => {
         let tr = document.getElementById(`t${e}`);
         tr.innerHTML=`<td>${e.charAt(0).toUpperCase()}${e.charAt(1)}</td>`;
-        let dayArray = bh[e];
+        let dayArray = sortDayArray(bh[e]);
         let i = 0;
             dayArray.forEach(timeslot=>{
                 let start = timeslot.split("-")[0];
@@ -35,7 +35,7 @@ function setUpTimeTable(){//sets up time Table for Business hours
                 in1.setAttribute("pattern", timeRegEx);
                 in2.setAttribute("pattern", timeRegEx);
                 in1.addEventListener("blur", function(e){//EventListener to change submitbutton if input is invalid
-                    changeSubmitButtonAppearance(e, document.getElementById("updateBusinessHours"));
+                        changeSubmitButtonAppearance(e, document.getElementById("updateBusinessHours"));
                 });
                 in2.addEventListener("blur", function(e){
                     changeSubmitButtonAppearance(e, document.getElementById("updateBusinessHours"));
@@ -121,78 +121,93 @@ function saveTerminToDB(termin){
     console.log("Termin erfolgreich in der Datenbank 'Termine' gespeichert.");
 }
 function changeSubmitButtonAppearance(e, but){//Function für EventListener ("blur") für Inputs: wenn ein Input invalid verlassen wird, ändert sich submitbutton
-        console.log(correctOrder(e.target));
-        console.log(noOverlaps(e.target))
-        if(!e.currentTarget.validity.valid || !correctOrder(e.target)|| !noOverlaps(e.target)){
+        if(!e.currentTarget.validity.valid||!correctOrder(e.target)){
             but.style.backgroundColor="rgb(0,0,0,0.2)";
             but.style.border="2px solid black";
             but.style.pointerEvents="none";
+            e.target.parentElement.style.backgroundColor="#d46c6c";
         }else{
             but.style.backgroundColor="white";
             but.style.pointerEvents="all";
             but.style.border="0px";
             but.style.cursor="pointer";
+            e.target.parentElement.style.backgroundColor="var(--lightest-color)";
         }
 }
-function noOverlaps(inp){
-    let row = document.getElementById(`t${inp.id.split("s")[0]}`);
-    let compArray = [];
-    row.childNodes.forEach(inbox=>{
-        inbox.childNodes.forEach(input =>{
-            compArray.push(input.value);
+function noOverlaps(bho){
+    for(let prop in bho){
+        let compArray=[];
+        sortDayArray(bho[prop]).forEach(timeslot =>{
+            if(timeslot !== "-"){
+                compArray.push(timeslot.split("-")[0]);
+                compArray.push(timeslot.split("-")[1]);
+            }
         })
-        
-    });
-    console.log(`comp Array:${compArray}`);
-    for(i =0;i<compArray.length;i++){
-        if(i!=compArray.length&&!(Number(compArray[i])<Number(compArray[i+1]))){
-            return false;
+        for(i =0;i<compArray.length;i++){
+            if(i!=compArray.length-1&&Number(compArray[i])>Number(compArray[i+1])){
+                return false;
+            }
         }
     }
     return true;
 }
-function orderInputRow(inp){
-    let dayArray=bh[inp.id.split("s")[0]];
-    let row = document.getElementById(`t${inp.id.split("s")[0]}`);
-    sortDayArray()
-
-}
-function sortDayArray(arr){//NOT READY NOT FUNCTIONAL
-    let returnArray = [];
-    for(i =0;i<arr.length;i++){
-    if(Number(arr[i].split("-")[0])){
-        if(i!=arr.length-1){
-           if(Number(arr[i].split("-")[0])<Number(arr[i+1].split("-")[0])){
-                returnArray.push(arr[i]);
-           }
-        }else
-    }
+function sortDayArray(a){//sorts input like ["15.00-16.00", "14.00-15.00","-"] ----> ["14.00-15.00", "15.00-16.00", "-"]
+    let arr = a;
+    for(i=1;i<arr.length-1;i++){//<length-1 weil letztes Element "-" ist
+        let j = i;
+        while(j!=0&&Number(arr[j].split("-")[0]<Number(arr[j-1].split("-")[0]))){
+            let temp = arr[j];
+            arr[j]=arr[j-1];
+            arr[j-1]=temp;
+            j--;
+        }
    }
-   return returnArray;
+   return arr;
 }
 function updateBusinessHours(){//erstellt und speichert neues BusinessHours-Object mit den eingegebenen Werten und passt Layout an
     var dayNames=["mo","di","mi","don","fr"];
     let fb=document.getElementById("feedbackBusinessHours");
+    let copy = {
+        "mo":bh["mo"],
+        "di":bh["di"],
+        "mi":bh["mi"],
+        "don":bh["don"],
+        "fr":bh["fr"]
+    };
     dayNames.forEach(dayName=>{
-        for(i=0; i<bh[dayName].length;i++){
+        for(i=0; i<copy[dayName].length;i++){
             let in1=document.getElementById(`${dayName}start${i}`);//id z.B. mostart0
             let in2=document.getElementById(`${dayName}schluss${i}`);//id z.B. moschluss0
-            bh[dayName][i]=`${in1.value}-${in2.value}`;//input an stelle im Array (über)schreiben; Format: "HH.MM-HH.MM"
+            console.log(`${in1}, ${in2}`);
+            copy[dayName][i]=`${in1.value}-${in2.value}`;//Input an Stelle im Array (über)schreiben; Format: "HH.MM-HH.MM"
         }
-        bh[dayName]=bh[dayName].filter(function(str){//entfernen von "-"
+        copy[dayName]=copy[dayName].filter(function(str){//entfernen von "-"
             return str!== "-";
         })
-        if(bh[dayName][i-1]!=="-"){
-            bh[dayName].push("-");
-            console.log(i);
+        if(copy[dayName][i-1]!=="-"){
+            copy[dayName].push("-");
         }
     })
-    //Safe to Database!!!!
-    setUpTimeTable();
-    fb.innerHTML="Geschäftszeiten erfolgreich aktualisiert.";
+    if(noOverlaps(copy)){
+         //Safe to Database!!!!
+        for(let prop in bh){
+            bh[prop]=copy[prop];
+        }
+        setUpTimeTable();
+        fb.innerHTML="* Geschäftszeiten erfolgreich aktualisiert.";
+        fb.style.display="block";
+        fb.style.backgroundColor="var(--lightest-color)";
+    }else{
+        fb.innerHTML="* Zeiträume dürfen sich innerhalb eines Tages nicht überschneiden";
+        fb.style.display="block";
+        fb.style.backgroundColor="#d46c6c";
+    }
+    console.log(bh);
+    console.log(copy);
 }
 function correctOrder(inp){//expects 1 inputs
     //gets the corresponding input
+    let in1, in2;
     if(inp.id.match(new RegExp("start"))!=null){
         in1=inp;
         in2=document.getElementById(in1.id.replace(new RegExp("start"), "schluss"));
@@ -200,10 +215,10 @@ function correctOrder(inp){//expects 1 inputs
         in2=inp;
         in1=document.getElementById(in2.id.replace(new RegExp("schluss"), "start"));
     }
+    console.log(`In1.value ist ${in1.value}, In2 ist ${in2.value}`);
     if(in1.value===in2.value){
         return true;
     }else
-    console.log(`i1 mit ${in1.value} ist kleiner als in2 mit ${in2.value}?${Number(in1.value)<Number(in2.value)}`);
     return Number(in1.value)<Number(in2.value);
 
 }
