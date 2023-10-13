@@ -141,6 +141,7 @@ function fillDaySlots(){
                             d = new Date(d.getTime()+(15*60*1000));
                         }
             }
+            console.log(`${l}st one done.`);
         });
     }
 }
