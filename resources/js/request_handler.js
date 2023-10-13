@@ -91,5 +91,5 @@ function insertTermin(termin){//Takes Termin-Objekt als Input und stellt POST-Re
 }
 
 function checkFetching(){
-    insertTermin(new Termin("09", "30", "19.10.2023","Herzyoga", 5, new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552898", [])));
+    insertTermin(new Termin("15", "30", "24.10.2023","Telefontermin", 2, new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", [])));
 }
