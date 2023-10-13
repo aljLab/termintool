@@ -259,6 +259,7 @@ function fillDaySlot(){
                 }else{
                     temp.innerHTML=`${hour}:${minutes}`;
                     temp.setAttribute("class", "timeSlot");
+                    console.log(window.location.pathname==="/termintool/index.html");
                     if(window.location.pathname==="/termintool/index.html"){
                         let sel = document.getElementById("chooseLeistung");
                         temp.classList.toggle("invalidTimeSlot", sel.value === "--");
