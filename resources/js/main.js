@@ -69,7 +69,7 @@ function setUp(){
     }else{
         fetchTermine(setUpDays);
         //fetchKunden();
-        console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);*/
+        console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);
         //setUpDays();
         setUpNavbar();
         var sel = document.getElementById("chooseLeistung");
