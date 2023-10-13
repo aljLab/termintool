@@ -263,6 +263,7 @@ function fillDaySlot(){
                         let sel = document.getElementById("chooseLeistung");
                         temp.classList.toggle("invalidTimeSlot", sel.value === "--");
                         temp.setAttribute("onclick","deliverBooking(this)");
+                        console.log("everything adapted.");
                     }
                     temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
                     if(pastToday(d)){div.appendChild(temp);}
