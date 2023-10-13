@@ -69,13 +69,11 @@ function setUp(){
     }else{
         fetchTermine(fillDaySlots);
         //fetchKunden();
-        console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);
         setUpNavbar();
         setUpDays();
         var sel = document.getElementById("chooseLeistung");
         setUpLeistungsDropDown();
         fillLeistungsSelect(sel);
-        fillDaySlots();
     }
 }
 function setUpCalendar(){
@@ -333,4 +331,3 @@ function decrementDay(){
         }
     }
 }
-console.log(window.location.pathname==="/termintool/index.html");
