@@ -4,7 +4,7 @@ var hour="";
 var minute="";
 var subButton = document.getElementById("submitButton");
 var terminstring ="";
-const phoneRegExp=/(\+49|0)\d{11}/;
+const phoneRegExp=/(\+49|0)\d*/;
 const mailRegExp=/\w*@\w*\.\w{2,4}/;
 
 //make POST-Request
@@ -56,9 +56,7 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
         if(nachname == ""||vorname==""){
             let box = document.getElementById("feedback");
             box.innerHTML="";
-            let div = document.createElement("div");
-            div.innerHTML=`* Vor- und Nachname sind Pflichtfelder.`;
-            box.appendChild(div);
+            box.innerHTML=`* Vor- und Nachname sind Pflichtfelder.`;
         }else{ 
             if(!validMail(mail)){
                 let box = document.getElementById("feedback");
@@ -87,9 +85,8 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
                     //make POST-Request to enter Termin into database
                     let t = convertToTermin(terminstring, leistung);
                     if(terminPossible(t)){
-                        let div = document.createElement("div");
-                        div.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
-                        box.appendChild(div);
+                        box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
+                        f.reset();
                     }else{
                         box.innerHTML="Termin außerhalb der Betriebszeiten.";
                     }
@@ -179,7 +176,8 @@ function closeModal(){
     let b = document.body;
     b.style.height="auto";
     b.style.overflow="scroll";
-    window.location.reload();
+    let fb = document.getElementById("feedback");
+    fb.innerHTML="";
 }
 
 /*---------------------------------------Validation and Sanitization help methods-----------------------------------*/

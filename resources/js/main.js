@@ -6,10 +6,10 @@ var sunday = new Date(today.getFullYear(), today.getMonth(), today.getDate()+(6-
 //echtzeitliches Heute
 var currentDay=today.getDate(), currentMonth=today.getMonth(), currentYear=today.getFullYear();
 //hier werden alle arrays etc. durch db anfragen gefüllt
-var termine =[new Termin("09", "30", "12.10.2023","Anamnese", 5, new Kunde("Dr.", "Aljoscha", "Lustig", "a@b.com", "017623559949", [])), 
+var termine =[]/*[new Termin("09", "30", "12.10.2023","Anamnese", 5, new Kunde("Dr.", "Aljoscha", "Lustig", "a@b.com", "017623559949", [])), 
 new Termin("11", "30", "5.10.2023", "Untersuchung", 7, new Kunde("Herr","Wolfram", "Ebert", "w.ebert@web.com", "+49 1982736475")), 
 new Termin("09", "30", "19.10.2023","Herzyoga", 5, new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", [])), 
-new Termin("15", "30", "24.10.2023","Telefontermin", 2, new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", []))];//, new Termin("10", "30", "21.9.2023", "Hallo", 5)];
+new Termin("15", "30", "24.10.2023","Telefontermin", 2, new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", []))];//, new Termin("10", "30", "21.9.2023", "Hallo", 5)];*/
 
 const leistungen=[
     new Leistung("Esalenmassage (60 Minuten)", 5, "65€"), new Leistung("Esalenmassage (75 Minuten)", 6, "80€"),
@@ -18,7 +18,7 @@ const leistungen=[
     new Leistung("Beratung/Gespräch", 5, "65€"),new Leistung("Yoga/Atemsitzung", 5, "65€"), new Leistung("Tsa Lung", 5, "65€"), 
     new Leistung("Telefontermin akut", 2, "25€")
     ]; 
-const bh= new BusinessHours(["15.00-16.00", "-"],["-"],["10.15-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"]);
+const bh= new BusinessHours(["-"],["-"],["-"],["9.30-13.00", "15.00-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"]);
 const kunden =[];
 const bhweekdays =["mo", "di", "mi", "don", "fr"];
 var currentDauer = 4;
@@ -67,10 +67,10 @@ function setUp(){
         fillLeistungsSelect(sel);
         fillDaySlot();
     }else{
-        /*fetchTermine(setUpDays);
-        fetchKunden();
+        fetchTermine(setUpDays);
+        //fetchKunden();
         console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);*/
-        setUpDays();
+        //setUpDays();
         setUpNavbar();
         var sel = document.getElementById("chooseLeistung");
         setUpLeistungsDropDown();
@@ -89,9 +89,9 @@ function setUpCalendar(){
         /*fetchTermine(setUpDays);
         fetchKunden();
         console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);*/
+        setUpNavbar();
         setUpDays();
-        //setUpNavbar();
-        //fillDaySlots();
+        fillDaySlots();
     }
 }
 function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an #days, erstellt header und setzt id auf =bhweekdays[i]
@@ -233,7 +233,6 @@ function uptodate(){//day, month (1-12;Jan-Dez) und year an aktuelles Datum anpa
 
 /*--------mobile Set up()---------------- */
 /*--------------------smartphone-------------*/
-
 function fillDaySlot(){
     c.innerHTML="";
     let bhprop = bhweekdays[convertToMoSo(today.getDay())];
@@ -333,18 +332,3 @@ function decrementDay(){
         }
     }
 }
-/*function equipFormInputsForMobile(){
-    let form=document.getElementById("bform");
-    let elArray = form.elements;
-    elArray.forEach(inp =>{
-        inp.addEventListener("focus", ()=>{
-            window.scroll(0,0);
-            window.resizeTo(500);
-            window.style.overflowY="scroll";
-            window.style.overflowX="hidden";
-        })
-    })
-}*/
-
-console.log(window.location.pathname);
-console.log(window.location.pathname==="/index.html");

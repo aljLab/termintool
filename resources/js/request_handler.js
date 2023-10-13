@@ -68,7 +68,7 @@ function fetchBusinessHours(){
 }
 
 /*----------------------------pushing-------------------------------*/
-function insertTermin(termin){//Takes Termin-Objekt als Input und stellt POST-REQUest an entsprechendes server-side php-Skript
+function insertTermin(termin){//Takes Termin-Objekt als Input und stellt POST-Request an entsprechendes server-side php-Skript
     fetch("./server-side-php/settingTermine.php",{
             method:"POST",
             headers: {'Content-Type': 'application/json'},
@@ -84,8 +84,12 @@ function insertTermin(termin){//Takes Termin-Objekt als Input und stellt POST-RE
         // Handle the response from the server
         console.log(responsetext);
     })
-    .catch(function(error) {
+    .catch(function(error){
         // Handle any errors that occurred during the fetch
         console.error('Fetch error:', error);
     });
+}
+
+function checkFetching(){
+    insertTermin(new Termin("09", "30", "19.10.2023","Herzyoga", 5, new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552898", [])));
 }

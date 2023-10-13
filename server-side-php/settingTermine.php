@@ -8,17 +8,17 @@
     $t = json_decode($t, true);
     
     try {
-    $conn =
-      // Insert data into MySQL table (modify the query as needed)
-      $sql = "INSERT INTO termine (termin) VALUES (?)";
-      $stmt = $conn->prepare($sql);
+        $conn = new PDO($dns, $user, $password);
+        // Insert data into MySQL table (modify the query as needed)
+        $sql = "INSERT INTO termine (termin) VALUES (?)";
+        $stmt = $conn->prepare($sql);
   
-      if ($stmt) {
-          $stmt->execute($t);
-          echo "Data inserted successfully.";
-      } else {
-          echo "Error: " . $conn->errorInfo()[2];
-      }
-  } catch (PDOException $e) {
+        if ($stmt) {
+            $stmt->execute($t);
+            echo "Data inserted successfully.";
+        } else {
+            echo "Error: " . $conn->errorInfo()[2];
+        }
+    } catch (PDOException $e) {
       echo "Error: " . $e->getMessage();
   }
