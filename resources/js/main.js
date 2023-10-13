@@ -131,7 +131,7 @@ function fillDaySlots(){
                         }else{
                             temp.innerHTML=`${hour}:${minutes}`;
                             temp.setAttribute("class", "timeSlot");
-                            if(window.location.pathname==="/index.html"){
+                            if(window.location.pathname==="/termintool/index.html"){
                                 let sel = document.getElementById("chooseLeistung");
                                 temp.classList.toggle("invalidTimeSlot", sel.value === "--");
                                 temp.setAttribute("onclick","deliverBooking(this)");
@@ -258,12 +258,10 @@ function fillDaySlot(){
                 }else{
                     temp.innerHTML=`${hour}:${minutes}`;
                     temp.setAttribute("class", "timeSlot");
-                    console.log(window.location.pathname==="/termintool/index.html");
                     if(window.location.pathname==="/termintool/index.html"){
                         let sel = document.getElementById("chooseLeistung");
                         temp.classList.toggle("invalidTimeSlot", sel.value === "--");
                         temp.setAttribute("onclick","deliverBooking(this)");
-                        console.log("everything adapted.");
                     }
                     temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
                     if(pastToday(d)){div.appendChild(temp);}
