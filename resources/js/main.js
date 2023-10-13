@@ -259,7 +259,7 @@ function fillDaySlot(){
                 }else{
                     temp.innerHTML=`${hour}:${minutes}`;
                     temp.setAttribute("class", "timeSlot");
-                    if(window.location.pathname==="/index.html"){
+                    if(window.location.pathname==="/termintool/index.html"){
                         let sel = document.getElementById("chooseLeistung");
                         temp.classList.toggle("invalidTimeSlot", sel.value === "--");
                         temp.setAttribute("onclick","deliverBooking(this)");
@@ -331,4 +331,3 @@ function decrementDay(){
         }
     }
 }
-console.log(window.location.pathname);
