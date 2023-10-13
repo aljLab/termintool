@@ -86,6 +86,8 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
                     let t = convertToTermin(terminstring, leistung);
                     if(terminPossible(t)){
                         box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
+                        t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
+                        insertTermin(t);
                         f.reset();
                     }else{
                         box.innerHTML="Termin außerhalb der Betriebszeiten.";
