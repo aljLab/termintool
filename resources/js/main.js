@@ -331,3 +331,4 @@ function decrementDay(){
         }
     }
 }
+console.log(window.location.pathname==="/termintool/index.html");
