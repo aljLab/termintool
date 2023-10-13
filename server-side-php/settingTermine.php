@@ -3,7 +3,7 @@
     $user = $_SERVER["dbuser"];
     $password =$_SERVER["dbuserpassword"];
     $t = file_get_contents("php://input");//reading POST-Request body from Fetch-Request
-
+    
   // Assuming the data is sent as JSON, decode it
     $t = json_decode($t, true);
     
@@ -15,7 +15,7 @@
   
         if ($stmt) {
             $stmt->execute($t);
-            echo "Data inserted successfully.";
+            echo "Data inserted successfully. $t";
         } else {
             echo "Error: " . $conn->errorInfo()[2];
         }
