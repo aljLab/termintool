@@ -67,11 +67,11 @@ function setUp(){
         fillLeistungsSelect(sel);
         fillDaySlot();
     }else{
-        fetchTermine(setUpDays);
+        fetchTermine(fillDaySlots);
         //fetchKunden();
         console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);
-        //setUpDays();
         setUpNavbar();
+        setUpDays();
         var sel = document.getElementById("chooseLeistung");
         setUpLeistungsDropDown();
         fillLeistungsSelect(sel);
@@ -111,15 +111,13 @@ function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an 
         a.style.width= "20%";
         c.appendChild(a);
     }
-    console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);
 }
 function fillDaySlots(){
     for(l=0;l<5;l++){
             let div = document.getElementById(`${bhweekdays[l]}`);
-            /*while (div.childNodes.length > 1) {
+            while (div.childNodes.length > 1) {
                 div.removeChild(div.lastChild);
-            }*/
-            div.innerHTML="";
+            }
             let bhArray=bh[bhweekdays[l]];
             bhArray.forEach(timeslot=>{
                 let sd = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
