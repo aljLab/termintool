@@ -5,7 +5,6 @@
     $t = file_get_contents("php://input");//reading POST-Request body from Fetch-Request
     
   // Assuming the data is sent as JSON, decode it
-    $t = json_decode($t, true);
     
     try {
         $conn = new PDO($dns, $user, $password);
