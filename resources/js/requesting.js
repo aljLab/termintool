@@ -28,13 +28,15 @@ function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
     prepareSubmission(terminstring);
 }
 function fillLeistungsSelect(select){
-    select.innerHTML="<option selected>--</option>";
-    leistungen.forEach(l=>{
-        let opt = document.createElement("option");
-        opt.innerHTML=`${l.name}: ${l.preis}`;
-        opt.value=`${l.name}`;
-        select.appendChild(opt);
-    })
+    if(select!==null){
+        select.innerHTML="<option selected>--</option>";
+        leistungen.forEach(l=>{
+            let opt = document.createElement("option");
+            opt.innerHTML=`${l.name}: ${l.preis}`;
+            opt.value=`${l.name}`;
+            select.appendChild(opt);
+        })
+    }
 }
 function displayDateChosen(){
     let flag = document.getElementById("zeitpunkt");

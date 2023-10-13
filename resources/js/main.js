@@ -18,7 +18,7 @@ const leistungen=[
     new Leistung("Beratung/Gespräch", 5, "65€"),new Leistung("Yoga/Atemsitzung", 5, "65€"), new Leistung("Tsa Lung", 5, "65€"), 
     new Leistung("Telefontermin akut", 2, "25€")
     ]; 
-const bh= new BusinessHours(["15.00-16.00", "12.00-13.00", "-"],["-"],["10.15-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"]);
+const bh= new BusinessHours(["15.00-16.00", "-"],["-"],["10.15-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"]);
 const kunden =[];
 const bhweekdays =["mo", "di", "mi", "don", "fr"];
 var currentDauer = 4;
@@ -59,21 +59,42 @@ function setUp(){
         /*fetchTermine(setUpSmartphoneDays);
         fetchKunden();
         console.log("Smartphone set up finished.");*/
-        setUpSmartphoneDays();
-    }else if(window.innerWidth<=1024){
-        fetchTermine(setUpDays);
-        fetchKunden();
-        console.log("Tablet set up finished.");
+        setUpNavbarSmartphone();
+        //equipFormInputsForMobile();
+        //Leistungsselect
+        var sel = document.getElementById("chooseLeistung");
+        setUpLeistungsDropDown();
+        fillLeistungsSelect(sel);
+        fillDaySlot();
     }else{
         /*fetchTermine(setUpDays);
         fetchKunden();
         console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);*/
         setUpDays();
+        setUpNavbar();
+        var sel = document.getElementById("chooseLeistung");
+        setUpLeistungsDropDown();
+        fillLeistungsSelect(sel);
+        fillDaySlots();
     }
 }
-
+function setUpCalendar(){
+    if(window.innerWidth<=767){
+        /*fetchTermine(setUpSmartphoneDays);
+        fetchKunden();
+        console.log("Smartphone set up finished.");*/
+        setUpNavbarSmartphone();
+        fillDaySlot();
+    }else{
+        /*fetchTermine(setUpDays);
+        fetchKunden();
+        console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);*/
+        setUpDays();
+        //setUpNavbar();
+        //fillDaySlots();
+    }
+}
 function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an #days, erstellt header und setzt id auf =bhweekdays[i]
-    setUpNavbar();
     //Tageslots setup------------------------------------------------------------------------
     c.innerHTML="";
     for(i = 0;i<5; i++){
@@ -90,19 +111,14 @@ function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an 
         a.style.width= "20%";
         c.appendChild(a);
     }
-    //Leistungsselect
-    var sel = document.getElementById("chooseLeistung");
-    setUpLeistungsDropDown();
-    fillLeistungsSelect(sel);
-    
-    fillDaySlots();
-    
     console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);
 }
 function fillDaySlots(){
     for(l=0;l<5;l++){
             let div = document.getElementById(`${bhweekdays[l]}`);
-            div.innerHTML="";
+            while (div.childNodes.length > 1) {
+                div.removeChild(div.lastChild);
+            }
             let bhArray=bh[bhweekdays[l]];
             bhArray.forEach(timeslot=>{
                 let sd = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
@@ -118,10 +134,12 @@ function fillDaySlots(){
                         }else{
                             temp.innerHTML=`${hour}:${minutes}`;
                             temp.setAttribute("class", "timeSlot");
-                            let sel = document.getElementById("chooseLeistung");
-                            temp.classList.toggle("invalidTimeSlot", sel.value === "--");
+                            if(window.location.pathname==="/index.html"){
+                                let sel = document.getElementById("chooseLeistung");
+                                temp.classList.toggle("invalidTimeSlot", sel.value === "--");
+                                temp.setAttribute("onclick","deliverBooking(this)");
+                            }
                             temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
-                            temp.setAttribute("onclick","deliverBooking(this)");
                             if(pastToday(d)){div.appendChild(temp);}
                             d = new Date(d.getTime()+(15*60*1000));
                         }
@@ -165,20 +183,18 @@ function setUpNavbar(){
 }
 function setUpLeistungsDropDown(){
     var s = document.getElementById("chooseLeistung");
-    s.default=
-    console.log(s.value);
-    s.addEventListener("blur", function(){
-        leistungen.forEach(l=>{
-            if(l.name == s.value){
-                currentDauer=l.dauer;
+        s.addEventListener("blur", function(){
+            leistungen.forEach(l=>{
+                if(l.name == s.value){
+                    currentDauer=l.dauer;
+                }
+            })
+            if(window.innerWidth<=767){
+                fillDaySlot();
+            }else{
+                fillDaySlots();
             }
         })
-        if(window.innerWidth<=767){
-            fillDaySlot();
-        }else{
-            fillDaySlots();
-        }
-    })
 }
 function convertToMoSo(x){
     //getDay() gibt für Sonntag 0 aus -> gewollt ist Mo = 0 -> So = 6 ---> alle außer So dekrementieren, so 6 mal inkrementieren
@@ -196,7 +212,9 @@ function incrementWeek(){
     monday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+7);
     sunday = new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate()+7);
     uptodate();
+    setUpNavbar();
     setUpDays();
+    fillDaySlots();
 }
 function decrementWeek(){
     if(pastToday(new Date(monday.getTime()-3*24*60*60*1000))){//nur dekrementieren wenn mindestens der Freitag letzter Woche noch in der Zukunft liegt
@@ -204,7 +222,9 @@ function decrementWeek(){
         monday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()-7);
         sunday = new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate()-7);
         uptodate();
+        setUpNavbar();
         setUpDays();
+        fillDaySlots();
     }
 }
 function uptodate(){//day, month (1-12;Jan-Dez) und year an aktuelles Datum anpassen
@@ -213,15 +233,7 @@ function uptodate(){//day, month (1-12;Jan-Dez) und year an aktuelles Datum anpa
 
 /*--------mobile Set up()---------------- */
 /*--------------------smartphone-------------*/
-function setUpSmartphoneDays(){
-    setUpNavbarSmartphone();
-    //equipFormInputsForMobile();
-    //Leistungsselect
-    var sel = document.getElementById("chooseLeistung");
-    setUpLeistungsDropDown();
-    fillLeistungsSelect(sel);
-    fillDaySlot();
-}
+
 function fillDaySlot(){
     c.innerHTML="";
     let bhprop = bhweekdays[convertToMoSo(today.getDay())];
@@ -249,10 +261,12 @@ function fillDaySlot(){
                 }else{
                     temp.innerHTML=`${hour}:${minutes}`;
                     temp.setAttribute("class", "timeSlot");
-                    let sel = document.getElementById("chooseLeistung");
-                    temp.classList.toggle("invalidTimeSlot", sel.value === "--");
+                    if(window.location.pathname==="/index.html"){
+                        let sel = document.getElementById("chooseLeistung");
+                        temp.classList.toggle("invalidTimeSlot", sel.value === "--");
+                        temp.setAttribute("onclick","deliverBooking(this)");
+                    }
                     temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
-                    temp.setAttribute("onclick","deliverBooking(this)");
                     if(pastToday(d)){div.appendChild(temp);}
                     d = new Date(d.getTime()+(15*60*1000));
                 }
@@ -267,7 +281,6 @@ function fillDaySlot(){
         }
 }
 function setUpNavbarSmartphone(){
-    //navbar setup smartphone-------------------------------------------
     //get Divs from HTMl file
     var l = document.getElementById("lbutton");
     l.innerHTML="";
@@ -291,21 +304,18 @@ function setUpNavbarSmartphone(){
     l.appendChild(lbutton);
     w.appendChild(week);
     r.appendChild(rbutton); 
-
-     //Leistungsselect
-     var sel = document.getElementById("chooseLeistung");
-     setUpLeistungsDropDown();
-     fillLeistungsSelect(sel);
 }
 function incrementDay(){
     if(convertToMoSo(today.getDay())==4){
         today = new Date(today.getFullYear(), today.getMonth(), today.getDate()+3);
         uptodate();
-        setUpSmartphoneDays();
+        setUpNavbarSmartphone();
+        fillDaySlot();
     }else{
         today = new Date(today.getFullYear(), today.getMonth(), today.getDate()+1);
         uptodate();
-        setUpSmartphoneDays();
+        setUpNavbarSmartphone();
+        fillDaySlot();
     }
 }
 function decrementDay(){
@@ -313,15 +323,17 @@ function decrementDay(){
         if(convertToMoSo(today.getDay())==0){
             today = new Date(today.getFullYear(), today.getMonth(), today.getDate()-3);
             uptodate();
-            setUpSmartphoneDays();
+            setUpNavbarSmartphone();
+            fillDaySlot();
         }else{
             today = new Date(today.getFullYear(), today.getMonth(), today.getDate()-1);
             uptodate();
-            setUpSmartphoneDays();
+            setUpNavbarSmartphone();
+            fillDaySlot();
         }
     }
 }
-function equipFormInputsForMobile(){
+/*function equipFormInputsForMobile(){
     let form=document.getElementById("bform");
     let elArray = form.elements;
     elArray.forEach(inp =>{
@@ -332,4 +344,7 @@ function equipFormInputsForMobile(){
             window.style.overflowX="hidden";
         })
     })
-}
+}*/
+
+console.log(window.location.pathname);
+console.log(window.location.pathname==="/index.html");
