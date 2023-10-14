@@ -90,7 +90,7 @@ function insertTermin(termin){//Takes Termin-Objekt als Input und stellt POST-Re
     });
 }
 
-function deleteTermin(termin){//Takes Termin-Objekt als Input und stellt POST-Request an entsprechendes server-side php-Skript
+function deleteTermin(termin, callback){//Takes Termin-Objekt als Input und stellt POST-Request an entsprechendes server-side php-Skript
     fetch("./server-side-php/deleteTermin.php",{
             method:"POST",
             headers: {'Content-Type': 'application/json'},
@@ -100,6 +100,7 @@ function deleteTermin(termin){//Takes Termin-Objekt als Input und stellt POST-Re
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
+        callback();
         return response.text();
     })
     .then(function(responsetext) {
