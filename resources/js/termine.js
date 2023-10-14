@@ -35,6 +35,7 @@ function makeModBox(termin){
     but2.onclick="showKunde()";
     but3.addEventListener("click", (e)=>{
         deleteTermin(termin);
+        window.location.reload();
         let fb = document.getElementById(`termineFeedback`);
         fb.innerHTML="Termin erfolgreich aus Datenbank gelöscht.";
     });
