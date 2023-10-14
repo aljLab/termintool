@@ -102,8 +102,7 @@ function setUpTerminModal(termin){
         deleteTermin(termin, ()=>{
             fetchTermine(displayTermine);
             setTimeout(() => {
-                let fb = document.getElementById("termineFeedback");
-                fb.innerHTML = `Termin am ${termin.date}, ${termin.hourValue}.${termin.minuteValue} Uhr erfolgreich gelöscht.`;
+               window.location.reload();
             }, 500); // Delay in milliseconds
         });
     });
