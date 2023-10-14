@@ -615,6 +615,7 @@ form:invalid > button{
         width: 30%;
         height: 25%;
         overflow-wrap: break-word;
+        overflow-y: scroll;
     }
   }
  
