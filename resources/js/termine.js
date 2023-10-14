@@ -95,7 +95,7 @@ function setUpTerminModal(termin){
     let mess= document.createElement("span");
     /*mess.innerHTML=`Termin am ${termin.date} um ${termin.hourValue}.${termin.minuteValue} Uhr wird dauerhaft gelöscht.`;
     bod.insertBefore(mess, dl);*/
-    dl.addEventListener("click", (termin)=>{
+    dl.addEventListener("click", ()=>{
         console.log(termin);
         deleteTermin(termin);
         //window.location.reload();
