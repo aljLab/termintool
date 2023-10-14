@@ -34,6 +34,7 @@ function makeModBox(termin){
     });
     but2.onclick="showKunde()";
     but3.addEventListener("click", ()=>{
+        console.log(termin);
         setUpTerminModal(termin);
     });
     div.classList.add("modBox");
@@ -95,6 +96,7 @@ function setUpTerminModal(termin){
     /*mess.innerHTML=`Termin am ${termin.date} um ${termin.hourValue}.${termin.minuteValue} Uhr wird dauerhaft gelöscht.`;
     bod.insertBefore(mess, dl);*/
     dl.addEventListener("click", (termin)=>{
+        console.log(termin);
         deleteTermin(termin);
         window.location.reload();
         let fb = document.getElementById("termineFeedback");
