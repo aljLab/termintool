@@ -532,7 +532,7 @@ form:invalid > button{
         display: flex;
         flex-direction: row;
         width: 100%;
-        height: 50px;
+        height: auto;
         align-items: center;
         justify-content: space-between;
         border: 0px;
@@ -542,6 +542,23 @@ form:invalid > button{
         width: auto;
         display: flex;
         justify-content: center;
+        box-shadow: 0 10px 6px -6px var(--darkest-color);
+    }
+    #currentItem a{
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .listItem{
+        font-size: 15px;
+    }
+    .sidebarIcon{
+        width: 40px;
+        height: 40px;
+        margin: 10px;
+    }
+    .sidebarIcon:hover{
+        transform: rotate(20deg);
+        transition: ease-in 300ms;
     }
     
     /*----------------Calendar------------------*/

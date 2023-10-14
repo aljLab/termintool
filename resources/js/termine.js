@@ -1,6 +1,9 @@
 const tc = document.getElementById("terminContainer");
 
 function displayTermine(){
+    if(window.innerWidth<=767){
+        adaptSideBar();
+    }
     tc.innerHTML="";
     let fb = document.createElement("span");
     fb.id="termineFeedback";

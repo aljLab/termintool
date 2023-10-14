@@ -22,6 +22,7 @@ const bh= new BusinessHours(["-"],["-"],["-"],["9.30-13.00", "15.00-19.00", "-"]
 const kunden =[new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", []), new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", [])];
 const bhweekdays =["mo", "di", "mi", "don", "fr"];
 var currentDauer = 4;
+const imageRefs=["../resources/images/calendar-blank-icon.svg", "../resources/images/clock-line-icon.svg","../resources/images/diary-icon.svg","../resources/images/boys-icon.svg","../resources/images/service-provider-icon.svg"];
 /*------------------------------------------Konstruktoren--------------------------------------------*/
 //Constructor für Termin
 function Termin(h, m, date, leistung, dauer, kunde){
@@ -81,6 +82,7 @@ function setUpCalendar(){
         /*fetchTermine(setUpSmartphoneDays);
         fetchKunden();
         console.log("Smartphone set up finished.");*/
+        adaptSideBar();
         setUpNavbarSmartphone();
         fillDaySlot();
     }else{
@@ -231,6 +233,20 @@ function uptodate(){//day, month (1-12;Jan-Dez) und year an aktuelles Datum anpa
 
 /*--------mobile Set up()---------------- */
 /*--------------------smartphone-------------*/
+function adaptSideBar(){
+    let sb = document.getElementById("sidebar");
+    let i = 0;
+    console.log(sb.children);
+    console.log(sb.className);
+    Array.from(sb.children).forEach(n=>{
+        if(n.className ==="listItem"){
+            n.innerHTML=`<img class ='sidebarIcon' src=${imageRefs[i]}>`;
+            i++;
+        }else if(n.id=="currentItem"){
+            i++;
+        }
+    })
+}
 function fillDaySlot(){
     c.innerHTML="";
     let bhprop = bhweekdays[convertToMoSo(today.getDay())];

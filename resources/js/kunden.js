@@ -24,6 +24,7 @@ function fillKundenTabelle(){
             t.appendChild(row);
         })
     }else{
+        adaptSideBar();
         kunden.forEach(k=>{
             let row = document.createElement("div");
             row.setAttribute("class", "kundeContainer");

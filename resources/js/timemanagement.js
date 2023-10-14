@@ -12,6 +12,9 @@ function setUpTimeManagement(){//called onload of body,
 }
 
 function setUpTimeTable(){//sets up time Table for Business hours
+    if(window.innerWidth<=767){
+        adaptSideBar();
+    }
     var dayNames=["mo","di","mi","don","fr"];//watch out for the don...
     dayNames.forEach(e => {
         let tr = document.getElementById(`t${e}`);

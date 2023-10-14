@@ -1,5 +1,8 @@
 
 function fillLeistungsTabelle(){
+    if(window.innerWidth<=767){
+        adaptSideBar();
+    }
     var tab = document.getElementById("leistungsTabelle");
     leistungen.forEach(l=>{
         let row = document.createElement("tr");
