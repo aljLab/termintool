@@ -101,9 +101,11 @@ function setUpTerminModal(termin){
         closeTerminModal();
         deleteTermin(termin, ()=>{
             fetchTermine(displayTermine);
+            setTimeout(() => {
+                let fb = document.getElementById("termineFeedback");
+                fb.innerHTML = `Termin am ${termin.date}, ${termin.hourValue}.${termin.minuteValue} Uhr erfolgreich gelöscht.`;
+            }, 500); // Delay in milliseconds
         });
-        let fb = document.getElementById("termineFeedback");
-        fb.innerHTML=`Termin am ${termin.date}, ${termin.hourValue}.${termin.minuteValue} Uhr erfolgreich gelöscht.`;
     });
     cb.addEventListener("click", closeTerminModal);
     m.style.display="flex";
