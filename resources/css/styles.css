@@ -59,6 +59,7 @@ body{
     background-color: var(--light-color);
     color: white;
     border: 1px solid black;
+    flex-wrap:wrap;
 }
 hr{
     width: 80%;
