@@ -35,10 +35,10 @@ function setUpTimeTable(){//sets up time Table for Business hours
                 in1.setAttribute("pattern", timeRegEx);
                 in2.setAttribute("pattern", timeRegEx);
                 in1.addEventListener("blur", function(e){//EventListener to change submitbutton if input is invalid
-                        changeSubmitButtonAppearance1(e, document.getElementById("updateBusinessHours"));
+                        changeSubmitButtonAppearance(e, document.getElementById("updateBusinessHours"));
                 });
                 in2.addEventListener("blur", function(e){
-                    changeSubmitButtonAppearance1(e, document.getElementById("updateBusinessHours"));
+                    changeSubmitButtonAppearance(e, document.getElementById("updateBusinessHours"));
                 });
                 td.appendChild(in1);
                 td.appendChild(in2);
@@ -59,19 +59,19 @@ function setUpBlockTermin(){
      sb.addEventListener("click", checkTermin);
 
     a.addEventListener("blur", function(e){
-        changeSubmitButtonAppearance(e, but);
+        changeSubmitButtonAppearance1(e, but);
     });
     b.addEventListener("blur", function(e){
-        changeSubmitButtonAppearance(e, but);
+        changeSubmitButtonAppearance1(e, but);
     });
     c.addEventListener("blur", function(e){
-        changeSubmitButtonAppearance(e, but);
+        changeSubmitButtonAppearance1(e, but);
     });
     d.addEventListener("blur", function(e){
-        changeSubmitButtonAppearance(e, but);
+        changeSubmitButtonAppearance1(e, but);
     });
     e.addEventListener("blur", function(e){
-        changeSubmitButtonAppearance(e, but);
+        changeSubmitButtonAppearance1(e, but);
     });
 }
 function checkTermin(){
