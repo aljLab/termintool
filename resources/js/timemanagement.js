@@ -35,10 +35,10 @@ function setUpTimeTable(){//sets up time Table for Business hours
                 in1.setAttribute("pattern", timeRegEx);
                 in2.setAttribute("pattern", timeRegEx);
                 in1.addEventListener("blur", function(e){//EventListener to change submitbutton if input is invalid
-                        changeSubmitButtonAppearance(e, document.getElementById("updateBusinessHours"));
+                        changeSubmitButtonAppearance1(e, document.getElementById("updateBusinessHours"));
                 });
                 in2.addEventListener("blur", function(e){
-                    changeSubmitButtonAppearance(e, document.getElementById("updateBusinessHours"));
+                    changeSubmitButtonAppearance1(e, document.getElementById("updateBusinessHours"));
                 });
                 td.appendChild(in1);
                 td.appendChild(in2);
@@ -133,6 +133,18 @@ function changeSubmitButtonAppearance(e, but){//Function für EventListener ("bl
             but.style.cursor="pointer";
             e.target.parentElement.style.backgroundColor="var(--lightest-color)";
         }
+}
+function changeSubmitButtonAppearance1(e, but){//Function für EventListener ("blur") für Inputs: wenn ein Input invalid verlassen wird, ändert sich submitbutton
+    if(!e.currentTarget.validity.valid){
+        but.style.backgroundColor="rgb(0,0,0,0.2)";
+        but.style.border="2px solid black";
+        but.style.pointerEvents="none";
+    }else{
+        but.style.backgroundColor="white";
+        but.style.pointerEvents="all";
+        but.style.border="0px";
+        but.style.cursor="pointer";
+    }
 }
 function noOverlaps(bho){
     for(let prop in bho){
