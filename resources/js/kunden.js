@@ -5,7 +5,9 @@ function fillKundenTabelle(){
     kunden.forEach(k=>{
         let row = document.createElement("tr");
         for(let prop in k){
+            console.log(prop);
             let col = document.createElement("td");
+            console.log(k[prop]);
             col.innerHTML=`${k[prop]}`;
             row.appendChild(col);        
         }
