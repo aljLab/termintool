@@ -613,7 +613,7 @@ form:invalid > button{
     }
     .infoBubble{
         width: 30%;
-        height: 25px;
+        height: 25%;
         overflow-wrap: break-word;
     }
   }
