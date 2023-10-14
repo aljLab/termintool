@@ -1,6 +1,9 @@
 const tc = document.getElementById("terminContainer");
 
 function displayTermine(){
+    let fb = document.createElement("span");
+    fb.id="termineFeedback";
+    tc.appendChild(fb);
     termine.forEach(t=>{
         let div = document.createElement("div");
         let ter = document.createElement("div");
@@ -23,25 +26,23 @@ function makeModBox(termin){
     let but1= document.createElement("button");
     let but2=document.createElement("button");
     let but3=document.createElement("button");
-    let modBoxFeedback = document.createElement("span");
     but1.innerHTML="Termin stornieren";
     but2.innerHTML="Kunden anzeigen";
     but3.innerHTML="Termin aus Database löschen";
-    modBoxFeedback.setAttribute("id", "modBoxFeedback");
     but1.addEventListener("click", (e)=>{
         e.target.style.display = "none";
     });
     but2.onclick="showKunde()";
     but3.addEventListener("click", (e)=>{
         deleteTermin(termin);
-        let fb = document.getElementById("modBoxFeedback");
+        window.location.reload();
+        let fb = document.getElementById(`termineFeedback`);
         fb.innerHTML="Termin erfolgreich aus Datenbank gelöscht.";
     });
     div.classList.add("modBox");
     div.appendChild(but1);
     div.appendChild(but2);
     div.appendChild(but3);
-    div.appendChild(modBoxFeedback);
     return div;
 }
 function handleStorno(){
