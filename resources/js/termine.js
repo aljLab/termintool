@@ -88,6 +88,7 @@ function getCompDate(termin){
 }
 
 function setUpTerminModal(termin){
+    window.scrollTo(0,0);
     let m = document.getElementById("terminModal");
     let mb = document.getElementById("terminModalBack");
     let cb = document.getElementById("termineCloseButton");
