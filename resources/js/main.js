@@ -22,7 +22,7 @@ const bh= new BusinessHours(["-"],["-"],["-"],["9.30-13.00", "15.00-19.00", "-"]
 const kunden =[new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", []), new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", [])];
 const bhweekdays =["mo", "di", "mi", "don", "fr"];
 var currentDauer = 4;
-const imageRefs=["../resources/images/calendar-blank-icon.svg", "../resources/images/clock-line-icon.svg","../resources/images/diary-icon.svg","../resources/images/boys-icon.svg","../resources/images/service-provider-icon.svg"];
+const imageRefs=["/termintool/resources/images/calendar-blank-icon.svg", "/termintool/resources/images/clock-line-icon.svg","/termintool/resources/images/diary-icon.svg","/termintool/resources/images/boys-icon.svg","/termintool/resources/images/service-provider-icon.svg"];
 /*------------------------------------------Konstruktoren--------------------------------------------*/
 //Constructor für Termin
 function Termin(h, m, date, leistung, dauer, kunde){
