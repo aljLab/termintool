@@ -100,7 +100,6 @@ function setUpTerminModal(termin){
         console.log(termin);
         closeTerminModal();
         deleteTermin(termin, ()=>{
-            fetchTermine(displayTermine);
             setTimeout(() => {
                window.location.reload();
             }, 500); // Delay in milliseconds
