@@ -92,14 +92,13 @@ function setUpTerminModal(termin){
     let dl = document.getElementById("termineDeleteButton");
     let bod = document.body;
     let mess= document.createElement("span");
-    mess.innerHTML=`Termin am ${termin.date} um ${termin.hourValue}.${termin.minuteValue} Uhr wird dauerhaft gelöscht.`;
-    bod.insertBefore(mess, dl);
+    /*mess.innerHTML=`Termin am ${termin.date} um ${termin.hourValue}.${termin.minuteValue} Uhr wird dauerhaft gelöscht.`;
+    bod.insertBefore(mess, dl);*/
     cb.addEventListener("click", (termin)=>{
         deleteTermin(termin);
         alert("Termin erfolgreich gelöscht.");
     });
     dl.addEventListener("click", closeTerminModal);
-
     m.style.display="flex";
     mb.style.display="block";
 }
@@ -112,4 +111,3 @@ function closeTerminModal(){
     m.style.display="none";
     mb.style.display="none";
 }
-setUpTerminModal(new Termin("09", "30", "12.10.2023","Anamnese", 5, new Kunde("Dr.", "Aljoscha", "Lustig", "a@b.com", "017623559949", [])));
