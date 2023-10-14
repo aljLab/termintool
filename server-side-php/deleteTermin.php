@@ -7,7 +7,7 @@ $t = file_get_contents("php://input"); // Reading POST-Request body from Fetch-R
 try {
     $conn = new PDO($dns, $user, $password);
     $conn->beginTransaction();
-    $sql = "DELETE FROM termine WHERE termin = ?";
+    $sql = "DELETE FROM termine WHERE kunde = NULL";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
