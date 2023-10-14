@@ -35,7 +35,6 @@ function fetchTermine(callback) {
                 orderInAsc(JSON.parse(obj.termin));
             })
             console.log("Data received and assigned to termine");
-            console.log(termine);
             callback();
         })
         .catch(error => {
