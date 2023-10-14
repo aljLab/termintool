@@ -20,7 +20,6 @@
     });
 }*/
 function fetchTermine(callback) {
-    console.log(`Termine: ${termine}`);
     fetch('./server-side-php/termin_handle.php')
         .then(response => {
             if (!response.ok) {
@@ -34,7 +33,6 @@ function fetchTermine(callback) {
             data.forEach(obj=>{
                 orderInAsc(JSON.parse(obj.termin));
             })
-            console.log("Data received and assigned to termine");
             callback();
         })
         .catch(error => {
