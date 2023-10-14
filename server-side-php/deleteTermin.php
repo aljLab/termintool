@@ -6,12 +6,14 @@ $t = file_get_contents("php://input"); // Reading POST-Request body from Fetch-R
 
 try {
     $conn = new PDO($dns, $user, $password);
+    $conn->beginTransaction();
     $sql = "DELETE FROM termine WHERE termin = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
         $stmt->bindParam(1, $t, PDO::PARAM_STR);
         $stmt->execute();
+        $conn->commit();
         echo "Data deleted successfully. $t";
     } else {
         echo "Error: " . $conn->errorInfo()[2];
