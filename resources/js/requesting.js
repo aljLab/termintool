@@ -13,7 +13,6 @@ const mailRegExp=/\w*@\w*\.\w{2,4}/;
 //deliver Booking page
 function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
     window.scrollTo(0,0);
-    document.body.style.display = "none";
     let mb =document.getElementById("modalBack");
     let m = document.getElementById("bookingbox");
     mb.style.display="block";
