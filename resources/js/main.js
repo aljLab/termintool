@@ -10,7 +10,7 @@ var termine =[]/*[new Termin("09", "30", "12.10.2023","Anamnese", 5, new Kunde("
 new Termin("11", "30", "5.10.2023", "Untersuchung", 7, new Kunde("Herr","Wolfram", "Ebert", "w.ebert@web.com", "+49 1982736475")), 
 new Termin("09", "30", "19.10.2023","Herzyoga", 5, new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", [])), 
 new Termin("15", "30", "24.10.2023","Telefontermin", 2, new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", []))];//, new Termin("10", "30", "21.9.2023", "Hallo", 5)];*/
-
+const admin = new Kunde("Admin", "Admin", "Admin", "aljoschalabonte@rocketmail.com", "XXX", []);
 const leistungen=[
     new Leistung("Esalenmassage (60 Minuten)", 5, "65€"), new Leistung("Esalenmassage (75 Minuten)", 6, "80€"),
     new Leistung("Esalenmassage (90 Minuten)", 7, "95€"), new Leistung("Homöopathische Erstanamnese", 7, "175€"),
