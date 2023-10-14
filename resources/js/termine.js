@@ -1,6 +1,7 @@
 const tc = document.getElementById("terminContainer");
 
 function displayTermine(){
+    tc.innerHTML="";
     let fb = document.createElement("span");
     fb.id="termineFeedback";
     tc.appendChild(fb);
