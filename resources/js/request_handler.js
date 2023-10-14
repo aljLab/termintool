@@ -98,7 +98,7 @@ function deleteTermin(termin, cb){//Takes Termin-Objekt als Input und stellt POS
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        cb();
+        cb(displayTermine);
         return response.text();
     })
     .then(function(responsetext) {
