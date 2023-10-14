@@ -98,7 +98,7 @@ function setUpTerminModal(termin){
     dl.addEventListener("click", (termin)=>{
         console.log(termin);
         deleteTermin(termin);
-        window.location.reload();
+        //window.location.reload();
         let fb = document.getElementById("termineFeedback");
         fb.innerHTML=`Termin am ${termin.date}, ${termin.hourValue}.${termin.minuteValue} Uhr erfolgreich gelöscht.`;
     });
