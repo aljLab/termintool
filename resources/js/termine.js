@@ -34,10 +34,7 @@ function makeModBox(termin){
     });
     but2.onclick="showKunde()";
     but3.addEventListener("click", (e)=>{
-        deleteTermin(termin);
-        window.location.reload();
-        let fb = document.getElementById(`termineFeedback`);
-        fb.innerHTML="Termin erfolgreich aus Datenbank gelöscht.";
+        setUpTerminModal(termin);
     });
     div.classList.add("modBox");
     div.appendChild(but1);
@@ -87,3 +84,32 @@ function orderInAsc(termin){//sortiert Input termin in 'termine'-Array nach Zeit
 function getCompDate(termin){
     return new Date(termin.date.split(".")[2], termin.date.split(".")[1]-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);
 }
+
+function setUpTerminModal(termin){
+    let m = document.getElementById("terminModal");
+    let mb = document.getElementById("terminModalBack");
+    let cb = document.getElementById("termineCloseButton");
+    let dl = document.getElementById("termineDeleteButton");
+    let bod = document.body;
+    let mess= document.createElement("span");
+    mess.innerHTML=`Termin am ${termin.date} um ${termin.hourValue}.${termin.minuteValue} Uhr wird dauerhaft gelöscht.`;
+    bod.insertBefore(mess, dl);
+    cb.addEventListener("click", (termin)=>{
+        deleteTermin(termin);
+        alert("Termin erfolgreich gelöscht.");
+    });
+    dl.addEventListener("click", closeTerminModal);
+
+    m.style.display="flex";
+    mb.style.display="block";
+}
+
+//Modal handling, Usability adding
+function closeTerminModal(){
+    let m = document.getElementById("terminModal");
+    let mb = document.getElementById("terminModalBack");
+
+    m.style.display="none";
+    mb.style.display="none";
+}
+setUpTerminModal(new Termin("09", "30", "12.10.2023","Anamnese", 5, new Kunde("Dr.", "Aljoscha", "Lustig", "a@b.com", "017623559949", [])));
