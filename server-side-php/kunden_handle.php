@@ -1,21 +1,24 @@
 <?php
-$dbuser=$_SERVER["dbuser"];
-$dbuserpassword =$_SERVER["dbuserpassword"];
-$dns = "mysql:host=localhost;dbname=termintool";
-
-try{
-    $conn = new PDO($dns, $dbuser, $dbpassword);
+$dns ="mysql:host=localhost;dbname=termintool";
+$user = $_SERVER["dbuser"];
+$password =$_SERVER["dbuserpassword"];
+try {
+    // Select data from MySQL table (modify the query as needed)
+    $conn = new PDO($dns, $user, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = ("SELECT kunde FROM kunden");
-    $stmnt = $conn->prepare($sql);
+    $sql = "SELECT kunde FROM kunden";
+    $stmt = $conn->prepare($sql);
 
-    if($stmnt){
-        $stmnt->execute();
-        $stmnt = $conn->prepare($sql);
-        $data = $stmnt->fetchAll(PDO::FETCH_ASSOC); //[kunde => [JSON-String]]
-        header("Content-Type:application/json");
-        echo json_encode($data);// echos [{kunde:JSON-STring},{kunde:JSON-STring}, etc.]
+    if ($stmt) {
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);//contains associative Array, where the json-strings are the values 
+        header('Content-Type: application/json'); // Set the response header
+        echo json_encode($data);//echos array of json-objects of this structure: {termin:JSON_STRING}
+    } else {
+        error_log( "Error: " . $conn->errorInfo()[2]);
     }
-}catch(PDOException $e){
-    error_log(e->getMessage());
+} catch (PDOException $e) {
+    error_log($e->getMessage());
+    error_log("Error: " . $e->getMessage());
 }
+?>

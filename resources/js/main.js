@@ -19,7 +19,7 @@ const leistungen=[
     new Leistung("Telefontermin akut", 2, "25€")
     ]; 
 const bh= new BusinessHours(["-"],["-"],["-"],["9.30-13.00", "15.00-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"]);
-const kunden =[];
+const kunden =[new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", []), new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", [])];
 const bhweekdays =["mo", "di", "mi", "don", "fr"];
 var currentDauer = 4;
 /*------------------------------------------Konstruktoren--------------------------------------------*/

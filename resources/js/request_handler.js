@@ -39,7 +39,7 @@ function fetchTermine(callback) {
             console.error('Fetch error', error);
         });
 }
-function fetchKunden(){
+function fetchKunden(callback){
     fetch('./server-side-php/kunden_handle.php')
     .then(response =>{
         if(!response.ok){
@@ -53,6 +53,7 @@ function fetchKunden(){
             kunden.push(JSON.parse(e.kunde));
             console.log(JSON.parse(e.kunde));
         })
+        callback();
     })
     .catch(error=>{
         console.error('Fetch error', error);
@@ -113,4 +114,25 @@ function deleteTermin(termin, cb){//Takes Termin-Objekt als Input und stellt POS
 
 function checkFetching(){
     insertTermin(new Termin("15", "30", "24.10.2023","Telefontermin", 2, new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", [])));
+}
+function insertKunde(kunde){//Takes Kunden-Objekt als Input und stellt POST-Request an entsprechendes server-side php-Skript
+    fetch("./server-side-php/settingKunde.php",{
+            method:"POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(kunde),
+        }
+    ).then(function(response) {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(function(responsetext) {
+        // Handle the response from the server
+        console.log(responsetext);
+    })
+    .catch(function(error){
+        // Handle any errors that occurred during the fetch
+        console.error('Fetch error:', error);
+    });
 }
