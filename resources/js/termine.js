@@ -33,7 +33,7 @@ function makeModBox(termin){
         e.target.style.display = "none";
     });
     but2.onclick="showKunde()";
-    but3.addEventListener("click", (e)=>{
+    but3.addEventListener("click", ()=>{
         setUpTerminModal(termin);
     });
     div.classList.add("modBox");
@@ -94,11 +94,11 @@ function setUpTerminModal(termin){
     let mess= document.createElement("span");
     /*mess.innerHTML=`Termin am ${termin.date} um ${termin.hourValue}.${termin.minuteValue} Uhr wird dauerhaft gelöscht.`;
     bod.insertBefore(mess, dl);*/
-    cb.addEventListener("click", (termin)=>{
+    dl.addEventListener("click", (termin)=>{
         deleteTermin(termin);
         alert("Termin erfolgreich gelöscht.");
     });
-    dl.addEventListener("click", closeTerminModal);
+    cb.addEventListener("click", closeTerminModal);
     m.style.display="flex";
     mb.style.display="block";
 }
