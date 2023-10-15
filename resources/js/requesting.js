@@ -237,9 +237,8 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
         let UpBound=compareDates[i][1];
         let condition1= (lowBound<startDate&&startDate<UpBound)&&(UpBound<endDate);//untere Grenze ist in BH, obere aber nicht <=> ...
         let condition2=(startDate<lowBound)&&(lowBound<endDate)//obere Grenze ist drin, untere nicht
-        let condition3=(startDate<absLower&&endDate<absLower);
-        let condition4=(startDate>absUpper&&endDate>absUpper);
-        if(condition1||condition2||condition3||condition4){
+        let condition3=(startDate<absLower||endDate>absUpper);
+        if(condition1||condition2||condition3){
             return false;
         }
     }
@@ -247,14 +246,16 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
 }
 function noTerminConflicts(termin, terminList){//returns true, if termin does not conflict with other book appointments, false otherwise
    for(i=0;i<terminList.length;i++){
-    let t = terminList[i];
+     let t = terminList[i];
+     console.log(terminList[i]);
      if(t.date===termin.date){
         let startDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);
         let endDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue+termin.dauer*15);
         let lowBound = new Date(t.date.split(".")[2], Number(t.date.split(".")[1])-1, t.date.split(".")[0], t.hourValue, t.minuteValue);
         let UpBound = new Date(t.date.split(".")[2], Number(t.date.split(".")[1])-1, t.date.split(".")[0], t.hourValue, t.minuteValue+t.dauer*15);
-        let condition1= (lowBound<startDate&&startDate<UpBound);//untere Grenze ist in BH, obere aber nicht <=> ...
-        let condition2=(startDate<lowBound)&&(lowBound<endDate)//obere Grenze ist drin, untere nicht
+        let condition1= (lowBound<=startDate&&startDate<=UpBound);//untere Grenze ist in BH, obere aber nicht <=> ...
+        let condition2=(startDate<=lowBound)&&(lowBound<=endDate)//obere Grenze ist drin, untere nicht
+        console.log(`untere Grenze ist in termin: ${condition1}...obere Grenze ist in termin:${condition2}`);
         if(condition1||condition2){//wenn zu buchender termin vor gefundenem anfängt und dabei/danach aufhört
             return false;
         }
