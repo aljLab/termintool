@@ -1,6 +1,11 @@
 const c = document.getElementById("days");
 const dayNames= ["Mo", "Di", "Mi", "Do", "Fr"]; 
-var today = new Date(), day=today.getDate(), month=today.getMonth()+1, year= today.getFullYear();
+if(convertToMoSo(new Date().getDay())<5){
+    today = new Date();
+}else{
+    today=new Date(new Date().getTime()+(7-convertToMoSo(new Date().getDay()))*(24*60*60*1000));
+}
+var day=today.getDate(), month=today.getMonth()+1, year= today.getFullYear();
 var maxDays, monday = new Date(today.getFullYear(), today.getMonth(), today.getDate()-convertToMoSo(today.getDay()));
 var sunday = new Date(today.getFullYear(), today.getMonth(), today.getDate()+(6-convertToMoSo(today.getDay())));
 //echtzeitliches Heute
