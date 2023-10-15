@@ -255,7 +255,6 @@ function noTerminConflicts(termin){//returns true, if termin does not conflict w
      }
    }
    return true;
-
 }
 function closeModal(){
     let mb =document.getElementById("modalBack");
