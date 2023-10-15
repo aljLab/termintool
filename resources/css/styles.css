@@ -600,13 +600,16 @@ form:invalid > button{
         align-items: center;
         font-size: 20px;
     }
-    #bformMobile input, #bformMobile select{
+    #bformMobile input, #bformMobile select, #bformMobile button{
         width: 90%;
         height: 22px;
         font-size: 20px;
     }
     #bformMobile span{
         font-size: 20px;
+    }
+    #backButtonMobile{
+        display: none;
     }
     /*--------------------time management------------------*/
     #timecontainer{

@@ -88,6 +88,12 @@ function prepareBookingMobile(){
                         t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
                         insertTermin(t);
                         f.reset();
+                        let bb = document.getElementById("backButtonMobile");
+                        bb.innerHTML="Zurück zum Kalender";
+                        bb.addEventListener("click", ()=>{
+                            window.location="index.html";
+                        });
+                        bb.style.display="block";
                     }else{
                         box.innerHTML="Termin außerhalb der Betriebszeiten.";
                     }
