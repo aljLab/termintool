@@ -210,13 +210,6 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
     let endDate = new Date(startDate.getTime() +termin.dauer*15*60*1000);
     let weekday=bhweekdays[convertToMoSo(startDate.getDay())];//get weekday string to identify corresponding BusinessHours.property
     var compareDates=[];//Aufbauen von Datum-Paaren (für jeden Timeslot im BusinessHourArray ein Paar)
-    console.log(bh);
-    console.log(bh["mo"]);
-    console.log(bh[weekday]);
-    console.log(`Weekday variable: ${weekday};`);
-    console.log(convertToMoSo(startDate.getDay()));
-    console.log(bhweekdays[convertToMoSo(startDate.getDay())]);
-
     if(!weekday){
         return false;
     }else{
