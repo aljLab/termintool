@@ -253,7 +253,7 @@ function noTerminConflicts(termin, terminList){//returns true, if termin does no
         let endDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue+termin.dauer*15);
         let startComp = new Date(t.date.split(".")[2], Number(t.date.split(".")[1])-1, t.date.split(".")[0], t.hourValue, t.minuteValue);
         let endComp = new Date(t.date.split(".")[2], Number(t.date.split(".")[1])-1, t.date.split(".")[0], t.hourValue, t.minuteValue+t.dauer*15);
-        if(startDate.getTime()<startComp.getTime()&&startComp.getTime()<endDate.getTime()){//wenn zu buchender termin vor gefundenem anfängt und dabei/danach aufhört
+        if(startDate.getTime()<=startComp.getTime()&&startComp.getTime()<=endDate.getTime()){//wenn zu buchender termin vor gefundenem anfängt und dabei/danach aufhört
             return false;
         }
      }
