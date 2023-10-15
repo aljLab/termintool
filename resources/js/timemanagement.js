@@ -97,7 +97,7 @@ function provideTerminFeedback(termin){
     let y = termin.date.split(".")[2];
     if(pastToday(new Date(y, m-1, d))){
         if(withinBusinessHours(termin, bh)){
-            if(noTerminConflicts(termin, termine)){
+            if(noTerminConflicts(termin)){
                 if(termin.dauer>0){
                     //safeToDB
                     saveTerminToDB(termin);

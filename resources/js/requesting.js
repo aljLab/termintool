@@ -203,7 +203,7 @@ function convertToTermin(tstr, l){//macht aus den Inputdaten einen Termin, Forma
 }
 function terminPossible(termin){
     //check if within businesshours
-    return withinBusinessHours(termin, bh)&&noTerminConflicts(termin, termine);
+    return withinBusinessHours(termin, bh)&&noTerminConflicts(termin);
 }
 function withinBusinessHours(termin){//returns true, if selected termin lies within business hours, fals otherwise (booked appointments are NOT considered)
     let startDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);
@@ -244,10 +244,10 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
     }
     return true;
 }
-function noTerminConflicts(termin, terminList){//returns true, if termin does not conflict with other book appointments, false otherwise
-   for(i=0;i<terminList.length;i++){
-     let t = terminList[i];
-     console.log(terminList[i]);
+function noTerminConflicts(termin){//returns true, if termin does not conflict with other book appointments, false otherwise
+   for(i=0;i<termine.length;i++){
+     let t = termine[i];
+     console.log(termine[i]);
      if(t.date===termin.date){
         let startDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);
         let endDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue+termin.dauer*15);
