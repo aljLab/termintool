@@ -605,6 +605,9 @@ form:invalid > button{
         height: 22px;
         font-size: 20px;
     }
+    #bformMobile span{
+        font-size: 20px;
+    }
     /*--------------------time management------------------*/
     #timecontainer{
         flex-direction: column;
