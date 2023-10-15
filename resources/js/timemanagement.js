@@ -95,15 +95,10 @@ function provideTerminFeedback(termin){
     let d = termin.date.split(".")[0];
     let m = termin.date.split(".")[1];
     let y = termin.date.split(".")[2];
-    console.log(`Termine-Array:${termine}`);
     if(pastToday(new Date(y, m-1, d))){
-        console.log("past today: check");
         if(withinBusinessHours(termin, bh)){
-            console.log("within bh: check");
             if(noTerminConflicts(termin)){
-                console.log("no conflicts: check");
                 if(termin.dauer>0){
-                    console.log(`correct order: check`);
                     //safeToDB
                     saveTerminToDB(termin);
                     fb = "Termin erfolgreich blockiert.";
