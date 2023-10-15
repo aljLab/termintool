@@ -269,6 +269,7 @@ function fillDaySlot(){
                 let hour=d.getHours();
                 let minutes=`0${d.getMinutes()}`.slice(-2);
                 let temp=document.createElement("div");
+                console.log(checkIfTaken(date, hour, minutes));
                 if(checkIfTaken(date, hour, minutes)!=false){
                     d=new Date(d.getTime()+(15*(checkIfTaken(date, hour, minutes))*60*1000));
                 }else{
