@@ -44,6 +44,7 @@ function prepareBookingMobile(){
     let ls = document.getElementById("leistungsselectMobile");
     zp.innerHTML=`${t.date}, ${t.hourValue}:${t.minuteValue} Uhr`;
     fillLeistungsSelect(ls);
+    ls.value = t.leistung;
     f.addEventListener("submit", function(e){
         e.preventDefault();
         anrede = f.elements.anrede.value;
