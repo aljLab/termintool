@@ -5,7 +5,7 @@ var minute="";
 var subButton = document.getElementById("submitButton");
 var terminstring ="";
 const phoneRegExp=/(\+49|0)\d*/;
-const mailRegExp=/\w*@\w*\.\w{2,4}/;
+const mailRegExp=/\w*@\w*\.\w{1,5}/;
 
 //make POST-Request
     
