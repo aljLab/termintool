@@ -81,6 +81,7 @@ function checkTermin(){
     //make Termin
     let message;
     let t = getBlockedTermin();
+    console.log(t);
     let fb = document.getElementById("feedbackBlockTermin");
     if (typeof t !=="object"){
         message = "Eingabefelder sind leer.";
