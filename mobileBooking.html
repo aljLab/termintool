@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="resources/css/styles.css" rel = "stylesheet">
+    <script src="resources/js/main.js" defer></script>
+    <script src="resources/js/requesting.js" defer></script>
+    <script src="resources/js/request_handler.js" defer></script>
+    <script src="resources/js/timemanagement.js" defer></script>
+    <script src="resources/js/termine.js" defer></script>
+    <title>Mobile Booking</title>
+</head>
+<body style="display: flex;flex-direction: column;align-items: center;" onload="prepareBookingMobile()">
+            <h2>Terminbuchung</h2>
+            <p id="zeitpunktMobile"></p>
+            <form id="bformMobile" method = "POST">
+                Anrede:<br /><select name="anrede" id="anredeselectMobile">
+                    <option value="Herr">Herr</option>
+                    <option value="Frau">Frau</option>
+                    <option value="Dr.">Dr.</option>
+                </select><br />
+                Vorname:<br /><input type = "text" name="vorname" id ="vornameinputMobile" pattern="\w*"><br />
+                Nachname:<br /><input type="text" name = "nachname" id ="nachnameinputMobile"><br />
+                E-Mail-Adresse: <br /><input type="text" name = "mail" id ="mailinputMobile"><br />
+                Telefonnummer: <br /><input type="text" name = "phone" id ="phoneinputMobile"><br />
+                Leistung: <br /> <select name="leistung" id="leistungsselectMobile">
+                </select><br/>
+                <input type="submit" name="submit" value = "Verbindlich buchen" id = "submitButtonMobile"><br/>
+                <span id="feedbackMobile"></span><br />
+            </form>
+</body>
+</html>

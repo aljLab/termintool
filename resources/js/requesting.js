@@ -12,20 +12,103 @@ const mailRegExp=/\w*@\w*\.\w{2,4}/;
 
 //deliver Booking page
 function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
-    window.scrollTo(0,0);
-    let mb =document.getElementById("modalBack");
-    let m = document.getElementById("bookingbox");
-    mb.style.display="block";
-    m.style.display="flex";
-    let b = document.body;
-    b.style.height="100%";
-    b.style.overflow="hidden";
-    terminstring = e.id;
-    displayDateChosen();
-    var select = document.getElementById("leistungsselect");
-    fillLeistungsSelect(select);
-    select.value = document.getElementById("chooseLeistung").value;
-    prepareSubmission(terminstring);
+    if(window.innerWidth<=767){
+        //mobile logic here
+        let lei = document.getElementById("chooseLeistung").value.split(":")[0];
+        let t = new Termin(e.id.split(",")[1].split(" ")[1].split(":")[0], e.id.split(",")[1].split(" ")[1].split(":")[1], e.id.split(",")[0], lei, getDauer(lei), "");
+        sessionStorage.setItem("termin", JSON.stringify(t));
+        window.location="mobileBooking.html";
+    }else{
+        window.scrollTo(0,0);
+        let mb =document.getElementById("modalBack");
+        let m = document.getElementById("bookingbox");
+        mb.style.display="block";
+        m.style.display="flex";
+        let b = document.body;
+        b.style.height="100%";
+        b.style.overflow="hidden";
+        terminstring = e.id;//dd.mm.yyyy, 10:30 Uhr
+        displayDateChosen();
+        var select = document.getElementById("leistungsselect");
+        fillLeistungsSelect(select);
+        select.value = document.getElementById("chooseLeistung").value;
+        prepareSubmission(terminstring);
+    }
+}
+//for mobile only:
+function prepareBookingMobile(){
+    //get Termin-Object (OHNE KUNDENINFO) aus session Storage!
+    let f = document.getElementById("bformMobile");
+    let t = JSON.parse(sessionStorage.getItem("termin"));
+    let zp = document.getElementById("zeitpunktMobile");
+    let ls = document.getElementById("leistungsselectMobile");
+    zp.innerHTML=`${t.date}, ${t.hourValue}:${t.minuteValue} Uhr`;
+    fillLeistungsSelect(ls);
+    f.addEventListener("submit", function(e){
+        e.preventDefault();
+        anrede = f.elements.anrede.value;
+        vorname = f.elements.vorname.value;
+        nachname = f.elements.nachname.value;
+        mail = f.elements.mail.value;
+        phone = f.elements.phone.value;
+        leistung = f.elements.leistung.value;
+        if(nachname == ""||vorname==""){
+            let box = document.getElementById("feedbackMobile");
+            box.innerHTML="";
+            box.innerHTML=`* Vor- und Nachname sind Pflichtfelder.`;
+        }else{ 
+            if(!validMail(mail)){
+                let box = document.getElementById("feedbackMobile");
+                box.innerHTML="";
+                let div = document.createElement("div");
+                let i = document.getElementById("mailinputMobile");
+                i.style.border = "2px solid red";
+                div.innerHTML=`* ${mail} ist keine gültige E-Mail-Adresse.`;
+                box.appendChild(div);
+            }else{
+                let i = document.getElementById("mailinputMobile");
+                i.style.border = "";
+                if(!validPhone(sanitizePhone(phone))){
+                    let box = document.getElementById("feedbackMobile");
+                    box.innerHTML="";
+                    let div = document.createElement("div");
+                    let i = document.getElementById("phoneinputMobile");
+                    i.style.border = "2px solid red";
+                    div.innerHTML=`* ${phone} ist keine gültige Telefonnummer.`;
+                    box.appendChild(div);
+                }else{
+                    let i = document.getElementById("phoneinputMobile");
+                    i.style.border = "";
+                    let box = document.getElementById("feedbackMobile");
+                    box.innerHTML="";
+                    //make POST-Request to enter Termin into database
+                    if(terminPossible(t)){
+                        box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
+                        t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
+                        insertTermin(t);
+                        f.reset();
+                    }else{
+                        box.innerHTML="Termin außerhalb der Betriebszeiten.";
+                    }
+                }
+            }
+        }
+    })
+
+}
+function getDauer(n){
+    for(i=0;i<leistungen.length;i++){
+        if(leistungen[i].name===n){
+            return leistungen[i].dauer;
+        }
+    }
+}
+function getPreis(n){
+    for(i=0;i<leistungen.length;i++){
+        if(leistungen[i].name===n){
+            return leistungen[i].preis;
+        }
+    }
 }
 function fillLeistungsSelect(select){
     if(select!==null){
@@ -97,6 +180,7 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
         }
     })
 }
+
 /*-----------------------------check if Termin to be booked is free and within businesshours------------------------------------*/
 function convertToTermin(tstr, l){//macht aus den Inputdaten einen Termin, Format tstr: "dd.mm.yyyy, hh:mm Uhr"
     let date = tstr.split(",")[0];
