@@ -247,7 +247,7 @@ function getBlockedTermin(){//returns new Termin mit den Eingabewerten der Input
     let end=f.elements.endTime.value;
     let dauer = (Number(end.split(".")[0])-Number(start.split(".")[0]))*4+(Number(end.split(".")[1])-Number(start.split(".")[1]))/15;
     if(d!==""&&m!==""&&y!==""&&start!==""&&end!==""){
-        return new Termin(start.split(".")[0], start.split(".")[1], `${d}.${m}.${y}`, "BLOCKED", dauer, admin);
+        return new Termin(start.split(".")[0], start.split(".")[1], `${d}.${m}.${y}`, "BLOCKED", dauer+1, admin);
     }else{
         return -1;
     }
