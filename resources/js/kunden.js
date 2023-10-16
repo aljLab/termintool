@@ -64,7 +64,7 @@ function fillKundenTabelle(){
 
 function makeKundenModBox(kunde){
     console.log(`Kundenarray: ${kunden}`);
-    console.log(`Kunde passed as parameter:${kunde}`);
+    console.log(kunde);
     let div = document.createElement("div");
     div.setAttribute("class", "modBox");
     div.id=JSON.stringify(kunde);
