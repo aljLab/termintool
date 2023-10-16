@@ -72,7 +72,7 @@ function makeKundenModBox(kunde){
         showTermine();
     });
     but2.addEventListener("click", (e)=>{
-        deleteKunde(JSON.parse(e.target.id), ()=>{
+        deleteKunde(e.target.id, ()=>{
             setTimeout(() => {
                window.location.reload();
             }, 500); // Delay in milliseconds

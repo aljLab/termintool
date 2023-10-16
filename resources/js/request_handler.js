@@ -140,7 +140,7 @@ function deleteKunde(kunde, cb){//Takes Termin-Objekt als Input und stellt POST-
     fetch("./server-side-php/deleteKunde.php",{
             method:"POST",
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(kunde),
+            body: kunde,
         }
     ).then(function(response) {
         if (!response.ok) {
