@@ -246,10 +246,15 @@ function noTerminConflicts(termin){//returns true, if termin does not conflict w
    for(i=0;i<termine.length;i++){
      let t = termine[i];
      if(t.date===termin.date){
+        console.log(t);
         let startDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);
+        console.log(`Startdate: ${startDate.getHours()}:${startDate.getMinutes()}`);
         let endDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue+termin.dauer*15);
+        console.log(`enddate: ${endDate.getHours()}:${endDate.getMinutes()}`);
         let lowBound = new Date(t.date.split(".")[2], Number(t.date.split(".")[1])-1, t.date.split(".")[0], t.hourValue, t.minuteValue);
+        console.log(`lowBound: ${lowBound.getHours()}:${lowBound.getMinutes()}`);
         let UpBound = new Date(t.date.split(".")[2], Number(t.date.split(".")[1])-1, t.date.split(".")[0], t.hourValue, t.minuteValue+t.dauer*15);
+        console.log(`upBound: ${upBound.getHours()}:${upBound.getMinutes()}`);
         let condition1= (lowBound<=startDate&&startDate<=UpBound);//untere Grenze ist in BH, obere aber nicht <=> ...
         let condition2=(startDate<=lowBound)&&(lowBound<=endDate)//obere Grenze ist drin, untere nicht
         console.log(condition1);
