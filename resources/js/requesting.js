@@ -178,6 +178,7 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
                         box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
                         t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
                         insertTermin(t);
+                        insertKunde(JSON.stringify(t.kunde));
                         f.reset();
                     }else{
                         box.innerHTML="Termin außerhalb der Betriebszeiten.";

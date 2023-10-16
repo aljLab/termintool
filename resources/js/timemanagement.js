@@ -122,7 +122,6 @@ function pastToday(date){
 }
 function saveTerminToDB(termin){
     insertTermin(termin);
-    console.log("Termin erfolgreich in der Datenbank 'Termine' gespeichert.");
 }
 function changeSubmitButtonAppearance(e, but){//Function für EventListener ("blur") für Inputs: wenn ein Input invalid verlassen wird, ändert sich submitbutton
         if(!e.currentTarget.validity.valid||!correctOrder(e.target)){
