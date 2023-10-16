@@ -78,7 +78,7 @@ function makeKundenModBox(kunde){
         console.log(e.target.parentNode.id);
         deleteKunde(e.target.parentNode.id, ()=>{
             setTimeout(() => {
-               window.location.reload();
+               //window.location.reload();
             }, 500); // Delay in milliseconds
         });
     });
