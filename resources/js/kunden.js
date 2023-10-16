@@ -68,15 +68,15 @@ function makeKundenModBox(kunde){
     let div = document.createElement("div");
     div.setAttribute("class", "modBox");
     div.id=JSON.stringify(kunde);
-    console.log(div.id);
+    console.log(`id der Modbox: ${div.id}`);
     let but1=document.createElement("button");
     let but2=document.createElement("button");
     but1.addEventListener("click", ()=>{
         showTermine();
     });
     but2.addEventListener("click", (e)=>{
-        console.log(e.target.id);
-        deleteKunde(e.target.id, ()=>{
+        console.log(e.target.parentNode.id);
+        deleteKunde(e.target.parentNode.id, ()=>{
             setTimeout(() => {
                window.location.reload();
             }, 500); // Delay in milliseconds
