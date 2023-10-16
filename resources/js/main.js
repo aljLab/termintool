@@ -17,11 +17,11 @@ new Termin("09", "30", "19.10.2023","Herzyoga", 5, new Kunde("Frau", "Amaya", "P
 new Termin("15", "30", "24.10.2023","Telefontermin", 2, new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", []))];//, new Termin("10", "30", "21.9.2023", "Hallo", 5)];*/
 const admin = new Kunde("Admin", "", "", "aljoschalabonte@rocketmail.com", "XXX", []);
 const leistungen=[
-    new Leistung("Esalenmassage (60 Minuten)", 5, "65€"), new Leistung("Esalenmassage (75 Minuten)", 6, "80€"),
-    new Leistung("Esalenmassage (90 Minuten)", 7, "95€"), new Leistung("Homöopathische Erstanamnese", 7, "175€"),
-    new Leistung("Klassische Homöopathie (Anamnese)",5,"65€"),new Leistung("Traditionelle Tibetische Medizin", 5, "65€"), 
-    new Leistung("Beratung/Gespräch", 5, "65€"),new Leistung("Yoga/Atemsitzung", 5, "65€"), new Leistung("Tsa Lung", 5, "65€"), 
-    new Leistung("Telefontermin akut", 2, "25€")
+    new Leistung("Esalenmassage (60 Minuten)", 4, "65€"), new Leistung("Esalenmassage (75 Minuten)", 5, "80€"),
+    new Leistung("Esalenmassage (90 Minuten)", 6, "95€"), new Leistung("Homöopathische Erstanamnese", 6, "175€"),
+    new Leistung("Klassische Homöopathie (Anamnese)",4,"65€"),new Leistung("Traditionelle Tibetische Medizin", 4, "65€"), 
+    new Leistung("Beratung/Gespräch", 4, "65€"),new Leistung("Yoga/Atemsitzung", 4, "65€"), new Leistung("Tsa Lung", 4, "65€"), 
+    new Leistung("Telefontermin akut", 1, "25€")
     ]; 
 const bh= new BusinessHours(["-"],["-"],["-"],["9.30-13.00", "15.00-19.00", "-"],["9.30-13.00", "15.00-19.00", "-"]);
 const kunden =[];//[new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", []), new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", [])];
@@ -128,7 +128,7 @@ function fillDaySlots(){
                 let sd = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
                 let ed = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
                 let d = new Date(sd.getTime());
-                while(d<(new Date(ed.getTime()-((currentDauer-1)*15*60*1000)))){
+                while(d<(new Date(ed.getTime()-((currentDauer+1)*15*60*1000)))){
                         let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;
                         let hour=d.getHours();
                         let minutes=`0${d.getMinutes()}`.slice(-2);
@@ -269,7 +269,7 @@ function fillDaySlot(){
         let sd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
         let ed = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
         let d = new Date(sd.getTime());
-        while(d<(new Date(ed.getTime()-((currentDauer-1)*15*60*1000)))){
+        while(d<(new Date(ed.getTime()-((currentDauer+1)*15*60*1000)))){
                 let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;
                 let hour=d.getHours();
                 let minutes=`0${d.getMinutes()}`.slice(-2);

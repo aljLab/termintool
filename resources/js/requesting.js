@@ -174,12 +174,16 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
                     box.innerHTML="";
                     //make POST-Request to enter Termin into database
                     let t = convertToTermin(terminstring, leistung);
-                    if(terminPossible(t)){
-                        box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
-                        t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
-                        insertTermin(t);
-                        insertKunde(JSON.stringify(t.kunde));
-                        f.reset();
+                    if(withinBusinessHours(t, bh)){
+                        if(noTerminConflicts(t)){
+                            box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
+                            t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
+                            insertTermin(t);
+                            insertKunde(JSON.stringify(t.kunde));
+                            f.reset();
+                        }else{
+                            box.innerHTML="Termin überschneidet sich mit bereits gebuchtem Termin!";
+                        }
                     }else{
                         box.innerHTML="Termin außerhalb der Betriebszeiten.";
                     }
@@ -201,10 +205,6 @@ function convertToTermin(tstr, l){//macht aus den Inputdaten einen Termin, Forma
         }
     })
     return new Termin(h, m, date, l, leiObj.dauer, "");
-}
-function terminPossible(termin){
-    //check if within businesshours
-    return withinBusinessHours(termin, bh)&&noTerminConflicts(termin);
 }
 function withinBusinessHours(termin){//returns true, if selected termin lies within business hours, fals otherwise (booked appointments are NOT considered)
     let startDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);
