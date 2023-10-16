@@ -11,7 +11,7 @@
                     $LOGGED_IN = true;
                     $_SESSION["u"]=$name;
                     session_regenerate_id(true);
-                    header("Location: ../index_admin.html");
+                    header("Location: ../index_admin.php");
             }else{
                 $ErrorMessage="* Falscher Nutzername"."<br>"."oder falsches Passwort";
             }
