@@ -66,12 +66,14 @@ function makeKundenModBox(kunde){
     let div = document.createElement("div");
     div.setAttribute("class", "modBox");
     div.id=JSON.stringify(kunde);
+    console.log(div.id);
     let but1=document.createElement("button");
     let but2=document.createElement("button");
     but1.addEventListener("click", ()=>{
         showTermine();
     });
     but2.addEventListener("click", (e)=>{
+        console.log(e.target.id);
         deleteKunde(e.target.id, ()=>{
             setTimeout(() => {
                window.location.reload();
