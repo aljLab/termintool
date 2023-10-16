@@ -352,3 +352,6 @@ function decrementDay(){
         }
     }
 }
+function testKundenInsertion(){
+    insertKunde(new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", []));
+}

@@ -33,7 +33,7 @@
                     <a class="listItem" href="termine.php">Termine</a><br />
                     <div id="currentItem"><a class="listItem">Kunden</a></div><br />
                     <a class="listItem" href="leistungen.php">Leistungen</a><br />
-                    <!--button onclick = "checkFetching()">testen</button-->
+                    <button onclick = "testKundenInsertion()">testen</button-->
             </div>
             <div id="kundenContainer">
                 <h2 style="text-align: center;width: 100%;">Kunden</h2>       
