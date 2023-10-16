@@ -24,7 +24,7 @@
         <div id="container">
         <div id="navbar">
             <div id="logo"><p style="margin-left:15px;font-weight: bold;">Naturheilpraxis Martina La Bonté</p></div>
-            <div id="login"><a href="./index.html"><img style = "width:25px;height:30px;margin:15px;" src="resources/images/logout_icon.png"></a></div>
+            <div id="login"><a href="./server-side-php/logout.php"><img style = "width:25px;height:30px;margin:15px;" src="resources/images/logout_icon.png"></a></div>
         </div>
         <div id="maincontainer">
             <div id="sidebar">
