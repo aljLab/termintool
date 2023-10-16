@@ -87,6 +87,7 @@ function prepareBookingMobile(){
                         box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
                         t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
                         insertTermin(t);
+                        insertKunde(t.kunde);
                         f.reset();
                         let bb = document.getElementById("backButtonMobile");
                         bb.innerHTML="Zurück zum Kalender";
@@ -179,7 +180,7 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
                             box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
                             t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
                             insertTermin(t);
-                            insertKunde(JSON.stringify(t.kunde));
+                            insertKunde(t.kunde);
                             f.reset();
                         }else{
                             box.innerHTML="Termin überschneidet sich mit bereits gebuchtem Termin!";
