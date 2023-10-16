@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(!isset($_SESSION["name"])){
+    if(!isset($_SESSION["u"])){
         header("Location: server-side-php/login.php");
         exit;
     }

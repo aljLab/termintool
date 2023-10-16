@@ -9,7 +9,7 @@
         if($_POST["name"]==$n){
             if($_POST["pword"]==$p){
                     $LOGGED_IN = true;
-                    $_SESSION["name"]=$name;
+                    $_SESSION["u"]=$name;
                     session_regenerate_id(true);
                     header("Location: ../index_admin.html");
             }else{
