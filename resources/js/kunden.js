@@ -23,7 +23,7 @@ function fillKundenTabelle(){
             row.appendChild(kundenModBox);
             t.appendChild(row);
         })
-    }else{
+    }else{//Mobile adaptions
         adaptSideBar();
         kunden.forEach(k=>{
             let row = document.createElement("div");
@@ -63,6 +63,8 @@ function fillKundenTabelle(){
 }
 
 function makeKundenModBox(kunde){
+    console.log(`Kundenarray: ${kunden}`);
+    console.log(`Kunde passed as parameter:${kunde}`);
     let div = document.createElement("div");
     div.setAttribute("class", "modBox");
     div.id=JSON.stringify(kunde);

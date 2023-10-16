@@ -51,7 +51,6 @@ function fetchKunden(callback){
     .then(data =>{
         data.forEach(e=>{
             kunden.push(JSON.parse(e.kunde));
-            console.log(JSON.parse(e.kunde));
         })
         callback();
     })
