@@ -10,6 +10,7 @@
             if($_POST["pword"]==$p){
                     $LOGGED_IN = true;
                     $_SESSION["name"]=$name;
+                    session_regenerate_id(true);
                     header("Location: ../index_admin.html");
             }else{
                 $ErrorMessage="* Falscher Nutzername"."<br>"."oder falsches Passwort";

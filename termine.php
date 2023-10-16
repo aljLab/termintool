@@ -2,6 +2,7 @@
     session_start();
     if(!isset($_SESSION["name"])){
         header("Location: server-side-php/login.php");
+        exit;
     }
 ?>
 
