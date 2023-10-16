@@ -65,13 +65,14 @@ function fillKundenTabelle(){
 function makeKundenModBox(kunde){
     let div = document.createElement("div");
     div.setAttribute("class", "modBox");
+    div.id=JSON.stringify(kunde);
     let but1=document.createElement("button");
     let but2=document.createElement("button");
     but1.addEventListener("click", ()=>{
         showTermine();
     });
-    but2.addEventListener("click", ()=>{
-        deleteKunde(kunde, ()=>{
+    but2.addEventListener("click", (e)=>{
+        deleteKunde(JSON.parse(e.target.id), ()=>{
             setTimeout(() => {
                window.location.reload();
             }, 500); // Delay in milliseconds
