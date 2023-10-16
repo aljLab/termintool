@@ -5,8 +5,6 @@
         exit;
     }
 ?>
-
-
 <!DOCTYPE html>
 <html>
     <header>
@@ -31,11 +29,11 @@
         <div id="maincontainer">
             <div id="sidebar">
                 <br />
-                    <a class="listItem" href="index_admin.html">Kalender</a><br />
-                    <a class="listItem" href="time_management.html">Zeitmanagement</a><br />
+                    <a class="listItem" href="index_admin.php">Kalender</a><br />
+                    <a class="listItem" href="time_management.php">Zeitmanagement</a><br />
                     <div id="currentItem"><a class="listItem">Termine</a></div><br />
-                    <a class="listItem" href="kunden.html">Kunden</a><br />
-                    <a class="listItem" href="leistungen.html">Leistungen</a><br />
+                    <a class="listItem" href="kunden.php">Kunden</a><br />
+                    <a class="listItem" href="leistungen.php">Leistungen</a><br />
                     <button onclick = "checkFetching()">Insert testen</button>
             </div>
             <div id="terminContainer">
