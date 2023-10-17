@@ -245,6 +245,7 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
 function noTerminConflicts(termin){//returns true, if termin does not conflict with other book appointments, false otherwise
    for(i=0;i<termine.length;i++){
      let t = termine[i];
+     console.log(`termin-date: ${termin.date}, t.date: ${t.date}, equal? ${t.date===termin.date}`);
      if(t.date===termin.date){
         console.log(t);
         let startDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);
@@ -255,8 +256,8 @@ function noTerminConflicts(termin){//returns true, if termin does not conflict w
         console.log(`lowBound: ${lowBound.getHours()}:${lowBound.getMinutes()}`);
         let UpBound = new Date(t.date.split(".")[2], Number(t.date.split(".")[1])-1, t.date.split(".")[0], t.hourValue, t.minuteValue+t.dauer*15);
         console.log(`upBound: ${UpBound.getHours()}:${UpBound.getMinutes()}`);
-        let condition1= (lowBound<=startDate&&startDate<=UpBound);//untere Grenze ist in BH, obere aber nicht <=> ...
-        let condition2=(startDate<=lowBound)&&(lowBound<=endDate)//obere Grenze ist drin, untere nicht
+        let condition1= (lowBound.getTime()<=startDate.getTime()&&startDate.getTime()<=UpBound.getTime());//untere Grenze ist in BH, obere aber nicht <=> ...
+        let condition2=(startDate.getTime()<=lowBound.getTime())&&(lowBound.getTime()<=endDate.getTime())//obere Grenze ist drin, untere nicht
         console.log(condition1);
         console.log(condition2);
         if(condition1||condition2){//wenn zu buchender termin vor gefundenem anfängt und dabei/danach aufhört
