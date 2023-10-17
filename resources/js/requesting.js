@@ -254,7 +254,7 @@ function noTerminConflicts(termin){//returns true, if termin does not conflict w
         let lowBound = new Date(t.date.split(".")[2], Number(t.date.split(".")[1])-1, t.date.split(".")[0], t.hourValue, t.minuteValue);
         console.log(`lowBound: ${lowBound.getHours()}:${lowBound.getMinutes()}`);
         let UpBound = new Date(t.date.split(".")[2], Number(t.date.split(".")[1])-1, t.date.split(".")[0], t.hourValue, t.minuteValue+t.dauer*15);
-        console.log(`upBound: ${upBound.getHours()}:${upBound.getMinutes()}`);
+        console.log(`upBound: ${UpBound.getHours()}:${UpBound.getMinutes()}`);
         let condition1= (lowBound<=startDate&&startDate<=UpBound);//untere Grenze ist in BH, obere aber nicht <=> ...
         let condition2=(startDate<=lowBound)&&(lowBound<=endDate)//obere Grenze ist drin, untere nicht
         console.log(condition1);
