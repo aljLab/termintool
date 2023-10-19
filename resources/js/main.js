@@ -37,7 +37,12 @@ function Termin(h, m, date, leistung, dauer, kunde){
     this.leistung = leistung;//
     this.dauer = dauer;
     this.kunde = kunde;
-    getTimeslot= getTimeslot(this.date, this.hourValue, this.minuteValue, this.dauer);
+    getTimeslot= function(){//to be called from retrieved termin-objects (because dates cant be recovered from db(JSON))
+        dateArr = this.date.split(".");
+        let startDate= new Date(dateArr[2], dateArr[1], dateArr[0], this.hourValue, this.minuteValue);
+        let endDate=new Date(startDate.getTime()+ 1000*60*15*this.dauer);
+        return new Timeslot(this.date, startDate, endDate);
+    };
 }
 function Leistung(name, dauer, preis){
     this.name = name;

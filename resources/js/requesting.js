@@ -246,7 +246,7 @@ function noTerminConflicts(termin){//returns true, if termin does not conflict w
    for(i=0;i<termine.length;i++){
      let t = termine[i];
      if(t.date===termin.date){
-        if (!noOverlaps(t.getTimeslot, termin.getTimeslot))
+        if (!noOverlaps(t.getTimeslot(), termin.getTimeslot()))
             return false;
         }
     }
