@@ -66,15 +66,16 @@ function Kunde(anrede, vorname, nachname, mail, phone, termine){
 
 /*------------------------Index Page handling------------------------------*/
 function setUp(){
-    termine.forEach(t=>{
-        t.getTimeslot=function(){//to be called from retrieved termin-objects (because dates cant be recovered from db(JSON))
+    termine.forEach(t => {
+        t.getTimeslot = function() {
             dateArr = this.date.split(".");
-            let startDate= new Date(dateArr[2], dateArr[1], dateArr[0], this.hourValue, this.minuteValue);
-            let endDate=new Date(startDate.getTime()+ 1000*60*15*this.dauer);
+            let startDate = new Date(dateArr[2], dateArr[1], dateArr[0], this.hourValue, this.minuteValue);
+            let endDate = new Date(startDate.getTime() + 1000 * 60 * 15 * this.dauer);
             return new Timeslot(this.date, startDate, endDate);
         };
         console.log(t);
     });
+}
     if(window.innerWidth<=767){
         /*fetchTermine(setUpSmartphoneDays);
         fetchKunden();
