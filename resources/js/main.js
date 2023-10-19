@@ -72,7 +72,7 @@ function setUp(){
             let startDate= new Date(dateArr[2], dateArr[1], dateArr[0], this.hourValue, this.minuteValue);
             let endDate=new Date(startDate.getTime()+ 1000*60*15*this.dauer);
             return new Timeslot(this.date, startDate, endDate);
-        }
+        };
     });
     if(window.innerWidth<=767){
         /*fetchTermine(setUpSmartphoneDays);
