@@ -37,6 +37,7 @@ function Termin(h, m, date, leistung, dauer, kunde){
     this.leistung = leistung;//
     this.dauer = dauer;
     this.kunde = kunde;
+    getTimeslot= getTimeslot(this.date, this.hourValue, this.minuteValue, this.dauer);
 }
 function Leistung(name, dauer, preis){
     this.name = name;
@@ -57,6 +58,11 @@ function Kunde(anrede, vorname, nachname, mail, phone, termine){
     this.mail=mail;
     this.phone=phone;
     this.termine=termine;
+}
+function Timeslot(dateString, startDate, endDate){
+    this.date = dateString;
+    this.startDate= startDate;
+    this.endDate=endDate;
 }
 
 /*------------------------Index Page handling------------------------------*/
@@ -120,21 +126,28 @@ function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an 
 function fillDaySlots(){
     for(l=0;l<5;l++){
             let div = document.getElementById(`${bhweekdays[l]}`);
-            while (div.childNodes.length > 1) {
+            /*while (div.childNodes.length > 1) {
                 div.removeChild(div.lastChild);
-            }
+            }*/
             let bhArray=bh[bhweekdays[l]];
             bhArray.forEach(timeslot=>{
                 let sd = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
                 let ed = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
                 let d = new Date(sd.getTime());
-                while(d<(new Date(ed.getTime()-((currentDauer+1)*15*60*1000)))){
-                        let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;
+                while(d<(new Date(ed.getTime()-((currentDauer)*15*60*1000)))){
+                        //initialisierungen
+                        let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;//datestring: eg. "9.7.2023"
                         let hour=d.getHours();
                         let minutes=`0${d.getMinutes()}`.slice(-2);
-                        let temp=document.createElement("div");
-                        if(checkIfTaken(date, hour, minutes)!=false){
-                            d=new Date(d.getTime()+((checkIfTaken(date, hour, minutes))*15*60*1000));
+                        //HTML-Element
+                        let temp=document.createElement("div");//timeslot html element
+
+                        //Logic
+                        if(taken(date, hour, minutes)){//wenn timeslot taken by termin -> counter um die Dauer (+1) inkrementieren
+                            d=new Date(d.getTime()+((taken(date, hour, minutes))*15*60*1000));
+                        }else if(checkFutureSlots(currentDauer, date, hour, minutes)){
+                            let i = checkFutureSlots(currentDauer, date, hour, minutes);
+                            d = new Date(d.getTime()+1000*60*15*i);
                         }else{
                             temp.innerHTML=`${hour}:${minutes}`;
                             temp.setAttribute("class", "timeSlot");
@@ -144,7 +157,9 @@ function fillDaySlots(){
                                 temp.setAttribute("onclick","deliverBooking(this)");
                             }
                             temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
-                            if(pastToday(d)){div.appendChild(temp);}
+                            if(pastToday(d)){
+                                div.appendChild(temp);
+                            }
                             d = new Date(d.getTime()+(15*60*1000));
                         }
             }
@@ -152,7 +167,15 @@ function fillDaySlots(){
         });
     }
 }
-function checkIfTaken(d, h, m){
+function checkFutureSlots(dauer, date, hourValue, minuteValue){
+    for(i =1;i<=dauer;i++){
+        if(taken(date, hourValue, minuteValue+15*i)){
+            return i;
+        }
+    }
+    return false;
+}
+function taken(d, h, m){
     for(let t of termine){
         if(t.date == d&&t.hourValue==h&&t.minuteValue == m){
             return t.dauer;
@@ -274,9 +297,9 @@ function fillDaySlot(){
                 let hour=d.getHours();
                 let minutes=`0${d.getMinutes()}`.slice(-2);
                 let temp=document.createElement("div");
-                console.log(checkIfTaken(date, hour, minutes));
-                if(checkIfTaken(date, hour, minutes)!=false){
-                    d=new Date(d.getTime()+(15*(checkIfTaken(date, hour, minutes))*60*1000));
+                console.log(taken(date, hour, minutes));
+                if(taken(date, hour, minutes)!=false){
+                    d=new Date(d.getTime()+(15*(taken(date, hour, minutes))*60*1000));
                 }else{
                     temp.innerHTML=`${hour}:${minutes}`;
                     temp.setAttribute("class", "timeSlot");
