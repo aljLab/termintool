@@ -442,6 +442,15 @@ form:invalid > button{
     cursor: pointer;
     color: white;
   }
+  .terminDisplayPASSED{
+    background-color: rgb(0,0,0,0.5);
+    }
+    .kundenDisplayPASSED{
+        background-color: rgb(0,0,0,0.7);
+    }
+    .terminkundePASSED{
+        background-color: rgb(0,0,0,0.3);
+    }
   .modBox{
     height: 100%;
     width: 25%;
