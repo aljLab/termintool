@@ -16,7 +16,7 @@ function displayTermine(){
         kun.innerHTML=`<h2>Kunde</h2><p>${t.kunde.anrede} ${t.kunde.vorname} ${t.kunde.nachname}</p><a mailto="${t.kunde.mail}">${t.kunde.mail}</a><p>${t.kunde.phone}</p>`;
         let modBox= makeModBox(t);
         
-        if(t.getCompDate()>(new Date().getTime())){
+        if(getCompDate(t)>(new Date().getTime())){
             div.classList.add("terminkunde");
             ter.classList.add("terminDisplay");
             kun.classList.add("kundenDisplay");
