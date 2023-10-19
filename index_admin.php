@@ -14,6 +14,7 @@
         <script src="resources/js/request_handler.js" defer></script>
         <script src="resources/js/timemanagement.js" defer></script>
         <script src="resources/js/termine.js" defer></script>
+        <script src="resources/js/slotHandle.js" defer></script>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
