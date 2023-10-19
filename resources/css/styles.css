@@ -636,6 +636,15 @@ form:invalid > button{
     .modBox button{
         margin: 10px;
     }
+    .terminDisplayPASSED{
+        background-color: rgb(0,0,0,0.5);
+    }
+    .kundenDisplayPASSED{
+        background-color: rgb(0,0,0,0.7);
+    }
+    .terminkundePASSED{
+        background-color: rgb(0,0,0,0.3);
+    }
     /*--------------------------------Kunden------------------------------------------------*/
     #kundenContainer{
         align-items: center;
