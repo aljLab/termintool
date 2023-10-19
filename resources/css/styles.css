@@ -427,18 +427,18 @@ form:invalid > button{
  .kundenDisplay{
     background-color: var(--dark-color);
  }
- .kundenDisplay p, .terminDisplay p{
+ .kundenDisplay p, .terminDisplay p, .kundenDisplayPASSED p, .terminDisplayPASSED p{
    margin-left: 15px;
  }
- .kundenDisplay h2, .terminDisplay h2{
+ .kundenDisplay h2, .terminDisplay h2, .kundenDisplayPASSED h2, .terminDisplayPASSED h2{
     margin-left: 15px;
     color: white;
   }
- .kundenDisplay a, .terminDisplay a{
+ .kundenDisplay a, .terminDisplay a, .kundenDisplayPASSED a, .terminDisplayPASSED a{
     margin-left: 15px;
     text-decoration: none;
   }
-  .kundenDisplay a:hover, .terminDisplay a:hover{
+  .kundenDisplay a:hover, .terminDisplay a:hover, .kundenDisplayPASSED a:hover, .terminDisplayPASSED a:hover{
     cursor: pointer;
     color: white;
   }
