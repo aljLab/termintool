@@ -38,12 +38,17 @@ function Termin(h, m, date, leistung, dauer, kunde){
     this.dauer = dauer;
     this.kunde = kunde;
 }
-Termin.prototype.getTimeslot=function(){//to be called from retrieved termin-objects (because dates cant be recovered from db(JSON))
+function Timeslot(dateString, startDate, endDate){
+    this.date = dateString;
+    this.startDate= startDate;
+    this.endDate=endDate;
+}
+Termin.prototype.getTimeslot = function(){//to be called from retrieved termin-objects (because dates cant be recovered from db(JSON))
     dateArr = this.date.split(".");
     let startDate= new Date(dateArr[2], dateArr[1], dateArr[0], this.hourValue, this.minuteValue);
     let endDate=new Date(startDate.getTime()+ 1000*60*15*this.dauer);
     return new Timeslot(this.date, startDate, endDate);
-};
+}
 function Leistung(name, dauer, preis){
     this.name = name;
     this.dauer = dauer;
@@ -63,11 +68,6 @@ function Kunde(anrede, vorname, nachname, mail, phone, termine){
     this.mail=mail;
     this.phone=phone;
     this.termine=termine;
-}
-function Timeslot(dateString, startDate, endDate){
-    this.date = dateString;
-    this.startDate= startDate;
-    this.endDate=endDate;
 }
 
 /*------------------------Index Page handling------------------------------*/
