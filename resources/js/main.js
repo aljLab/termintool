@@ -75,7 +75,6 @@ function setUp(){
         };
         console.log(t);
     });
-}
     if(window.innerWidth<=767){
         /*fetchTermine(setUpSmartphoneDays);
         fetchKunden();
