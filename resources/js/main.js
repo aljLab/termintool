@@ -65,14 +65,15 @@ function Kunde(anrede, vorname, nachname, mail, phone, termine){
 }
 
 /*------------------------Index Page handling------------------------------*/
+function getTimeSlot() {
+    dateArr = this.date.split(".");
+    let startDate = new Date(dateArr[2], dateArr[1], dateArr[0], this.hourValue, this.minuteValue);
+    let endDate = new Date(startDate.getTime() + 1000 * 60 * 15 * this.dauer);
+    return new Timeslot(this.date, startDate, endDate);
+}
 function setUp(){
     termine.forEach(t => {
-        t.getTimeslot = function() {
-            dateArr = this.date.split(".");
-            let startDate = new Date(dateArr[2], dateArr[1], dateArr[0], this.hourValue, this.minuteValue);
-            let endDate = new Date(startDate.getTime() + 1000 * 60 * 15 * this.dauer);
-            return new Timeslot(this.date, startDate, endDate);
-        };
+        t.getTimeslot = getTimeSlot;
         console.log(t);
     });
     if(window.innerWidth<=767){
