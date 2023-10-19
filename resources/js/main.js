@@ -37,6 +37,7 @@ function Termin(h, m, date, leistung, dauer, kunde){
     this.leistung = leistung;//
     this.dauer = dauer;
     this.kunde = kunde;
+    this.getTimeslot="";
 }
 function Timeslot(dateString, startDate, endDate){
     this.date = dateString;
