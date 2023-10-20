@@ -6,6 +6,8 @@ function getTimeslot(t){
 }
 function noOverlap(ts1, ts2){//checks two timeslots for overlaps
     //entweder liegt ts1 komplett vor ts2 oder danach
+    console.log(`tsBefore: ${tsBefore(ts1, ts2)}`);
+    console.log(`tsAfter: ${tsAfter(ts1, ts2)}`);
     return (tsBefore(ts1, ts2)||tsAfter(ts1, ts2));
 }
 

@@ -245,6 +245,7 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
 function noTerminConflicts(termin){//returns true, if termin does not conflict with other book appointments, false otherwise
    for(i=0;i<termine.length;i++){
      let t = termine[i];
+     console.log(t);
      if(t.date===termin.date){
         if (!noOverlap(getTimeslot(t), getTimeslot(termin)))
             return false;
