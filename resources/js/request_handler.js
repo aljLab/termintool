@@ -157,3 +157,16 @@ function deleteKunde(kundenString, cb){//Takes Termin-Objekt als Input und stell
         console.error('Fetch error:', error);
     });
 }
+function sendMail(){
+    fetch("./server-side-php/mailer.php")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not okay.");
+        } else {
+            return response.json();
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error', error);
+    });
+}
