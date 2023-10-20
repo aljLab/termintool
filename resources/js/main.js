@@ -162,17 +162,20 @@ function fillDaySlots(){
                             d = new Date(d.getTime()+(15*60*1000));
                         }
             }
-            console.log(`${l}st one done.`);
         });
     }
 }
 function checkFutureSlots(dauer, date, hourValue, minuteValue){
     for(i =1;i<=dauer;i++){
         let h = hourValue;
+        console.log(date);
+        console.log(m);
+        console.log(h);
         let m = (Number(minuteValue)+15*i)%15;
-        if (m==0){
+        if (m==="00"){
             h++;
         }
+        console.log(taken(date, h, m));
         if(taken(date, h, m)){
             return i;
         }
