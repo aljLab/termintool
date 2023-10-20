@@ -168,6 +168,7 @@ function fillDaySlots(){
 }
 function checkFutureSlots(dauer, date, hourValue, minuteValue){
     for(i =1;i<=dauer;i++){
+        console.log(taken(date, hourValue, minuteValue+15*i));
         if(taken(date, hourValue, minuteValue+15*i)){
             return i;
         }
