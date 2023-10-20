@@ -169,12 +169,13 @@ function checkFutureSlots(dauer, date, hourValue, minuteValue){
     for(i =1;i<=dauer;i++){
         let h = hourValue;
         console.log(date);
-        console.log(m);
-        console.log(h);
+        console.log(`h before possible increment:${h}`);
         let m = (Number(minuteValue)+15*i)%15;
+        console.log(m);
         if (m==="00"){
             h++;
         }
+        console.log(`h after possible increment:${h}`);
         console.log(taken(date, h, m));
         if(taken(date, h, m)){
             return i;
