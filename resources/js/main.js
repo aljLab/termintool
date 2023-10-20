@@ -67,7 +67,7 @@ function Kunde(anrede, vorname, nachname, mail, phone, termine){
 /*------------------------Index Page handling------------------------------*/
 function setUp(){
     if(window.innerWidth<=767){
-        /*fetchTermine(setUpSmartphoneDays);
+        fetchTermine(fillDaySlot);
         fetchKunden();
         console.log("Smartphone set up finished.");*/
         setUpNavbarSmartphone();
@@ -76,7 +76,6 @@ function setUp(){
         var sel = document.getElementById("chooseLeistung");
         setUpLeistungsDropDown();
         fillLeistungsSelect(sel);
-        fillDaySlot();
     }else{
         fetchTermine(fillDaySlots);
         //fetchKunden();
@@ -146,6 +145,7 @@ function fillDaySlots(){
                             d=new Date(d.getTime()+((taken(date, hour, minutes))*15*60*1000));
                         }else if(checkFutureSlots(currentDauer, date, hour, minutes)){
                             let i = checkFutureSlots(currentDauer, date, hour, minutes);
+                            console.log(` i= ${i}`);
                             d = new Date(d.getTime()+1000*60*15*i);
                         }else{
                             temp.innerHTML=`${hour}:${minutes}`;
