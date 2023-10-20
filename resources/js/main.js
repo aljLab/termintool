@@ -166,21 +166,21 @@ function fillDaySlots(){
     }
 }
 function checkFutureSlots(dauer, date, hourValue, minuteValue){
+    console.log(`Checking future slots for: ${date}, ${hourValue}:${minuteValue}`);
     let h = hourValue;let m=minuteValue;
     for(i =1;i<=dauer;i++){
-        console.log(date);
-        console.log(`h before possible increment:${h}`);
         m = (Number(m)+15*i)%60;
         console.log(m);
         if (m==0){
             h++;
         }
-        console.log(`h after possible increment:${h}`);
-        console.log(taken(date, h, m));
+        console.log(`i=${i}, h =${h}, m = ${m}`);
+        console.log(`Termin starting on ${date}, ${h}:${m}? ${taken(date, h, m)}`);
         if(taken(date, h, m)){
             return i;
         }
     }
+    console.log(`Checking future slots FINISHED for: ${date}, ${hourValue}:${minuteValue}`);
     return false;
 }
 function taken(d, h, m){
