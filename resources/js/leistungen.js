@@ -9,7 +9,7 @@ function fillLeistungsTabelle(){
         for (let prop in l){
             let col = document.createElement("td");
             if(prop ==="dauer"){
-                col.innerHTML=`${(l[prop]-1)*15} min`;
+                col.innerHTML=`${(l[prop])*15} min`;
             }else{
                 col.innerHTML=`${l[prop]}`;
             }
