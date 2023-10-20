@@ -143,7 +143,7 @@ function fillDaySlots(){
                         //Logic
                         if(taken(date, hour, minutes)){//wenn timeslot taken by termin -> counter um die Dauer (+1) inkrementieren
                             d=new Date(d.getTime()+((taken(date, hour, minutes))*15*60*1000));
-                        }else if(checkFutureSlots(currentDauer, date, hour, minutes)){
+                        }else if(checkFutureSlots(currentDauer, date, hour, minutes)!=false){
                             let i = checkFutureSlots(currentDauer, date, hour, minutes);
                             console.log(` i= ${i}`);
                             d = new Date(d.getTime()+1000*60*15*i);
@@ -168,6 +168,7 @@ function fillDaySlots(){
 }
 function checkFutureSlots(dauer, date, hourValue, minuteValue){
     for(i =1;i<=dauer;i++){
+        console.log(`date: ${date}, h:${hourValue}, minutes${minuteValue+15*i}`);
         console.log(taken(date, hourValue, minuteValue+15*i));
         if(taken(date, hourValue, minuteValue+15*i)){
             return i;
