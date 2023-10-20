@@ -69,7 +69,7 @@ function setUp(){
     if(window.innerWidth<=767){
         fetchTermine(fillDaySlot);
         fetchKunden();
-        console.log("Smartphone set up finished.");*/
+        console.log("Smartphone set up finished.");
         setUpNavbarSmartphone();
         //equipFormInputsForMobile();
         //Leistungsselect
