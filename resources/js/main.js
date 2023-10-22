@@ -171,7 +171,7 @@ function checkFutureSlots(dauer, date, hourValue, minuteValue){
     console.log(`Checking future slots for: ${date}, ${hourValue}:${minuteValue}`);
     let h = hourValue;let m=minuteValue;
     for(i =1;i<=dauer;i++){
-        m = (Number(m)+15*i)%60;
+        m = (Number(m)+15)%60;
         console.log(m);
         if (m==0){
             h++;
