@@ -3,14 +3,24 @@
     use PHPMailer\PHPMailer\Exception;
 
     // Include the PHPMailer autoloader
-    require 'vendor/autoload.php';
+    require 'phpmailer/src/Exception.php';
+    require 'phpmailer/src/PHPMailer.php';
+    require 'phpmailer/src/SMTP.php';
 
     // Create a new PHPMailer instance
     $mail = new PHPMailer(true);
 
     try {
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'naturheilpraxis.labonte@gmail.com';
+        $mail->Password = 'vhrvffrmnakqfqcg';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
         // Set the From address
-        $mail->setFrom('skymove@posteo.de', 'Martina La Bonté');
+        $mail->setFrom('naturheilpraxis.labonte@gmail.com', 'Martina La Bonté');
 
         // Add a recipient
         $mail->addAddress('aljoschalabonte@rocketmail.com', 'Aljoscha Labonte');
