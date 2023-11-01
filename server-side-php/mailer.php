@@ -6,7 +6,9 @@
     require 'phpmailer/src/Exception.php';
     require 'phpmailer/src/PHPMailer.php';
     require 'phpmailer/src/SMTP.php';
-
+    
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
     //read POST-Request Body -> Terminobjekt
     $objectArray = json_decode(file_get_contents("php://input"), true);
 
@@ -14,8 +16,12 @@
     $kun = $objectArray->kunde;
     $nameString = "$kun->anrede $kun->nachname";
     $tString = "$objectArray->date, $objectArray->hourValue : $objectArray->minuteValue Uhr";
+    
+    var_dump($objectArray);
+    var_dump($lei);
+    var_dump($kun);
+    var_dump($nameString);
 
-    // Create a new PHPMailer instance
     $mail = new PHPMailer(true);
 
     try {
