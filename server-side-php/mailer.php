@@ -15,7 +15,7 @@
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'naturheilpraxis.labonte@gmail.com';
-        $mail->Password = 'vhrvffrmnakqfqcg';
+        $mail->Password = getEnv('apppw');
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
