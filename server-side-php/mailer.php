@@ -10,8 +10,8 @@
     //read POST-Request Body -> Terminobjekt
     $objectArray = json_decode(file_get_contents("php://input"), true);
 
-    $lei = json_decode($objectArray->leistung, true);
-    $kun = json_decode($objectArray->kunde, true);
+    $lei = $objectArray->leistung;
+    $kun = $objectArray->kunde;
     $nameString = "$kun->anrede $kun->nachname";
     $tString = "$objectArray->date, $objectArray->hourValue : $objectArray->minuteValue Uhr";
 
