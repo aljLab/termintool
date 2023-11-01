@@ -167,7 +167,7 @@ function sendMail(termin){
         if (!response.ok) {
             throw new Error("Network response was not okay.");
         } else {
-            return response;
+            console.log(response);
         }
     })
     .catch(error => {
