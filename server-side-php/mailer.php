@@ -9,9 +9,11 @@
 
     //read POST-Request Body -> Terminobjekt
     $objectArray = json_decode(file_get_contents("php://input"), true);
-    $nameString = "$objectArray->anrede $objectArray->nachname";
-    $tString = "$objectArray->date, $objectArray->hourValue : $objectArray->minuteValue Uhr";
+
     $lei = json_decode($objectArray->leistung, true);
+    $kun = json_decode($objectArray->kunde, true);
+    $nameString = "$kun->anrede $kun->nachname";
+    $tString = "$objectArray->date, $objectArray->hourValue : $objectArray->minuteValue Uhr";
 
     // Create a new PHPMailer instance
     $mail = new PHPMailer(true);
@@ -29,7 +31,7 @@
         $mail->setFrom('naturheilpraxis.labonte@gmail.com', 'Martina La Bonte');
 
         // Add a recipient
-        $mail->addAddress($objectArray->mail, $objectArray->anrede." ".$objectArray->vorname." ".$objectArray->nachname);
+        $mail->addAddress($kun->mail, $kun->anrede." ".$kun->vorname." ".$kun->nachname);
 
         // Content
         $mail->isHTML(true);
