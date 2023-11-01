@@ -88,6 +88,7 @@ function prepareBookingMobile(){
                         t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
                         insertTermin(t);
                         insertKunde(t.kunde);
+                        sendMail(t);
                         f.reset();
                         let bb = document.getElementById("backButtonMobile");
                         bb.innerHTML="Zurück zum Kalender";
@@ -181,6 +182,7 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
                             t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
                             insertTermin(t);
                             insertKunde(t.kunde);
+                            sendMail(t);
                             f.reset();
                         }else{
                             box.innerHTML="Termin überschneidet sich mit bereits gebuchtem Termin!";

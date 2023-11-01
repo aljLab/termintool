@@ -157,8 +157,12 @@ function deleteKunde(kundenString, cb){//Takes Termin-Objekt als Input und stell
         console.error('Fetch error:', error);
     });
 }
-function sendMail(){
-    fetch("./server-side-php/mailer.php")
+function sendMail(termin){
+    fetch("./server-side-php/mailer.php", {
+        method:"POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(termin),
+    })
     .then(response => {
         if (!response.ok) {
             throw new Error("Network response was not okay.");

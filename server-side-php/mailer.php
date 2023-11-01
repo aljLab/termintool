@@ -7,6 +7,12 @@
     require 'phpmailer/src/PHPMailer.php';
     require 'phpmailer/src/SMTP.php';
 
+    //read POST-Request Body -> Terminobjekt
+    $objectArray = json_decode(file_get_contents("php://input"), true);
+    $nameString = "$objectArray->anrede $objectArray->nachname";
+    $tString = "$objectArray->date, $objectArray->hourValue : $objectArray->minuteValue Uhr";
+    $lei = json_decode($objectArray->leistung, true);
+
     // Create a new PHPMailer instance
     $mail = new PHPMailer(true);
 
@@ -20,15 +26,22 @@
         $mail->Port = 465;
 
         // Set the From address
-        $mail->setFrom('naturheilpraxis.labonte@gmail.com', 'Martina La Bonté');
+        $mail->setFrom('naturheilpraxis.labonte@gmail.com', 'Martina La Bonte');
 
         // Add a recipient
-        $mail->addAddress('aljoschalabonte@rocketmail.com', 'Aljoscha Labonte');
+        $mail->addAddress($objectArray->mail, $objectArray->anrede." ".$objectArray->vorname." ".$objectArray->nachname);
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Test Subject';
-        $mail->Body = 'This is a test email';
+        $mail->Subject = "Terminbestätigung $tString";
+        $mail->Body = "Terminbestätigung\n
+                Sehr geehrte/r $nameString, \n
+                Hiermit bestätige ich den gebuchten Termin am $tString.
+                Gebucht wurde Leistung: $lei->name ($lei->preis €).
+
+                Bitte antworten Sie nicht auf diese Mail. \n
+                Stornierung und Fragen bitte an skymove@posteo.de.
+            ";
 
         // Send the email
         $mail->send();
