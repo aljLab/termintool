@@ -83,19 +83,23 @@ function prepareBookingMobile(){
                     let box = document.getElementById("feedbackMobile");
                     box.innerHTML="";
                     //make POST-Request to enter Termin into database
-                    if(terminPossible(t)){
-                        box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
-                        t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
-                        insertTermin(t);
-                        insertKunde(t.kunde);
-                        sendMail(t);
-                        f.reset();
-                        let bb = document.getElementById("backButtonMobile");
-                        bb.innerHTML="Zurück zum Kalender";
-                        bb.addEventListener("click", ()=>{
-                            window.location="index.html";
-                        });
-                        bb.style.display="block";
+                    if(withinBusinessHours(t, bh)){
+                        if(noTerminConflicts(t)){
+                            box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
+                            t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
+                            insertTermin(t);
+                            insertKunde(t.kunde);
+                            sendMail(t);
+                            f.reset();
+                            let bb = document.getElementById("backButtonMobile");
+                            bb.innerHTML="Zurück zum Kalender";
+                            bb.addEventListener("click", ()=>{
+                                window.location="index.html";
+                            });
+                            bb.style.display="block";
+                        }else{
+                            box.innerHTML="Termin überschneidet sich mit bereits gebuchtem Termin!";
+                        }
                     }else{
                         box.innerHTML="Termin außerhalb der Betriebszeiten.";
                     }
