@@ -3,11 +3,9 @@ const timeRegEx="([0-2]?[0-9]\.[0-5][0-9])";
 //business hours werden in db gespeichert: spalten=timeSlots, zeilen=weekdays?
 
 function setUpTimeManagement(){//called onload of body, 
-    /*fetchTermine(()=>{
-        console.log("termine gefetched.");
-        });*/
     fetchKunden(()=>{console.log("kunden fetched.")});
-    fetchBusinessHours(setUpTimeTable);
+    //fetchBusinessHours(setUpTimeTable);
+    setUpTimeTable();
     setUpBlockTermin();
 }
 

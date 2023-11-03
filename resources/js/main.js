@@ -68,9 +68,7 @@ function Kunde(anrede, vorname, nachname, mail, phone, termine){
 function setUp(){
     if(window.innerWidth<=767){
         fetchKunden(()=>{console.log("kunden fetched.")});
-        console.log("Smartphone set up finished.");
         setUpNavbarSmartphone();
-        //equipFormInputsForMobile();
         //Leistungsselect
         fetchBusinessHours(fillDaySlot);
         var sel = document.getElementById("chooseLeistung");
