@@ -171,18 +171,13 @@ function checkFutureSlots(dauer, date, hourValue, minuteValue){
     let h = hourValue;let m=minuteValue;
     for(i =1;i<=dauer;i++){
         m = (Number(m)+15)%60;
-        console.log(m);
         if (m==0){
             h++;
         }
-        console.log(`Checking future slots for: ${date}, ${hourValue}:${minuteValue}`);
-        console.log(`i=${i}, h =${h}, m = ${m}`);
-        console.log(`Termin starting on ${date}, ${h}:${m}? ${taken(date, h, m)}`);
         if(taken(date, h, m)){
             return i;
         }
     }
-    console.log(`Checking future slots FINISHED for: ${date}, ${hourValue}:${minuteValue}`);
     return false;
 }
 function taken(d, h, m){
