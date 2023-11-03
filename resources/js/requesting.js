@@ -239,9 +239,6 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
         let condition1= (lowBound<startDate&&startDate<UpBound)&&(UpBound<endDate);//untere Grenze ist in BH, obere aber nicht <=> ...
         let condition2=(startDate<lowBound)&&(lowBound<endDate)//obere Grenze ist drin, untere nicht
         let condition3=(startDate<absLower||endDate>absUpper);
-        console.log(condition1);
-        console.log(condition2);
-        console.log(condition3);
         if(condition1||condition2||condition3){
             return false;
         }

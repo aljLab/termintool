@@ -141,7 +141,6 @@ function fillDaySlots(){
                         let temp=document.createElement("div");//timeslot html element
 
                         //Logic
-                        console.log(`Date to check: ${date}, ${hour}:${minutes}`);
                         if(taken(date, hour, minutes)){//wenn timeslot taken by termin -> counter um die Dauer (+1) inkrementieren
                             console.log("Termin taken! -> skip dauer and continue")
                             d=new Date(d.getTime()+((taken(date, hour, minutes))*15*60*1000));
