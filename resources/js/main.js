@@ -67,9 +67,8 @@ function Kunde(anrede, vorname, nachname, mail, phone, termine){
 /*------------------------Index Page handling------------------------------*/
 function setUp(){
     if(window.innerWidth<=767){
-        fetchTermine(fillDaySlot);
+        fillDaySlot;
         fetchKunden(()=>{console.log("kunden fetched.")});
-        fetchBusinessHours();
         console.log("Smartphone set up finished.");
         setUpNavbarSmartphone();
         //equipFormInputsForMobile();
@@ -78,7 +77,7 @@ function setUp(){
         setUpLeistungsDropDown();
         fillLeistungsSelect(sel);
     }else{
-        fetchTermine(fillDaySlots);
+        fillDaySlots;
         fetchKunden(()=>{console.log("kunden fetched.")});
         fetchBusinessHours();
         setUpNavbar();
@@ -93,12 +92,14 @@ function setUpCalendar(){
         /*fetchTermine(setUpSmartphoneDays);
         fetchKunden();
         console.log("Smartphone set up finished.");*/
+        fetchBusinessHours(()=>{console.log("bh fetched.")});
         adaptSideBar();
         setUpNavbarSmartphone();
         fillDaySlot();
     }else{
-        /*fetchTermine(setUpDays);
+        fetchTermine(setUpDays);
         fetchKunden();
+        fetchBusinessHours(()=>{console.log("bh fetched.")});
         console.log(`Desktop set up finished. Kunden: ${kunden}, Termine: ${termine}`);*/
         setUpNavbar();
         setUpDays();

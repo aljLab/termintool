@@ -61,7 +61,7 @@ function fetchKunden(callback){
 function fetchLeistungen(){
 
 }
-function fetchBusinessHours(){
+function fetchBusinessHours(callback){
         fetch('./server-side-php/bh_handle.php')
             .then(response => {
                 if (!response.ok) {
@@ -75,6 +75,7 @@ function fetchBusinessHours(){
                 data.forEach(obj=>{
                     bh = JSON.parse(obj.bh);
                 })
+                callback();
             })
             .catch(error => {
                 console.error('Fetch error', error);
