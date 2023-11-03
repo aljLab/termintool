@@ -7,7 +7,7 @@ function setUpTimeManagement(){//called onload of body,
         console.log("termine gefetched.");
         });*/
     fetchKunden(()=>{console.log("kunden fetched.")});
-    setUpTimeTable();
+    fetchBusinessHours(setUpTimeTable);
     setUpBlockTermin();
 }
 

@@ -72,7 +72,7 @@ function setUp(){
         setUpNavbarSmartphone();
         //equipFormInputsForMobile();
         //Leistungsselect
-        fillDaySlot;
+        fetchBusinessHours(fillDaySlot);
         var sel = document.getElementById("chooseLeistung");
         setUpLeistungsDropDown();
         fillLeistungsSelect(sel);
@@ -81,7 +81,7 @@ function setUp(){
         fetchBusinessHours();
         setUpNavbar();
         setUpDays();
-        fillDaySlots;
+        fetchBusinessHours(fillDaySlots);
         var sel = document.getElementById("chooseLeistung");
         setUpLeistungsDropDown();
         fillLeistungsSelect(sel);
@@ -89,18 +89,18 @@ function setUp(){
 }
 function setUpCalendar(){
     if(window.innerWidth<=767){
-        /*fetchTermine(setUpSmartphoneDays);
+        /*setUpSmartphoneDays;
         fetchKunden();
         console.log("Smartphone set up finished.");*/
         adaptSideBar();
         setUpNavbarSmartphone();
-        fillDaySlot();
+        fetchBusinessHours(fillDaySlot);
     }else{
         /*fetchTermine(setUpDays);
         fetchKunden();*/
         setUpNavbar();
         setUpDays();
-        fillDaySlots();
+        fetchBusinessHours(fillDaySlots);
     }
 }
 function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an #days, erstellt header und setzt id auf =bhweekdays[i]
