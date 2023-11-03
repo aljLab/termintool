@@ -71,7 +71,7 @@ function fetchBusinessHours(){
                 }
             })
             .then(data => {
-                //{termin: JSON-String}
+                //{bh: JSON-String}
                 data.forEach(obj=>{
                     bh = JSON.parse(obj.bh);
                 })
