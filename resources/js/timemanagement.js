@@ -5,8 +5,9 @@ const timeRegEx="([0-2]?[0-9]\.[0-5][0-9])";
 function setUpTimeManagement(){//called onload of body, 
     /*fetchTermine(()=>{
         console.log("termine gefetched.");
-        });
-    fetchKunden();*/
+        });*/
+    fetchKunden(()=>{console.log("kunden fetched.")});
+    fetchBusinessHours();
     setUpTimeTable();
     setUpBlockTermin();
 }
@@ -208,6 +209,7 @@ function updateBusinessHours(){//erstellt und speichert neues BusinessHours-Obje
         for(let prop in bh){
             bh[prop]=copy[prop];
         }
+        setBusinessHours(copy);
         setUpTimeTable();
         fb.innerHTML="* Geschäftszeiten erfolgreich aktualisiert.";
         fb.style.display="block";
@@ -217,8 +219,6 @@ function updateBusinessHours(){//erstellt und speichert neues BusinessHours-Obje
         fb.style.display="block";
         fb.style.backgroundColor="#d46c6c";
     }
-    console.log(bh);
-    console.log(copy);
 }
 function correctOrder(inp){//expects 1 inputs
     //gets the corresponding input

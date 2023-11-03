@@ -62,7 +62,24 @@ function fetchLeistungen(){
 
 }
 function fetchBusinessHours(){
-
+        fetch('./server-side-php/bh_handle.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not okay.");
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                //{termin: JSON-String}
+                data.forEach(obj=>{
+                    bh = JSON.parse(obj.bh);
+                })
+                callback();
+            })
+            .catch(error => {
+                console.error('Fetch error', error);
+            });
 }
 
 /*----------------------------pushing-------------------------------*/
@@ -174,3 +191,25 @@ function sendMail(termin){
         console.error('Fetch error', error);
     });
 }
+function setBusinessHours(bh){//Takes Kunden-Objekt als Input und stellt POST-Request an entsprechendes server-side php-Skript
+    fetch("./server-side-php/settingBh.php",{
+            method:"POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(bh),
+        }
+    ).then(function(response) {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(function(responsetext) {
+        // Handle the response from the server
+        console.log(responsetext);
+    })
+    .catch(function(error){
+        // Handle any errors that occurred during the fetch
+        console.error('Fetch error:', error);
+    });
+}
+
