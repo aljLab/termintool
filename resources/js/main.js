@@ -23,7 +23,7 @@ const leistungen=[
     new Leistung("Beratung/Gespräch", 4, "65€"),new Leistung("Yoga/Atemsitzung", 4, "65€"), new Leistung("Tsa Lung", 4, "65€"), 
     new Leistung("Telefontermin akut", 1, "25€")
     ]; 
-const bh= new BusinessHours(["-"],["-"],["-"],["-"],["-"]);
+const bh= null;//new BusinessHours(["-"],["-"],["-"],["-"],["-"]);
 const kunden =[];//[new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", []), new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", [])];
 const bhweekdays =["mo", "di", "mi", "don", "fr"];
 var currentDauer = 4;
