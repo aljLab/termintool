@@ -4,8 +4,7 @@ const timeRegEx="([0-2]?[0-9]\.[0-5][0-9])";
 
 function setUpTimeManagement(){//called onload of body, 
     fetchKunden(()=>{console.log("kunden fetched.")});
-    //fetchBusinessHours(setUpTimeTable);
-    setUpTimeTable();
+    fetchBusinessHours(setUpTimeTable);
     setUpBlockTermin();
 }
 
