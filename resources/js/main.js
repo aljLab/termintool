@@ -78,7 +78,6 @@ function setUp(){
         fillLeistungsSelect(sel);
     }else{
         fetchKunden(()=>{console.log("kunden fetched.")});
-        fetchBusinessHours();
         setUpNavbar();
         setUpDays();
         fetchBusinessHours(fillDaySlots);
