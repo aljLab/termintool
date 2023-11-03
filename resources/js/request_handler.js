@@ -74,6 +74,7 @@ function fetchBusinessHours(callback){
                 //{bh: JSON-String}
                 data.forEach(obj=>{
                     bh = JSON.parse(obj.bh);
+                    console.log(bh);
                 })
                 callback();
             })
