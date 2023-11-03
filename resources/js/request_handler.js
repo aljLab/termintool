@@ -75,7 +75,6 @@ function fetchBusinessHours(){
                 data.forEach(obj=>{
                     bh = JSON.parse(obj.bh);
                 })
-                callback();
             })
             .catch(error => {
                 console.error('Fetch error', error);
