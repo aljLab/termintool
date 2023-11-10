@@ -257,7 +257,7 @@ function noTerminConflicts(termin){//returns true, if termin does not conflict w
     return true;
 }
 function closeModal(){
-    window.location.reload();
+    location.reload();
     /*let mb =document.getElementById("modalBack");
     let m = document.getElementById("bookingbox");
     mb.style.display="none";
