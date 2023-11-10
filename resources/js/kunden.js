@@ -1,6 +1,9 @@
 var t = document.getElementById("kundenContainer");
 
 function fillKundenTabelle(){
+    fetchTermine(()=>{
+        console.log("termine fetched");
+    })
     if(window.innerWidth>767){
         kunden.forEach(k=>{
             let row = document.createElement("div");
@@ -24,7 +27,7 @@ function fillKundenTabelle(){
             t.appendChild(row);
         })
     }else{//Mobile adaptions
-        adaptSideBar();
+        fetchTermine(adaptSideBar());
         kunden.forEach(k=>{
             let row = document.createElement("div");
             row.setAttribute("class", "kundeContainer");
@@ -111,6 +114,7 @@ function getTermineByName(kunde){
             terminArray.push(t);
         } 
     })
+    console.log(terminArray);
     return terminArray;
 }
 function formatTermine(terminArray){
