@@ -67,13 +67,29 @@ function makeKundenModBox(kunde){
     console.log(kunde);
     let div = document.createElement("div");
     div.setAttribute("class", "modBox");
+    //make dropdown-container within kundenmodbox (will be positioned relatively)
+    let dropDown = document.createElement("div");
+    dropDown.classList.add("dropDown");
+    //create div for content, fetch content, append content
+    let dropDownContent = document.createElement("div");
+    let arr = getTermineByName(kunde.name);
+    if(arr==[]){
+        dropDownContent.innerHTML= "Keine Termine gebucht.";
+    }else{
+        dropDownContent.innerHTML=formatTermine(arr);
+    }
+    
+    dropDownContent.classList.add('dropDownContent');
+    dropDown.appendChild(dropDownContent);
+
+    //ID der modBox ist der JSON-String des
     div.id=JSON.stringify(kunde);
-    console.log(`id der Modbox: ${div.id}`);
+    //Buttons: button 1 is within dropdown and triggers showing of dropdowncontent on hover
     let but1=document.createElement("button");
     let but2=document.createElement("button");
-    but1.addEventListener("click", ()=>{
-        showTermine();
-    });
+    dropDown.appendChild(but1);
+
+    //delete-functionality on delete-Button
     but2.addEventListener("click", (e)=>{
         console.log(e.target.parentNode.id);
         deleteKunde(e.target.parentNode.id, ()=>{
@@ -84,10 +100,23 @@ function makeKundenModBox(kunde){
     });
     but1.innerHTML="Termine einsehen";
     but2.innerHTML="Kunden entfernen";
-    div.appendChild(but1);
+    div.appendChild(dropDown);
     div.appendChild(but2);
     return div;
 }
-function showTermine(){
-
+function getTermineByName(name){
+    let terminArray=[];
+    termine.forEach(t=>{
+        if(t.kunde.name === name){
+            terminArray.push(t);
+        } 
+    })
+    return terminArray;
+}
+function formatTermine(terminArray){
+    let str = 'Gebuchte Termine:\n';
+    termineArray.forEach(t=>{
+        str *= `${t.date}, ${t.hourValue}:${t.minuteValue} Uhr [${t.preis}€, ${t.dauer*15} min] \n`;
+    })
+    return str;
 }
