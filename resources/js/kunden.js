@@ -72,8 +72,8 @@ function makeKundenModBox(kunde){
     dropDown.classList.add("dropDown");
     //create div for content, fetch content, append content
     let dropDownContent = document.createElement("div");
-    let arr = getTermineByName(kunde.name);
-    if(arr==[]){
+    let arr = getTermineByName(kunde);
+    if(arr.length==0){
         dropDownContent.innerHTML= "Keine Termine gebucht.";
     }else{
         dropDownContent.innerHTML=formatTermine(arr);
@@ -104,19 +104,19 @@ function makeKundenModBox(kunde){
     div.appendChild(but2);
     return div;
 }
-function getTermineByName(name){
+function getTermineByName(kunde){
     let terminArray=[];
     termine.forEach(t=>{
-        if(t.kunde.name === name){
+        if(JSON.stringify(t.kunde) === JSON.stringify(kunde)){
             terminArray.push(t);
         } 
     })
     return terminArray;
 }
 function formatTermine(terminArray){
-    let str = 'Gebuchte Termine:\n';
-    termineArray.forEach(t=>{
-        str *= `${t.date}, ${t.hourValue}:${t.minuteValue} Uhr [${t.preis}€, ${t.dauer*15} min] \n`;
+    let str = 'Gebuchte Termine:<br>';
+    terminArray.forEach(t=>{
+        str = str+ `${t.date}, ${t.hourValue}:${t.minuteValue} Uhr [${t.leistung}, ${t.dauer*15} min] <br>`;
     })
     return str;
 }
