@@ -422,8 +422,9 @@ form:invalid > button{
     border-radius: 5px;
 }
 .dropDown:hover > div{
+    z-index: 99;
     opacity: 1;
-    transform: translateX(-50 rem);
+    transform: translateX(-50rem);
     transition: opacity 250ms, transform 250ms;
 }
  /*-------------------------------------Termine display styles----------------------------------*/
