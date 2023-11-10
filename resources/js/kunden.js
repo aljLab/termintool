@@ -8,15 +8,7 @@ function fillKundenTabelle(){
             row.setAttribute("class", "kundeContainer");
             for(let prop in k){
                 let col = document.createElement("div");
-                if(prop === "termine"){
-                    if(k.termine==""){
-                        col.innerHTML="Keine Termine";
-                    }else{
-                        col.innerHTML=`${termine.length} Termine`;
-                    }
-                }else{
-                    col.innerHTML=`${k[prop]}`;
-                }
+                col.innerHTML=`${k[prop]}`;
                 col.setAttribute("class", "infoBubble");
                 row.appendChild(col);        
             }

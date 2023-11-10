@@ -86,7 +86,7 @@ function prepareBookingMobile(){
                     if(withinBusinessHours(t, bh)){
                         if(noTerminConflicts(t)){
                             box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
-                            t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
+                            t.kunde = new Kunde(anrede, vorname, nachname, mail, phone);
                             insertTermin(t);
                             insertKunde(t.kunde);
                             sendMail(t);
