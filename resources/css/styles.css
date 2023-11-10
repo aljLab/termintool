@@ -391,9 +391,8 @@ form:invalid > button{
     margin: 5px;
     background-color: var(--lightest-color);
     border-radius: 3px;
-    border:solid 3px var(--dark-color);
+    border:solid 2px var(--dark-color);
     width: 15%;
-    box-shadow: inset 0 0 10px var(--darkest-color);
     text-align: center;
     overflow-wrap: break-word;
 }
@@ -425,7 +424,7 @@ form:invalid > button{
 .dropDown:hover > div{
     z-index: 99;
     opacity: 1;
-    transform: translateX(-20rem);
+    transform: translateX(-15%rem);
     transition: opacity 250ms, transform 250ms;
 }
 .terminButtonClicked{
