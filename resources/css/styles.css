@@ -423,7 +423,7 @@ form:invalid > button{
 }
 .dropDown:hover > div{
     opacity: 1;
-    transform: translateX(-15 rem);
+    transform: translateX(-25 rem);
     transition: opacity 250ms, transform 250ms;
 }
  /*-------------------------------------Termine display styles----------------------------------*/
