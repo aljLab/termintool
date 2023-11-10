@@ -424,13 +424,13 @@ form:invalid > button{
 .dropDown:hover > div{
     z-index: 99;
     opacity: 1;
-    transform: translateX(-15%rem);
+    transform: translateX(-30%);
     transition: opacity 250ms, transform 250ms;
 }
 .terminButtonClicked{
     z-index: 99;
     opacity: 1;
-    transform: translateX(15%);
+    transform: translateX(-30%);
     transition: opacity 250ms, transform 250ms;
 }
  /*-------------------------------------Termine display styles----------------------------------*/
