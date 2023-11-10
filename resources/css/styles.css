@@ -709,6 +709,12 @@ form:invalid > button{
         overflow-wrap: break-word;
         overflow-y: scroll;
     }
+    .dropDown:hover > div{
+        z-index: 99;
+        opacity: 1;
+        transform: translateX(-20%);
+        transition: opacity 250ms, transform 250ms;
+    }
   }
  
     
