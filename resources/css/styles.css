@@ -400,7 +400,7 @@ form:invalid > button{
 .dropDown{
     position:relative;
 }
-.dropDown > button{
+.dropDown button{
     width: 95%;
     height: 30px;
     border-radius: 8px;
