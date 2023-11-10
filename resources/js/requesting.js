@@ -257,7 +257,8 @@ function noTerminConflicts(termin){//returns true, if termin does not conflict w
     return true;
 }
 function closeModal(){
-    let mb =document.getElementById("modalBack");
+    window.location.reload();
+    /*let mb =document.getElementById("modalBack");
     let m = document.getElementById("bookingbox");
     mb.style.display="none";
     m.style.display="none";
@@ -265,7 +266,7 @@ function closeModal(){
     b.style.height="auto";
     b.style.overflow="scroll";
     let fb = document.getElementById("feedback");
-    fb.innerHTML="";
+    fb.innerHTML="";*/
 }
 
 /*---------------------------------------Validation and Sanitization help methods-----------------------------------*/
