@@ -400,6 +400,15 @@ form:invalid > button{
 .dropDown{
     position:relative;
 }
+.dropDown > button{
+    width: 95%;
+    height: 30px;
+    border-radius: 8px;
+    border: 3px solid white;
+    background-color: var(--dark-color);
+    color: white;
+    font-size: 14px;
+}
 .dropDownContent{
     opacity:0;
     pointer-events: none;
@@ -412,7 +421,7 @@ form:invalid > button{
 }
 .dropDown:hover > div{
     opacity: 1;
-    transform: translateX(-1 rem);
+    transform: translateX(-15 rem);
     transition: opacity 250ms, transform 250ms;
 }
  /*-------------------------------------Termine display styles----------------------------------*/
