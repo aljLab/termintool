@@ -2,8 +2,6 @@ var t = document.getElementById("kundenContainer");
 
 function fillKundenTabelle(){
     fetchTermine(()=>{
-        console.log("termine fetched");
-    })
     if(window.innerWidth>767){
         kunden.forEach(k=>{
             let row = document.createElement("div");
@@ -27,7 +25,7 @@ function fillKundenTabelle(){
             t.appendChild(row);
         })
     }else{//Mobile adaptions
-        fetchTermine(adaptSideBar());
+        adaptSideBar();
         kunden.forEach(k=>{
             let row = document.createElement("div");
             row.setAttribute("class", "kundeContainer");
@@ -62,11 +60,12 @@ function fillKundenTabelle(){
             row.appendChild(kundenModBox);
             t.appendChild(row);
         })
-    }
+    }})
 }
 
 function makeKundenModBox(kunde){
     console.log(`Kundenarray: ${kunden}`);
+    console.log(`Termin-Array: ${termine}`);
     console.log(kunde);
     let div = document.createElement("div");
     div.setAttribute("class", "modBox");
