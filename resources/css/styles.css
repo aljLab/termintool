@@ -427,6 +427,12 @@ form:invalid > button{
     transform: translateX(-20rem);
     transition: opacity 250ms, transform 250ms;
 }
+.terminButtonClicked{
+    z-index: 99;
+    opacity: 1;
+    transform: translateX(-20rem);
+    transition: opacity 250ms, transform 250ms;
+}
  /*-------------------------------------Termine display styles----------------------------------*/
  #terminContainer{
     width: 100%;

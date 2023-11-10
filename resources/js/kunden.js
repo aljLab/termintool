@@ -56,8 +56,6 @@ function fillKundenTabelle(){
 }
 
 function makeKundenModBox(kunde){
-    console.log(`Kundenarray: ${kunden}`);
-    console.log(`Termin-Array: ${termine}`);
     console.log(kunde);
     let div = document.createElement("div");
     div.setAttribute("class", "modBox");
@@ -66,6 +64,7 @@ function makeKundenModBox(kunde){
     dropDown.classList.add("dropDown");
     //create div for content, fetch content, append content
     let dropDownContent = document.createElement("div");
+    dropDownContent.id=JSON.stringify(kunde)+"termine";
     let arr = getTermineByName(kunde);
     if(arr.length==0){
         dropDownContent.innerHTML= "Keine Termine gebucht.";
@@ -84,6 +83,10 @@ function makeKundenModBox(kunde){
     dropDown.appendChild(but1);
 
     //delete-functionality on delete-Button
+    but1.addEventListener("click", (e)=>{
+        let con = document.getElementById(e.target.id+"termine");
+        con.classList.toggle("termineButtonClicked");
+    })
     but2.addEventListener("click", (e)=>{
         console.log(e.target.parentNode.id);
         deleteKunde(e.target.parentNode.id, ()=>{
