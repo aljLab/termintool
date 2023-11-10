@@ -21,32 +21,11 @@ function fillKundenTabelle(){
         kunden.forEach(k=>{
             let row = document.createElement("div");
             row.setAttribute("class", "kundeContainer");
-            let i = 0;
-            let subRow = document.createElement("div");
             for(let prop in k){
-                if(i==0){
-                    subRow=document.createElement("div");
-                    subRow.setAttribute("class", "subRow");
-                }else{
-                    subRow=subRow;
-                }
                 let col = document.createElement("div");
-                console.log(prop === "termine");
-                if(prop === "termine"){
-                    if(k.termine==""){
-                        col.innerHTML="Keine Termine";
-                    }else{
-                        col.innerHTML=`${termine.length} Termine`;
-                    }
-                }else{
-                    col.innerHTML=`${k[prop]}`;
-                }
+                col.innerHTML=`${k[prop]}`;
                 col.setAttribute("class", "infoBubble");
-                subRow.appendChild(col);  
-                if(i==2){
-                    row.appendChild(subRow);
-                }
-                i=(i+1)%3;  
+                row.appendChild(col);        
             }
             let kundenModBox = makeKundenModBox(k);
             row.appendChild(kundenModBox);
@@ -117,4 +96,7 @@ function formatTermine(terminArray){
         str = str+ `${t.date}, ${t.hourValue}:${t.minuteValue} Uhr [${t.leistung}, ${t.dauer*15} min] <br>`;
     })
     return str;
+}
+function showTermine(){
+
 }

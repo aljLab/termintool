@@ -35,7 +35,6 @@
                     <div id="currentItem"><a class="listItem">Termine</a></div><br />
                     <a class="listItem" href="kunden.php">Kunden</a><br />
                     <a class="listItem" href="leistungen.php">Leistungen</a><br />
-                    <button onclick = "checkFetching()">Insert testen</button>
             </div>
             <div id="terminContainer">
                 
