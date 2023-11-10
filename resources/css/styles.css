@@ -712,7 +712,7 @@ form:invalid > button{
     .dropDown:hover > div{
         z-index: 99;
         opacity: 1;
-        transform: translateX(-20%);
+        transform: translateX(-14%);
         transition: opacity 250ms, transform 250ms;
     }
   }
