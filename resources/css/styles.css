@@ -399,6 +399,7 @@ form:invalid > button{
 }
 .dropDown{
     position:relative;
+    width: 100%;
 }
 .dropDown button{
     width: 95%;
