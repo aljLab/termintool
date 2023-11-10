@@ -85,7 +85,7 @@ function makeKundenModBox(kunde){
     //delete-functionality on delete-Button
     but1.addEventListener("click", (e)=>{
         let con = document.getElementById(e.target.id+"termine");
-        con.classList.toggle("termineButtonClicked");
+        con.classList.toggle("termineButtonClicked", true);
     })
     but2.addEventListener("click", (e)=>{
         console.log(e.target.parentNode.id);
