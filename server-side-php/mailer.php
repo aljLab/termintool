@@ -33,7 +33,7 @@
 
         // Set the From address
         $mail->setFrom('naturheilpraxis.labonte@gmail.com', 'Martina La Bonté');
-        $mail->setSender('naturheilpraxis.labonte@gmail.com');
+        //$mail->setSender('naturheilpraxis.labonte@gmail.com');
         // Add a recipient
         $mail->addAddress($kun["mail"], $kun["anrede"]." ".$kun["vorname"]." ".$kun["nachname"]);
 
