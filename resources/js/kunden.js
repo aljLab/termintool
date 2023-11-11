@@ -33,6 +33,7 @@ function fillKundenTabelle(){
                 });
         });
         row.appendChild(terminBox);
+        row.appendChild(kundenDeleteButton);
         t.appendChild(row);
         })
     })
