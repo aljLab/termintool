@@ -1,40 +1,42 @@
 var t = document.getElementById("kundenContainer");
 
 function fillKundenTabelle(){
-    fetchTermine(()=>{
-    if(window.innerWidth>767){
-        kunden.forEach(k=>{
-            let row = document.createElement("div");
-            row.setAttribute("class", "kundeContainer");
-            for(let prop in k){
-                let col = document.createElement("div");
-                col.innerHTML=`${k[prop]}`;
-                col.setAttribute("class", "infoBubble");
-                row.appendChild(col);        
-            }
-            let kundenModBox = makeKundenModBox(k);
-            row.appendChild(kundenModBox);
-            t.appendChild(row);
-        })
-    }else{//Mobile adaptions
+    if(window.innerWidth<767){
         adaptSideBar();
-        kunden.forEach(k=>{
-            let row = document.createElement("div");
-            row.setAttribute("class", "kundeContainer");
-            for(let prop in k){
-                let col = document.createElement("div");
-                col.innerHTML=`${k[prop]}`;
-                col.setAttribute("class", "infoBubble");
-                row.appendChild(col);        
-            }
-            let kundenModBox = makeKundenModBox(k);
-            row.appendChild(kundenModBox);
-            t.appendChild(row);
+    }
+    fetchTermine(()=>{
+    kunden.forEach(k=>{
+        let row = document.createElement("div");
+        row.setAttribute("class", "kundeContainer");
+        for(let prop in k){
+            let col = document.createElement("div");
+            col.innerHTML=`${k[prop]}`;
+            col.setAttribute("class", "infoBubble");
+            row.appendChild(col);        
+        }
+
+        let terminBox = document.createElement("div");
+        terminBox.innerHTML=formatTermine(getTermineByName(k));
+
+        let kundenDeleteButton = document.createElement("button");
+        kundenDeleteButton.innerHTML="<img size = '16px' href= '.resources/images/cross.png'>";
+        kundenDeleteButton.addEventListener("click", (e)=>{
+            deleteKunde(e.target.parentNode.id, ()=>{
+                    setTimeout(() => {
+                       window.location.reload();
+                    }, 500); // Delay in milliseconds
+                });
+        });
+        row.appendChild(terminBox);
+        row.appendChild(kundenModBox);
+        row.appendChild(kundenDeleteButton);
+        t.appendChild(row);
         })
-    }})
+    })
 }
 
-function makeKundenModBox(kunde){
+
+/*function makeKundenModBox(kunde){
     console.log(kunde);
     let div = document.createElement("div");
     div.setAttribute("class", "modBox");
@@ -79,7 +81,7 @@ function makeKundenModBox(kunde){
     div.appendChild(dropDown);
     div.appendChild(but2);
     return div;
-}
+}*/
 function getTermineByName(kunde){
     let terminArray=[];
     termine.forEach(t=>{
