@@ -50,7 +50,7 @@ function getTermineByName(kunde){
 function formatTermine(terminArray){
     let str = 'Gebuchte Termine:<br>';
     terminArray.forEach(t=>{
-        str = str+ `${t.date}, ${t.hourValue}:${t.minuteValue} Uhr, ${t.leistung} <br>`;
+        str = str+ `${t.date}, ${t.hourValue}:${t.minuteValue} Uhr, ${t.leistung.name} (${t.leistung.preis}) <br>`;
     })
     return str;
 }

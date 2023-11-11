@@ -211,7 +211,7 @@ function convertToTermin(tstr, l){//macht aus den Inputdaten einen Termin, Forma
             leiObj = lei;
         }
     })
-    return new Termin(h, m, date, l, leiObj.dauer, "");
+    return new Termin(h, m, date, leiObj, leiObj.dauer, "");
 }
 function withinBusinessHours(termin){//returns true, if selected termin lies within business hours, fals otherwise (booked appointments are NOT considered)
     let startDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);

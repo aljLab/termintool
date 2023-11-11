@@ -42,7 +42,7 @@
                 Sehr geehrte/r $nameString, \n
                 Hiermit bestätige ich den gebuchten Termin am $tString.
                 Gebucht wurde Leistung: $lei->name ($lei->preis €).
-
+                
                 Bitte antworten Sie nicht auf diese Mail. \n
                 Stornierung und Fragen bitte an skymove@posteo.de.
             ");
