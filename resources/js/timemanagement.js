@@ -242,6 +242,7 @@ function getBlockedTermin(){//returns new Termin mit den Eingabewerten der Input
     let start=f.elements.startTime.value;
     let end=f.elements.endTime.value;
     let dauer = (Number(end.split(".")[0])-Number(start.split(".")[0]))*4+(Number(end.split(".")[1])-Number(start.split(".")[1]))/15;
+    console.log(dauer);
     if(d!==""&&m!==""&&y!==""&&start!==""&&end!==""){
         return new Termin(start.split(".")[0], start.split(".")[1], `${d}.${m}.${y}`, new Leistung("BLOCKED", dauer, "--"),dauer+1, new Kunde("NEUTRUM","","ADMIN", "praxisbuero@posteo.de", "XXXXXXXXXXXX"));
     }else{

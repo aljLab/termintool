@@ -434,6 +434,7 @@ form:invalid > button{
 .deleteButton:hover{
    background-color: rgb(155, 56, 56);
    cursor: pointer;
+   color:white;
 }
  /*-------------------------------------Termine display styles----------------------------------*/
  #terminContainer{

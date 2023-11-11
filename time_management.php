@@ -70,7 +70,7 @@
                     <div class="lineContainer">
                         <label class="dateInputLabel" for="reserveDay">Datum:</label>
                         <div class="dateContainer">
-                            <input class="dateInputs" id ="reserveDay" name="day" type="text" size="4" placeholder="TT" pattern="[0-2]\d" required>.
+                            <input class="dateInputs" id ="reserveDay" name="day" type="text" size="4" placeholder="TT" pattern="[0-3]\d" required>.
                             <input class="dateInputs" id="reserveMonth" name ="month" type="text" size="4" placeholder="MM" pattern="(0|1)\d" required>.
                             <input class="dateInputs" id ="reserveYear" name = "year" type="text" size="6" placeholder="JJJJ" pattern ="\d{4}" required>
                         </div>    
