@@ -20,7 +20,7 @@ function fillKundenTabelle(){
         terminBox.classList.add("terminBox");
         let kundenDeleteButton = document.createElement("button");
 
-        kundenDeleteButton.innerHTML="<img width='80px' height='80px' src='resources/images/cross.png'>";
+        kundenDeleteButton.innerHTML="<img width='60px' src='resources/images/cross.png'>";
         kundenDeleteButton.addEventListener("click", (e)=>{
             deleteKunde(e.target.parentNode.id, ()=>{
                     setTimeout(() => {
