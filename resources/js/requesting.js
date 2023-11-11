@@ -15,7 +15,13 @@ function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
     if(window.innerWidth<=767){
         //mobile logic here
         let lei = document.getElementById("chooseLeistung").value.split(":")[0];
-        let t = new Termin(e.id.split(",")[1].split(" ")[1].split(":")[0], e.id.split(",")[1].split(" ")[1].split(":")[1], e.id.split(",")[0], lei, getDauer(lei), "");
+        let leiObject;
+        leistungen.forEach(l=>{
+            if(l.name == lei){
+                leiObject = l;
+            }
+        })
+        let t = new Termin(e.id.split(",")[1].split(" ")[1].split(":")[0], e.id.split(",")[1].split(" ")[1].split(":")[1], e.id.split(",")[0], leiObject, leiObject.dauer, "");
         sessionStorage.setItem("termin", JSON.stringify(t));
         window.location="mobileBooking.html";
     }else{
