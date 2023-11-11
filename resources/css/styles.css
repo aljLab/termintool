@@ -572,12 +572,12 @@ form:invalid > button{
         font-size: 15px;
     }
     .sidebarIcon{
-        width: 40px;
-        height: 40px;
+        width: 25px;
+        height: 25px;
         margin: 10px;
     }
     .sidebarIcon:hover{
-        transform: rotate(20deg);
+        transform: rotate(15deg);
         transition: ease-in 300ms;
     }
     
