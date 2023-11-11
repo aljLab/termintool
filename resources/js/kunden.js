@@ -17,7 +17,7 @@ function fillKundenTabelle(){
 
         let terminBox = document.createElement("div");
         terminBox.innerHTML=formatTermine(getTermineByName(k));
-
+        terminBox.classList.add("infoBubble");
         let kundenDeleteButton = document.createElement("button");
         kundenDeleteButton.innerHTML="<img href='.resources/images/cross.png'>";
         kundenDeleteButton.addEventListener("click", (e)=>{
