@@ -232,7 +232,7 @@ function setUpLeistungsDropDown(){
             })
             c.appendChild(b);
         }else{
-            console.log(isMobile());
+            /*console.log(isMobile());
             console.log("User agent: "+navigator.userAgent);
             s.addEventListener("blur", function(){
                 leistungen.forEach(l=>{
@@ -245,7 +245,23 @@ function setUpLeistungsDropDown(){
                 }else{
                     fillDaySlots();
                 }
+            })*/
+            let c = s.parentElement();
+            let b= document.createElement("button");
+            b.innerHTML="Aktualisieren";
+            b.addEventListener("click", function(){
+                leistungen.forEach(l=>{
+                    if(l.name == s.value){
+                        currentDauer=l.dauer;
+                    }
+                })
+                if(window.innerWidth<=767){
+                    fillDaySlot();
+                }else{
+                    fillDaySlots();
+                }
             })
+            c.appendChild(b);
         }
         
 }
