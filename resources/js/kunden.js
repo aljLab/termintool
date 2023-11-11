@@ -19,7 +19,11 @@ function fillKundenTabelle(){
             row.id=JSON.stringify(k);
             console.log("Row-id: "+row.id);
             let terminBox = document.createElement("div");
-            terminBox.innerHTML=formatTermine(getTermineByName(k));
+            if(getTermineByName(k).length==0){
+                terminBox.innerHTML="Keine Termine gebucht.";
+            }else{
+                terminBox.innerHTML=formatTermine(getTermineByName(k));
+            }
             terminBox.classList.add("terminBox");
             let kundenDeleteButton = document.createElement("button");
             kundenDeleteButton.classList.add("deleteButton");
