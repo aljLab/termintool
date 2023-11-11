@@ -232,6 +232,8 @@ function setUpLeistungsDropDown(){
             })
             c.appendChild(b);
         }else{
+            console.log(isMobile());
+            console.log("User agent: "+navigator.userAgent);
             s.addEventListener("blur", function(){
                 leistungen.forEach(l=>{
                     if(l.name == s.value){
