@@ -52,7 +52,7 @@ function getTermineByName(kunde){
     return terminArray;
 }
 function formatTermine(terminArray){
-    let str = 'Gebuchte Termine:<br>';
+    let str = '<h3>Gebuchte Termine<h3/>:<br>';
     terminArray.forEach(t=>{
         str = str+ `${t.date}, ${t.hourValue}:${t.minuteValue} Uhr<br> ${t.leistung.name} (${t.leistung.preis}) <br>`;
     })
@@ -60,11 +60,13 @@ function formatTermine(terminArray){
 }
 function noDuplicates(kundenString){//entfernt Duplikate aus dem Kunden-Array
     let kids = t.children;
+    console.log(kids);
     for(i = 0; i<t.length; i++){
         if(kids.item(i).id===kundenString){
             return false;       
         }
     }
+    console.log("No dups found");
     return true;
 }
 
