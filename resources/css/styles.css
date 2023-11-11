@@ -413,7 +413,8 @@ form:invalid > button{
     overflow-y: scroll;
 }
 .kundeContainer button{
-    width: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 5px;
     border: 0px;
     background-color: lightcoral;
