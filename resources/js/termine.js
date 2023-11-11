@@ -18,7 +18,7 @@ function displayTermine(){
         but3.innerHTML="Termin aus Database löschen";
         but3.classList.add("deleteButton");
         but3.addEventListener("click", ()=>{
-            setUpTerminModal(termin);
+            setUpTerminModal(t);
         });
         
         if(getCompDate(t)>(new Date().getTime())){
