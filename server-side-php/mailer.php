@@ -56,7 +56,7 @@
                     <p>Informationen und weitere Angebote finden sie auf <a>https://martinalabonte.de</a></p>
 
                     <p><em>Dies ist eine automatisierte Nachricht, bitte antworten sie nicht auf diese Mail.</em><br>
-                    Im Falle weiterer Fragen oder sollten Sie den Termin stornieren wollen, wenden Sie sich bitte an skymove@posteo.de.<br>
+                    Im Falle weiterer Fragen oder sollten Sie den Termin stornieren wollen, wenden Sie sich bitte an praxisbuero@posteo.de.<br>
                     Telefonisch erreichen Sie mich unter: (0341) 3034 384.<br></p>
 
                     <p style='color: maroon'>Wird ein Termin nicht wahrgenommen und nicht mindestens 24 Stunden vor Terminbeginn abgesagt, behalte ich mir vor, eine Ausfallgebühr von 50€ zu berechnen.</p>
