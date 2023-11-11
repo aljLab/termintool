@@ -145,6 +145,11 @@ hr{
     height: auto;
     margin: 3px;
 }
+#aktualisierenButton{
+    width: 60%;
+    font-size: 18px;
+    margin: 3px;
+}
 /*@keyframes blink-animation{
     0%{
         background-color: #3b8e9b;

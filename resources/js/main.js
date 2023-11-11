@@ -218,7 +218,9 @@ function setUpLeistungsDropDown(){
             let c = s.parentElement;
             let b= document.createElement("button");
             b.innerHTML="Aktualisieren";
-            b.addEventListener("click", function(){
+            b.id="aktualisierenButton";
+            b.addEventListener("click", function(e){
+                e.preventDefault();
                 leistungen.forEach(l=>{
                     if(l.name == s.value){
                         currentDauer=l.dauer;
@@ -232,8 +234,6 @@ function setUpLeistungsDropDown(){
             })
             c.appendChild(b);
         }else{
-            /*console.log(isMobile());
-            console.log("User agent: "+navigator.userAgent);
             s.addEventListener("blur", function(){
                 leistungen.forEach(l=>{
                     if(l.name == s.value){
@@ -245,25 +245,8 @@ function setUpLeistungsDropDown(){
                 }else{
                     fillDaySlots();
                 }
-            })*/
-            let c = s.parentElement;
-            let b= document.createElement("button");
-            b.innerHTML="Aktualisieren";
-            b.addEventListener("click", function(){
-                leistungen.forEach(l=>{
-                    if(l.name == s.value){
-                        currentDauer=l.dauer;
-                    }
-                })
-                if(window.innerWidth<=767){
-                    fillDaySlot();
-                }else{
-                    fillDaySlots();
-                }
             })
-            c.appendChild(b);
         }
-        
 }
 function convertToMoSo(x){
     //getDay() gibt für Sonntag 0 aus -> gewollt ist Mo = 0 -> So = 6 ---> alle außer So dekrementieren, so 6 mal inkrementieren
