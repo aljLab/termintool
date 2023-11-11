@@ -10,7 +10,7 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
     //read POST-Request Body -> Terminobjekt 
-    $t == file_get_contents("php://input");//'{"hourValue":"09","minuteValue":"30","date":"12.10.2023","leistung":{"name":"Anamnese","dauer":"4","preis":"60"},"kunde":{"anrede":"Dr.","vorname":"Aljoscha","nachname":"Lustig","mail":"aljoschalabonte@rocketmail.com","phone":"017623559949"}}';
+    $t = file_get_contents("php://input");//'{"hourValue":"09","minuteValue":"30","date":"12.10.2023","leistung":{"name":"Anamnese","dauer":"4","preis":"60"},"kunde":{"anrede":"Dr.","vorname":"Aljoscha","nachname":"Lustig","mail":"aljoschalabonte@rocketmail.com","phone":"017623559949"}}';
     $objectArray = json_decode($t, true);
     $lei = $objectArray['leistung'];
     $kun = $objectArray['kunde'];
