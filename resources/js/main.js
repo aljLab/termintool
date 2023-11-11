@@ -215,7 +215,7 @@ function isMobile() {
 function setUpLeistungsDropDown(){
     var s = document.getElementById("chooseLeistung");
         if(isMobile()){
-            s.addEventListener("blur", function(){
+            s.addEventListener("input blur", function(){
                 leistungen.forEach(l=>{
                     if(l.name == s.value){
                         currentDauer=l.dauer;
