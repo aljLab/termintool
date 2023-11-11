@@ -214,6 +214,7 @@ function isMobile() {
   
 function setUpLeistungsDropDown(){
     var s = document.getElementById("chooseLeistung");
+        document.body.appendChild(document.createElement("div").innerHTML=navigator.userAgent);
         if(isMobile()){
             let c = s.parentElement;
             let b= document.createElement("button");
