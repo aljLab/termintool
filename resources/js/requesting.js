@@ -291,6 +291,6 @@ function sanitizePhone(str){
     return clean;
 }
 function sanitizeText(str){
-    let clean = clean.replaceAll(/( |\.|-)/gi, "");
+    let clean = str.replaceAll(/( |\.|-)/gi, "");
     return clean;
 }
