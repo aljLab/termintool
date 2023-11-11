@@ -19,6 +19,7 @@ function fillKundenTabelle(){
         terminBox.innerHTML=formatTermine(getTermineByName(k));
         terminBox.classList.add("terminBox");
         let kundenDeleteButton = document.createElement("button");
+        kundenDeleteButton.classList.add("deleteButton");
         kundenDeleteButton.title="Kunden löschen";
         kundenDeleteButton.innerHTML="<img width='60px' src='resources/images/cross.png'>";
         kundenDeleteButton.addEventListener("click", (e)=>{

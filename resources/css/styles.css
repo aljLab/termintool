@@ -413,7 +413,7 @@ form:invalid > button{
     height: 100px;
     overflow-y: scroll;
 }
-.kundeContainer button{
+.deleteButton{
     width: 100px;
     height: 100px;
     border-radius: 5px;
@@ -422,7 +422,7 @@ form:invalid > button{
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
     right: 5px;
 }
-.kundeContainer button:hover{
+.deleteButton:hover{
    background-color: rgb(155, 56, 56);
    cursor: pointer;
 }
