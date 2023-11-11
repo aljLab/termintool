@@ -227,6 +227,9 @@ function setUpLeistungsDropDown(){
                     fillDaySlots();
                 }
             })
+            document.body.addEventListener("touchstart",()=>{
+                s.blur();
+            });
         }else{
             s.addEventListener("blur", function(){
                 leistungen.forEach(l=>{
@@ -241,6 +244,7 @@ function setUpLeistungsDropDown(){
                 }
             })
         }
+        
 }
 function convertToMoSo(x){
     //getDay() gibt für Sonntag 0 aus -> gewollt ist Mo = 0 -> So = 6 ---> alle außer So dekrementieren, so 6 mal inkrementieren
