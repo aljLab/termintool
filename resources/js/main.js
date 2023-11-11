@@ -227,7 +227,7 @@ function setUpLeistungsDropDown(){
                     fillDaySlots();
                 }
             })
-            document.body.addEventListener("touchstart",()=>{
+            document.body.addEventListener("click",()=>{
                 s.blur();
             });
         }else{
