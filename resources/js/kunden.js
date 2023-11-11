@@ -14,7 +14,7 @@ function fillKundenTabelle(){
             col.setAttribute("class", "infoBubble");
             row.appendChild(col);        
         }
-
+        row.setAttribute("id", JSON.stringify(k));
         let terminBox = document.createElement("div");
         terminBox.innerHTML=formatTermine(getTermineByName(k));
         terminBox.classList.add("terminBox");
