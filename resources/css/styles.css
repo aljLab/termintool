@@ -397,6 +397,8 @@ form:invalid > button{
     text-align: center;
     overflow-wrap: break-word;
     font-size: 25px;
+    height: 100px;
+    overflow-y: scroll;
 }
 .dropDown{
     position:relative;
