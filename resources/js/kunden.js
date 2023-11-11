@@ -24,18 +24,15 @@ function fillKundenTabelle(){
         kundenDeleteButton.classList.add("deleteButton");
         kundenDeleteButton.title="Kunden löschen";
         kundenDeleteButton.innerHTML="<img width='60px' src='resources/images/cross.png'>";
-        console.log("parentNode-ID: "+kundenDeleteButton.parentNode.id);
-        console.log(row.id==kundenDeleteButton.parentNode.id);
-        kundenDeleteButton.addEventListener("click", (e)=>{
-            deleteKunde(e.target.parentNode.id, ()=>{
-                console.log(e.target.parentNode.id);
+        kundenDeleteButton.addEventListener("click", ()=>{
+            deleteKunde(row.id, ()=>{
+                console.log(row.id);
                     setTimeout(() => {
                        window.location.reload();
                     }, 500); // Delay in milliseconds
                 });
         });
         row.appendChild(terminBox);
-        row.appendChild(kundenDeleteButton);
         t.appendChild(row);
         })
     })
