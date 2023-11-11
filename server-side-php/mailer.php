@@ -32,7 +32,7 @@
 
         // Set the From address
         $mail->setFrom('naturheilpraxis.labonte@gmail.com', 'Martina La Bonté');
-
+        $mail->Sender('naturheilpraxis.labonte@gmail.com');
         // Add a recipient
         $mail->addAddress($kun["mail"], $kun["anrede"]." ".$kun["vorname"]." ".$kun["nachname"]);
 
@@ -52,8 +52,7 @@
                 Im Falle weiterer Fragen oder sollten Sie den Termin stornieren wollen, wenden Sie sich bitte an skymove@posteo.de.\n
                 Telefonisch erreichen Sie mich unter: (0341) 3034 384.\n
 
-                Wird ein Termin nicht wahrgenommen und nicht mindestens 24 Stunden vor Terminbeginn abgesagt,
-                behalte ich mir vor, eine Ausfallgebühr von 50€ zu berechnen.
+                Wird ein Termin nicht wahrgenommen und nicht mindestens 24 Stunden vor Terminbeginn abgesagt, behalte ich mir vor, eine Ausfallgebühr von 50€ zu berechnen.
             ");
 
         // Send the email
