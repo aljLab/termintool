@@ -441,6 +441,7 @@ form:invalid > button{
     background-color: var(--lightest-color);
     width: 90%;
     justify-content: flex-start;
+    align-items: center;
     margin: 10px;
     border-radius: 8px;
     box-shadow: 5px 5px 5px var(--dark-color);
