@@ -37,7 +37,7 @@ function makeModBox(termin){
     let div = document.createElement("div");
     let but3=document.createElement("button");
     but3.innerHTML="Termin aus Database löschen";
-    but3.classList.add("kundenDeleteButton");
+    but3.classList.add("deleteButton");
     but3.addEventListener("click", ()=>{
         console.log(termin);
         setUpTerminModal(termin);
