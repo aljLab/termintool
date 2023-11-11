@@ -413,6 +413,9 @@ form:invalid > button{
     overflow-y: scroll;
 }
 .kundeContainer button{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     width: 100px;
     height: 100px;
     border-radius: 5px;
