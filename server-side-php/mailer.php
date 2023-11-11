@@ -27,8 +27,8 @@
         $mail->SMTPAuth = true;
         $mail->Username = 'naturheilpraxis.labonte@gmail.com';
         $mail->Password = getEnv('apppw');
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
         $mail->XMail = "Termintool - Martina La Bonté";
 
         // Set the From address
