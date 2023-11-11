@@ -213,12 +213,7 @@ function isMobile() {
 }
   
 function setUpLeistungsDropDown(){
-    var s = document.getElementById("chooseLeistung");
-    let d= document.createElement("div");
-    d.innerHTML=navigator.userAgent;
-    let p = s.parentElement;
-    p.appendChild(d);
-        if(isMobile()){
+        if(isMobile()||window.innerWidth< 1366){
             let c = s.parentElement;
             let b= document.createElement("button");
             b.innerHTML="Aktualisieren";
