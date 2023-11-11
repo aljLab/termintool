@@ -215,7 +215,10 @@ function isMobile() {
 function setUpLeistungsDropDown(){
     var s = document.getElementById("chooseLeistung");
         if(isMobile()){
-            s.addEventListener("input blur", function(){
+            let c = s.parentElement();
+            let b= document.createElement("button");
+            b.innerHTML="Aktualisieren";
+            b.addEventListener("click", function(){
                 leistungen.forEach(l=>{
                     if(l.name == s.value){
                         currentDauer=l.dauer;
@@ -227,9 +230,7 @@ function setUpLeistungsDropDown(){
                     fillDaySlots();
                 }
             })
-            document.body.addEventListener("click",()=>{
-                s.blur();
-            });
+            c.appendChild(b);
         }else{
             s.addEventListener("blur", function(){
                 leistungen.forEach(l=>{
