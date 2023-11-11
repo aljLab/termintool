@@ -421,6 +421,7 @@ form:invalid > button{
 }
 .kundeContainer button:hover{
    background-color: rgb(155, 56, 56);
+   cursor: pointer;
 }
  /*-------------------------------------Termine display styles----------------------------------*/
  #terminContainer{
