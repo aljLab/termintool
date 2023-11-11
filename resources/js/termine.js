@@ -35,23 +35,14 @@ function displayTermine(){
 }
 function makeModBox(termin){
     let div = document.createElement("div");
-    let but1= document.createElement("button");
-    let but2=document.createElement("button");
     let but3=document.createElement("button");
-    but1.innerHTML="Termin stornieren";
-    but2.innerHTML="Kunden anzeigen";
     but3.innerHTML="Termin aus Database löschen";
-    but1.addEventListener("click", (e)=>{
-        e.target.style.display = "none";
-    });
-    but2.onclick="showKunde()";
+    but3.classList.add("kundenDeleteButton");
     but3.addEventListener("click", ()=>{
         console.log(termin);
         setUpTerminModal(termin);
     });
     div.classList.add("modBox");
-    div.appendChild(but1);
-    div.appendChild(but2);
     div.appendChild(but3);
     return div;
 }
