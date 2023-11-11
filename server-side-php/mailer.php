@@ -27,8 +27,9 @@
         $mail->SMTPAuth = true;
         $mail->Username = 'naturheilpraxis.labonte@gmail.com';
         $mail->Password = getEnv('apppw');
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        $mail->XMail = "Termintool - Martina La Bonté";
 
         // Set the From address
         $mail->setFrom('naturheilpraxis.labonte@gmail.com', 'Martina La Bonté');
@@ -40,20 +41,27 @@
         $mail->isHTML(true);
         $mail->CharSet = "UTF-8";
         $mail->Subject = "Terminbestätigung $tString";
-        $mail->Body = nl2br("Terminbestätigung\n
-                Sehr geehrte/r $nameString, \n\n
-                Hiermit bestätige ich Ihnen den gebuchten Termin:\n
-                $tString.\n
-                Gebucht wurde Leistung: $leiNa ($leiPreis €).
+        $mail->Body = "
+                <div style = 'background-color:white;'>
+                    <div style ='background-color:#79c2d0;width:100%;padding:5px;text-align:center'>
+                        <strong style='font-size:16px;'>Terminbestätigung</strong><br><br>
+                    </div>
+                    <p>Sehr geehrte/r <strong>$nameString</strong>,</p>
+                    Hiermit bestätige ich Ihnen den gebuchten Termin:<br><br>
+                    <div style = 'background-color:#ccf5fb;width:100%; display:flex; align-items:center;justify-content:center;'>
+                        <p style = 'font-size:15px; margin: 5px;'>$tString.</p>
+                    </div>
+                    <p>Gebucht wurde Leistung: <em>$leiNa ($leiPreis €)</em>.</p>
 
-                Informationen und weitere Angebote finden sie auf https://martinalabonte.de
+                    <p>Informationen und weitere Angebote finden sie auf <a>https://martinalabonte.de</a></p>
 
-                Dies ist eine automatisierte Nachricht, bitte antworten sie nicht auf diese Mail.\n
-                Im Falle weiterer Fragen oder sollten Sie den Termin stornieren wollen, wenden Sie sich bitte an skymove@posteo.de.\n
-                Telefonisch erreichen Sie mich unter: (0341) 3034 384.\n
+                    <p><em>Dies ist eine automatisierte Nachricht, bitte antworten sie nicht auf diese Mail.</em><br>
+                    Im Falle weiterer Fragen oder sollten Sie den Termin stornieren wollen, wenden Sie sich bitte an skymove@posteo.de.<br>
+                    Telefonisch erreichen Sie mich unter: (0341) 3034 384.<br></p>
 
-                Wird ein Termin nicht wahrgenommen und nicht mindestens 24 Stunden vor Terminbeginn abgesagt, behalte ich mir vor, eine Ausfallgebühr von 50€ zu berechnen.
-            ");
+                    <p style='color: maroon'>Wird ein Termin nicht wahrgenommen und nicht mindestens 24 Stunden vor Terminbeginn abgesagt, behalte ich mir vor, eine Ausfallgebühr von 50€ zu berechnen.</p>
+                </div>
+            ";
 
         // Send the email
         $mail->send();
