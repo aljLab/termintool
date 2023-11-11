@@ -215,7 +215,7 @@ function isMobile() {
 function setUpLeistungsDropDown(){
     var s = document.getElementById("chooseLeistung");
         if(isMobile()){
-            let c = s.parentElement();
+            let c = s.parentElement;
             let b= document.createElement("button");
             b.innerHTML="Aktualisieren";
             b.addEventListener("click", function(){
@@ -246,7 +246,7 @@ function setUpLeistungsDropDown(){
                     fillDaySlots();
                 }
             })*/
-            let c = s.parentElement();
+            let c = s.parentElement;
             let b= document.createElement("button");
             b.innerHTML="Aktualisieren";
             b.addEventListener("click", function(){
