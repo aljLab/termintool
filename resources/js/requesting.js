@@ -35,7 +35,7 @@ function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
         prepareSubmission(terminstring);
     }
 }
-//for mobile only:
+//for mobile only: normal is below, almost exact copy
 function prepareBookingMobile(){
     //get Termin-Object (OHNE KUNDENINFO) aus session Storage!
     let f = document.getElementById("bformMobile");
@@ -86,7 +86,7 @@ function prepareBookingMobile(){
                     if(withinBusinessHours(t, bh)){
                         if(noTerminConflicts(t)){
                             box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
-                            t.kunde = new Kunde(anrede, vorname, nachname, mail, phone);
+                            t.kunde = new Kunde(anrede, sanitizeText(vorname), sanitizeText(nachname), mail.toLowerCase(), sanitizePhone(phone));
                             insertTermin(t);
                             insertKunde(t.kunde);
                             sendMail(t);
@@ -183,7 +183,7 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
                     if(withinBusinessHours(t, bh)){
                         if(noTerminConflicts(t)){
                             box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
-                            t.kunde = new Kunde(anrede, vorname, nachname, mail.toLowerCase(), phone, []);
+                            t.kunde = new Kunde(anrede, sanitizeText(vorname), sanitizeText(nachname), mail.toLowerCase(), sanitizePhone(phone));
                             insertTermin(t);
                             insertKunde(t.kunde);
                             sendMail(t);
@@ -288,6 +288,9 @@ function validMail(str){
 function sanitizePhone(str){
     let clean= str.replace(/\+49/, "0");
     clean = clean.replaceAll(/( |\.|-)/gi, "");
-    console.log(clean);
+    return clean;
+}
+function sanitizeText(str){
+    let clean = clean.replaceAll(/( |\.|-)/gi, "");
     return clean;
 }
