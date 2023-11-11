@@ -17,10 +17,10 @@ function fillKundenTabelle(){
 
         let terminBox = document.createElement("div");
         terminBox.innerHTML=formatTermine(getTermineByName(k));
-        terminBox.classList.add("infoBubble");
+        terminBox.classList.add("terminBox");
         let kundenDeleteButton = document.createElement("button");
 
-        kundenDeleteButton.innerHTML="<img size ='45px' src='resources/images/cross.png'>";
+        kundenDeleteButton.innerHTML="<img src='resources/images/cross.png'>";
         kundenDeleteButton.addEventListener("click", (e)=>{
             deleteKunde(e.target.parentNode.id, ()=>{
                     setTimeout(() => {
