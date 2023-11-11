@@ -15,7 +15,8 @@ function fillKundenTabelle(){
             col.setAttribute("class", "infoBubble");
             row.appendChild(col);        
         }
-        row.setAttribute("id", JSON.stringify(k));
+        row.id=JSON.stringify(k);
+        console.log(row.id);
         let terminBox = document.createElement("div");
         terminBox.innerHTML=formatTermine(getTermineByName(k));
         terminBox.classList.add("terminBox");
@@ -25,6 +26,7 @@ function fillKundenTabelle(){
         kundenDeleteButton.innerHTML="<img width='60px' src='resources/images/cross.png'>";
         kundenDeleteButton.addEventListener("click", (e)=>{
             deleteKunde(e.target.parentNode.id, ()=>{
+                console.log(e.target.parentNode.id);
                     setTimeout(() => {
                        window.location.reload();
                     }, 500); // Delay in milliseconds
