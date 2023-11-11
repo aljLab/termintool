@@ -19,7 +19,10 @@ function fillKundenTabelle(){
         terminBox.innerHTML=formatTermine(getTermineByName(k));
         terminBox.classList.add("infoBubble");
         let kundenDeleteButton = document.createElement("button");
-        kundenDeleteButton.innerHTML="<img href='.resources/images/cross.png'>";
+        /*let img = document.createElement("img");
+        img.src=".resources/images/cross.png";
+        img.s*/
+        kundenDeleteButton.innerHTML="<img src='.resources/images/cross.png'>";
         kundenDeleteButton.addEventListener("click", (e)=>{
             deleteKunde(e.target.parentNode.id, ()=>{
                     setTimeout(() => {
@@ -94,10 +97,8 @@ function getTermineByName(kunde){
 function formatTermine(terminArray){
     let str = 'Gebuchte Termine:<br>';
     terminArray.forEach(t=>{
-        str = str+ `${t.date}, ${t.hourValue}:${t.minuteValue} Uhr [${t.leistung}, ${t.dauer*15} min] <br>`;
+        str = str+ `${t.date}, ${t.hourValue}:${t.minuteValue} Uhr, ${t.leistung} <br>`;
     })
     return str;
 }
-function showTermine(){
 
-}
