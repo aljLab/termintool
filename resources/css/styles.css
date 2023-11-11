@@ -696,17 +696,16 @@ form:invalid > button{
         width: 90%;
         box-shadow: 0 8px 6px -6px var(--darkest-color);
     }
-    .infoBubble, .kundeContainer button, .terminBox{
+    .infoBubble, .terminBox{
         width: 95%;
         height: 25%;
         overflow-wrap: break-word;
         overflow-y: scroll;
     }
-    .dropDown:hover > div{
-        z-index: 99;
-        opacity: 1;
-        transform: translateX(-12%);
-        transition: opacity 250ms, transform 250ms;
+    .kundeContainer button{
+        width: 95%;
+        height: 80px;
+        margin: 5px;
     }
   }
  
