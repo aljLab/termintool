@@ -215,7 +215,7 @@ function isMobile() {
 function setUpLeistungsDropDown(){
     var s = document.getElementById("chooseLeistung");
         if(isMobile()){
-            s.addEventListener("touchend", function(){
+            s.addEventListener("change", function(){
                 leistungen.forEach(l=>{
                     if(l.name == s.value){
                         currentDauer=l.dauer;
