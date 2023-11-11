@@ -19,10 +19,8 @@ function fillKundenTabelle(){
         terminBox.innerHTML=formatTermine(getTermineByName(k));
         terminBox.classList.add("infoBubble");
         let kundenDeleteButton = document.createElement("button");
-        /*let img = document.createElement("img");
-        img.src=".resources/images/cross.png";
-        img.s*/
-        kundenDeleteButton.innerHTML="<img src='.resources/images/cross.png'>";
+
+        kundenDeleteButton.innerHTML="<img size ='45px' src='resources/images/cross.png'>";
         kundenDeleteButton.addEventListener("click", (e)=>{
             deleteKunde(e.target.parentNode.id, ()=>{
                     setTimeout(() => {
