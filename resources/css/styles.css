@@ -683,7 +683,7 @@ form:invalid > button{
         overflow-wrap: break-word;
         overflow-y: scroll;
     }
-    .kundeContainer button{
+    .deleteButton{
         width: 95%;
         height: 80px;
         margin: 5px;
