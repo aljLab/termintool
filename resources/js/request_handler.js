@@ -153,7 +153,7 @@ function insertKunde(kunde){//Takes Kunden-Objekt als Input und stellt POST-Requ
         console.error('Fetch error:', error);
     });
 }
-function deleteKunde(kundenString, cb){//Takes Termin-Objekt als Input und stellt POST-Request an entsprechendes server-side php-Skript
+function deleteKunde(kundenString, cb){
     fetch("./server-side-php/deleteKunde.php",{
             method:"POST",
             headers: {'Content-Type': 'application/json'},

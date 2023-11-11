@@ -4,6 +4,7 @@ function fillKundenTabelle(){
     if(window.innerWidth<767){
         adaptSideBar();
     }
+    console.log(kunden);
     fetchTermine(()=>{
     kunden.forEach(k=>{
         let row = document.createElement("div");
