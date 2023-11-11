@@ -141,7 +141,7 @@ hr{
 }
 #chooseLeistung{
     width: 60%;
-    font-size: 30px;
+    font-size: 18px;
     height: auto;
     margin: 3px;
 }
@@ -264,7 +264,10 @@ form{
 #bform{
     width: 80%;
     height: auto;
-    font-size: 25px;
+    font-size: 18px;
+}
+#bform input{
+    font-size: 18px;
 }
 #feedback{
     font-size: 20px;

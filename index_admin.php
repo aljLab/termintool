@@ -35,7 +35,7 @@
                     <a class="listItem" href="termine.php">Termine</a><br />
                     <a class="listItem" href="kunden.php">Kunden</a><br />
                     <a class="listItem" href="leistungen.php">Leistungen</a><br />
-                    <button onclick="sendMail()">Send Mail</button>
+                    <!--button onclick="sendMail()">Send Mail</button-->
             </div>
             <div id="calcontainer">
                 <div id="calnav">

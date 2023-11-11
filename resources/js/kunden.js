@@ -37,52 +37,6 @@ function fillKundenTabelle(){
 }
 
 
-/*function makeKundenModBox(kunde){
-    console.log(kunde);
-    let div = document.createElement("div");
-    div.setAttribute("class", "modBox");
-    //make dropdown-container within kundenmodbox (will be positioned relatively)
-    let dropDown = document.createElement("div");
-    dropDown.classList.add("dropDown");
-    //create div for content, fetch content, append content
-    let dropDownContent = document.createElement("div");
-    dropDownContent.id=JSON.stringify(kunde)+"termine";
-    let arr = getTermineByName(kunde);
-    if(arr.length==0){
-        dropDownContent.innerHTML= "Keine Termine gebucht.";
-    }else{
-        dropDownContent.innerHTML=formatTermine(arr);
-    }
-    
-    dropDownContent.classList.add('dropDownContent');
-    dropDown.appendChild(dropDownContent);
-
-    //ID der modBox ist der JSON-String des
-    div.id=JSON.stringify(kunde);
-    //Buttons: button 1 is within dropdown and triggers showing of dropdowncontent on hover
-    let but1=document.createElement("button");
-    let but2=document.createElement("button");
-    dropDown.appendChild(but1);
-
-    //delete-functionality on delete-Button
-    but1.addEventListener("click", (e)=>{
-        let con = document.getElementById(e.target.id+"termine");
-        con.classList.toggle("termineButtonClicked", true);
-    })
-    but2.addEventListener("click", (e)=>{
-        console.log(e.target.parentNode.id);
-        deleteKunde(e.target.parentNode.id, ()=>{
-            setTimeout(() => {
-               window.location.reload();
-            }, 500); // Delay in milliseconds
-        });
-    });
-    but1.innerHTML="Termine einsehen";
-    but2.innerHTML="Kunden entfernen";
-    div.appendChild(dropDown);
-    div.appendChild(but2);
-    return div;
-}*/
 function getTermineByName(kunde){
     let terminArray=[];
     termine.forEach(t=>{
@@ -99,5 +53,8 @@ function formatTermine(terminArray){
         str = str+ `${t.date}, ${t.hourValue}:${t.minuteValue} Uhr, ${t.leistung} <br>`;
     })
     return str;
+}
+function removeDuplicates(){//entfernt Duplikate aus dem Kunden-Array
+    
 }
 

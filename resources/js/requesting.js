@@ -183,7 +183,7 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
                     if(withinBusinessHours(t, bh)){
                         if(noTerminConflicts(t)){
                             box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
-                            t.kunde = new Kunde(anrede, vorname, nachname, mail, phone, []);
+                            t.kunde = new Kunde(anrede, vorname, nachname, mail.toLowerCase(), phone, []);
                             insertTermin(t);
                             insertKunde(t.kunde);
                             sendMail(t);
