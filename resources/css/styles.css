@@ -454,6 +454,7 @@ form:invalid > button{
     border-radius: 5px;
     width: 35%;
     height: 96%;
+    overflow-wrap: break-word;
  }
  .terminDisplay{
     background-color: var(--light-color);
