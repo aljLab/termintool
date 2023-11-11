@@ -429,6 +429,7 @@ form:invalid > button{
     background-color: lightcoral;
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
     right: 5px;
+    font-size:18px;
 }
 .deleteButton:hover{
    background-color: rgb(155, 56, 56);

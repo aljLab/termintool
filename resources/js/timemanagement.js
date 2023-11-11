@@ -54,9 +54,9 @@ function setUpBlockTermin(){
     let d = document.getElementById("startTime");
     let e = document.getElementById("endTime");
     let but = document.getElementById("blockDateSubmit");
-     //Setting up Submission action in Termine blockieren!
-     var sb = document.getElementById("blockDateSubmit");//get submitbutton
-     sb.addEventListener("click", checkTermin);
+    //Setting up Submission action in Termine blockieren!
+    var sb = document.getElementById("blockDateSubmit");//get submitbutton
+    sb.addEventListener("click", checkTermin);
 
     a.addEventListener("blur", function(e){
         changeSubmitButtonAppearance1(e, but);
@@ -243,7 +243,7 @@ function getBlockedTermin(){//returns new Termin mit den Eingabewerten der Input
     let end=f.elements.endTime.value;
     let dauer = (Number(end.split(".")[0])-Number(start.split(".")[0]))*4+(Number(end.split(".")[1])-Number(start.split(".")[1]))/15;
     if(d!==""&&m!==""&&y!==""&&start!==""&&end!==""){
-        return new Termin(start.split(".")[0], start.split(".")[1], `${d}.${m}.${y}`, "BLOCKED", dauer+1, admin);
+        return new Termin(start.split(".")[0], start.split(".")[1], `${d}.${m}.${y}`, new Leistung("BLOCKED", dauer, "--"),dauer+1, new Kunde("NEUTRUM","","ADMIN", "praxisbuero@posteo.de", "XXXXXXXXXXXX"));
     }else{
         return -1;
     }

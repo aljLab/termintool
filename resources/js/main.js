@@ -55,7 +55,7 @@ function BusinessHours(mo, di, mi, don, fr){//expects Array with timeslots
     this.don=don;//Obacht
     this.fr=fr;
 }
-function Kunde(anrede, vorname, nachname, mail, phone, termine){
+function Kunde(anrede, vorname, nachname, mail, phone){
     this.anrede = anrede;
     this.vorname=vorname;
     this.nachname=nachname;
