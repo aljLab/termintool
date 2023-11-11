@@ -288,5 +288,6 @@ function validMail(str){
 function sanitizePhone(str){
     let clean= str.replace(/\+49/, "0");
     clean = clean.replaceAll(/( |\.|-)/gi, "");
+    console.log(clean);
     return clean;
 }

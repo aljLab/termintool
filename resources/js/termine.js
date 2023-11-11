@@ -12,7 +12,7 @@ function displayTermine(){
         let div = document.createElement("div");
         let ter = document.createElement("div");
         let kun = document.createElement("div");
-        ter.innerHTML=`<h2>Termin</h2><p>${t.date}</p><p>${t.hourValue}.${t.minuteValue} Uhr</p><p>${t.leistung.name}(${t.leistung.dauer*15} min)</p><p>${(t.leistung.preis)}</p>`;
+        ter.innerHTML=`<h2>Termin</h2><p>${t.date}</p><p>${t.hourValue}.${t.minuteValue} Uhr</p><p>${t.leistung.name} (${t.leistung.dauer*15} min)</p><p>${(t.leistung.preis)}</p>`;
         kun.innerHTML=`<h2>Kunde</h2><p>${t.kunde.anrede} ${t.kunde.vorname} ${t.kunde.nachname}</p><a mailto="${t.kunde.mail}">${t.kunde.mail}</a><p>${t.kunde.phone}</p>`;
         let but3=document.createElement("button");
         but3.innerHTML="Termin aus Database löschen";
