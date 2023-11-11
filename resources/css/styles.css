@@ -696,7 +696,7 @@ form:invalid > button{
         width: 90%;
         box-shadow: 0 8px 6px -6px var(--darkest-color);
     }
-    .infoBubble{
+    .infoBubble, .kundeContainer button, .terminBox{
         width: 95%;
         height: 25%;
         overflow-wrap: break-word;
