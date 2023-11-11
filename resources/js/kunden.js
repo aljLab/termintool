@@ -16,7 +16,7 @@ function fillKundenTabelle(){
             row.appendChild(col);        
         }
         row.id=JSON.stringify(k);
-        console.log(row.id);
+        console.log("Row-id: "+row.id);
         let terminBox = document.createElement("div");
         terminBox.innerHTML=formatTermine(getTermineByName(k));
         terminBox.classList.add("terminBox");
@@ -24,6 +24,8 @@ function fillKundenTabelle(){
         kundenDeleteButton.classList.add("deleteButton");
         kundenDeleteButton.title="Kunden löschen";
         kundenDeleteButton.innerHTML="<img width='60px' src='resources/images/cross.png'>";
+        console.log("parentNode-ID: "+kundenDeleteButton.parentNode.id);
+        console.log(row.id==kundenDeleteButton.parentNode.id);
         kundenDeleteButton.addEventListener("click", (e)=>{
             deleteKunde(e.target.parentNode.id, ()=>{
                 console.log(e.target.parentNode.id);
