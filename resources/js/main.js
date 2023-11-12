@@ -10,6 +10,7 @@ var maxDays, monday = new Date(today.getFullYear(), today.getMonth(), today.getD
 var sunday = new Date(today.getFullYear(), today.getMonth(), today.getDate()+(6-convertToMoSo(today.getDay())));
 //echtzeitliches Heute
 var currentDay=today.getDate(), currentMonth=today.getMonth(), currentYear=today.getFullYear();
+var currentDate = new Date();
 //hier werden alle arrays etc. durch db anfragen gefüllt
 var termine =[]/*[new Termin("09", "30", "12.10.2023","Anamnese", 5, new Kunde("Dr.", "Aljoscha", "Lustig", "a@b.com", "017623559949", [])), 
 new Termin("11", "30", "5.10.2023", "Untersuchung", 7, new Kunde("Herr","Wolfram", "Ebert", "w.ebert@web.com", "+49 1982736475")), 
@@ -117,6 +118,14 @@ function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an 
     }
 }
 function fillDaySlots(){
+    if(today.getTime()>currentDate.getTime()+10*7*24*60*60*1000){
+        let container = document.getElementById("days");
+        let pastTenWeeks = document.createElement("div");
+        pastTenWeeks.innerHTML="Noch keine freien Termine.";
+        pastTenWeeks.classList.add("pastTenWeeks");
+        container.appendChild(pastTenWeeks);
+        return;
+    }  
     for(l=0;l<5;l++){
             let div = document.getElementById(`${bhweekdays[l]}`);
             while (div.childNodes.length > 1) {
@@ -137,9 +146,9 @@ function fillDaySlots(){
 
                         //Logic
                         if(taken(date, hour, minutes)){//wenn timeslot taken by termin -> counter um die Dauer (+1) inkrementieren
-                            d=new Date(d.getTime()+((taken(date, hour, minutes))*15*60*1000));
-                        }else if(checkFutureSlots(currentDauer, date, hour, minutes)!=false){
-                            let i = checkFutureSlots(currentDauer, date, hour, minutes);
+                            d=new Date(d.getTime()+((taken(date, hour, minutes)+1)*15*60*1000));
+                        }else if(checkFutureSlots(currentDauer+1, date, hour, minutes)!=false){
+                            let i = checkFutureSlots(currentDauer+1, date, hour, minutes);
                             d = new Date(d.getTime()+1000*60*15*i);
                         }else{
                             temp.innerHTML=`${hour}:${minutes}`;
@@ -299,6 +308,14 @@ function adaptSideBar(){
     })
 }
 function fillDaySlot(){
+    if(today.getTime()>currentDate.getTime()+10*7*24*60*60*1000){
+        let container = document.getElementById("days");
+        let pastTenWeeks = document.createElement("div");
+        pastTenWeeks.innerHTML="Noch keine freien Termine.";
+        pastTenWeeks.classList.add("pastTenWeeks");
+        container.appendChild(pastTenWeeks);
+        return;
+    }  
     c.innerHTML="";
     let bhprop = bhweekdays[convertToMoSo(today.getDay())];
     let div = document.createElement("div");
