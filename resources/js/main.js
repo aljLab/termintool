@@ -120,6 +120,7 @@ function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an 
 function fillDaySlots(){
     if(today.getTime()>currentDate.getTime()+10*7*24*60*60*1000){
         let container = document.getElementById("days");
+        container.innerHTML="";
         let pastTenWeeks = document.createElement("div");
         pastTenWeeks.innerHTML="Noch keine freien Termine.";
         pastTenWeeks.classList.add("pastTenWeeks");
@@ -310,6 +311,7 @@ function adaptSideBar(){
 function fillDaySlot(){
     if(today.getTime()>currentDate.getTime()+10*7*24*60*60*1000){
         let container = document.getElementById("days");
+        container.innerHTML="";
         let pastTenWeeks = document.createElement("div");
         pastTenWeeks.innerHTML="Noch keine freien Termine.";
         pastTenWeeks.classList.add("pastTenWeeks");
