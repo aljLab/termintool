@@ -53,7 +53,7 @@ function prepareBookingMobile(){
     zp.innerHTML=`${t.date}, ${t.hourValue}:${t.minuteValue} Uhr`;
     fillLeistungsSelectbooking(ls, t.leistung.name);
     ls.value = t.leistung.name;
-    f.addEventListener("submit", function(e){
+    f.addEventListener("submit", function(e){//Logik, die überprüft ob Eingaben korrekt waren etc. und anschließend bucht
         e.preventDefault();
         anrede = f.elements.anrede.value;
         vorname = f.elements.vorname.value;
@@ -99,6 +99,8 @@ function prepareBookingMobile(){
                             insertKunde(t.kunde);
                             sendMail(t);
                             f.reset();
+                            let buchenButton = document.getElementById("submitButtonMobile");
+                            buchenButton.style="display:none;";
                             let bb = document.getElementById("backButtonMobile");
                             bb.innerHTML="Zurück zum Kalender";
                             bb.addEventListener("click", ()=>{
@@ -209,6 +211,8 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
                             insertKunde(t.kunde);
                             sendMail(t);
                             f.reset();
+                            let buchenButton = document.getElementById("submitButton");
+                            buchenButton.style="display:none;";
                         }else{
                             box.innerHTML="Termin überschneidet sich mit bereits gebuchtem Termin!";
                         }
