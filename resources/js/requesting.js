@@ -98,6 +98,7 @@ function prepareBookingMobile(){
                             insertTermin(t);
                             insertKunde(t.kunde);
                             sendMail(t);
+                            sendMailNotification(t);
                             f.reset();
                             let buchenButton = document.getElementById("submitButtonMobile");
                             buchenButton.style="display:none;";
@@ -210,6 +211,7 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
                             insertTermin(t);
                             insertKunde(t.kunde);
                             sendMail(t);
+                            sendMailNotification(t);
                             f.reset();
                             let buchenButton = document.getElementById("submitButton");
                             buchenButton.style="display:none;";

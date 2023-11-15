@@ -218,11 +218,7 @@ function setUpNavbar(){
     w.appendChild(week);
     r.appendChild(rbutton); 
 }
-function isMobile() {
-    const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-    return regex.test(navigator.userAgent);
-}
-  
+ 
 function setUpLeistungsDropDown(){
     var s = document.getElementById("chooseLeistung");
         if(isMobile()||window.innerWidth<1366){
@@ -330,7 +326,7 @@ function fillDaySlot(){
     div.id = bhprop;
     c.appendChild(div);
     //durch timeslots für entsprechenden Wochentag loopen und Terminslots erstellen
-    let bhArray = bh[bhprop];
+    let bhArray = bh[bhprop];//bhprop ist der entsprechende Wochentag --> bArray:= die timeslots der Geschäftszeiten an einem bestimmten wochentag
     bhArray.forEach(timeslot=>{
         //pro timeslot: ein Start- (sd) und Enddatum (ed), ein Counterdatum (d)
         let sd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
@@ -421,7 +417,4 @@ function decrementDay(){
             fillDaySlot();
         }
     }
-}
-function testKundenInsertion(){
-    insertKunde(new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", []));
 }
