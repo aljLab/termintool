@@ -117,7 +117,8 @@ function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an 
         c.appendChild(a);
     }
 }
-function fillDaySlots(){
+function fillDaySlots(){//Desktop version of web page, several days on one page
+    //check if Termin not to far in the future (if past ten weeks from now, dont display timeslots)
     if(today.getTime()>currentDate.getTime()+10*7*24*60*60*1000){
         let container = document.getElementById("days");
         container.innerHTML="";
@@ -142,6 +143,7 @@ function fillDaySlots(){
                         let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;//datestring: eg. "9.7.2023"
                         let hour=d.getHours();
                         let minutes=`0${d.getMinutes()}`.slice(-2);
+
                         //HTML-Element
                         let temp=document.createElement("div");//timeslot html element
 
@@ -182,7 +184,7 @@ function checkFutureSlots(dauer, date, hourValue, minuteValue){
     }
     return false;
 }
-function taken(d, h, m){
+function taken(d, h, m){//checks if termin is starting on given Date, time and if tru: returns dauer of termin
     for(let t of termine){
         if(t.date == d&&t.hourValue==h&&t.minuteValue == m){
             return t.dauer;
@@ -339,9 +341,12 @@ function fillDaySlot(){
                 let hour=d.getHours();
                 let minutes=`0${d.getMinutes()}`.slice(-2);
                 let temp=document.createElement("div");
-                console.log(taken(date, hour, minutes));
+                
                 if(taken(date, hour, minutes)!=false){
-                    d=new Date(d.getTime()+(15*(taken(date, hour, minutes))*60*1000));
+                    d=new Date(d.getTime()+(15*(taken(date, hour, minutes)+1)*60*1000));
+                }else if(checkFutureSlots(currentDauer+1, date, hour, minutes)!=false){
+                    let i = checkFutureSlots(currentDauer+1, date, hour, minutes);
+                    d = new Date(d.getTime()+1000*60*15*i);
                 }else{
                     temp.innerHTML=`${hour}:${minutes}`;
                     temp.setAttribute("class", "timeSlot");

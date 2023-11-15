@@ -51,7 +51,7 @@
                     <div style = 'background-color:#ccf5fb;width:100%; display:flex; align-items:center;justify-content:center;'>
                         <p style = 'font-size:15px; margin: 5px;'>$tString.</p>
                     </div>
-                    <p>Gebucht wurde Leistung: <em>$leiNa ($leiPreis €)</em>.</p>
+                    <p>Gebucht wurde Leistung: <em>$leiNa ($leiPreis)</em>.</p>
 
                     <p>Informationen und weitere Angebote finden sie auf <a>https://martinalabonte.de</a></p>
 
