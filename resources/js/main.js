@@ -221,7 +221,7 @@ function setUpNavbar(){
  
 function setUpLeistungsDropDown(){
     var s = document.getElementById("chooseLeistung");
-        if(isMobile()||window.innerWidth<1366){
+        if(window.innerWidth<1366){
             let c = s.parentElement;
             let b= document.createElement("button");
             b.innerHTML="Aktualisieren";
