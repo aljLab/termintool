@@ -32,9 +32,10 @@ function deliverBooking(e){//handles click on "Buchen"...Open Modal, Set Up Func
         let m = document.getElementById("bookingbox");
         mb.style.display="block";
         m.style.display="flex";
-        let b = document.body;
-        b.style.height="100%";
-        b.style.overflow="hidden";
+        m.style.transform="translateY(0)";
+        //let b = document.body;
+        //b.style.height="100%";
+        //b.style.overflow="hidden";
         terminstring = e.id;//dd.mm.yyyy, 10:30 Uhr
         displayDateChosen();
         var select = document.getElementById("leistungsselect");
