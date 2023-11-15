@@ -697,7 +697,6 @@ form:invalid > button{
         width: 95%;
         height: 25%;
         overflow-wrap: break-word;
-        overflow-y: scroll;
     }
     .deleteButton{
         width: 95%;

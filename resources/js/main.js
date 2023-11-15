@@ -138,7 +138,7 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
                 let sd = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
                 let ed = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
                 let d = new Date(sd.getTime());
-                while(d<(new Date(ed.getTime()-((currentDauer)*15*60*1000)))){
+                while(d<=(new Date(ed.getTime()-((currentDauer)*15*60*1000)))){//solange das Counter-Date kleiner-gleich dem enddate des Timeslots - currentDauer ist
                         //initialisierungen
                         let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;//datestring: eg. "9.7.2023"
                         let hour=d.getHours();
@@ -336,7 +336,7 @@ function fillDaySlot(){
         let sd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
         let ed = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
         let d = new Date(sd.getTime());
-        while(d<(new Date(ed.getTime()-((currentDauer+1)*15*60*1000)))){
+        while(d<=(new Date(ed.getTime()-((currentDauer)*15*60*1000)))){
                 let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;
                 let hour=d.getHours();
                 let minutes=`0${d.getMinutes()}`.slice(-2);
