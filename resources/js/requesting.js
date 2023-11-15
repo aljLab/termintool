@@ -6,14 +6,13 @@ var subButton = document.getElementById("submitButton");
 var terminstring ="";
 const phoneRegExp=/(\+49|0)\d*/;
 const mailRegExp=/\w*@\w*\.\w{1,5}/;
-
-//make POST-Request
     
 
 //deliver Booking page
-function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
-    if(window.innerWidth<=767){
-        //mobile logic here
+function deliverBooking(e){//handles click on "Buchen"...Open Modal, Set Up Functionality of Booking modal
+    if(window.innerWidth<=1024){
+        //mobile logic here: store Leistung und Termin in local-storage to navigate to new page to avoid
+        //using the modal, as it is bugged on mobile in browser
         let lei = document.getElementById("chooseLeistung").value.split(":")[0];
         let leiObject;
         leistungen.forEach(l=>{
@@ -21,10 +20,13 @@ function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
                 leiObject = l;
             }
         })
+        //store termin without customer data in local storage
         let t = new Termin(e.id.split(",")[1].split(" ")[1].split(":")[0], e.id.split(",")[1].split(" ")[1].split(":")[1], e.id.split(",")[0], leiObject, leiObject.dauer, "");
         sessionStorage.setItem("termin", JSON.stringify(t));
+        //navigate to booking page for mobile phones
         window.location="mobileBooking.html";
     }else{
+        //logic for laptop
         window.scrollTo(0,0);
         let mb =document.getElementById("modalBack");
         let m = document.getElementById("bookingbox");
@@ -36,7 +38,7 @@ function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
         terminstring = e.id;//dd.mm.yyyy, 10:30 Uhr
         displayDateChosen();
         var select = document.getElementById("leistungsselect");
-        fillLeistungsSelect(select);
+        //fillLeistungsSelect(select);
         select.value = document.getElementById("chooseLeistung").value;
         prepareSubmission(terminstring);
     }
@@ -49,7 +51,7 @@ function prepareBookingMobile(){
     let zp = document.getElementById("zeitpunktMobile");
     let ls = document.getElementById("leistungsselectMobile");
     zp.innerHTML=`${t.date}, ${t.hourValue}:${t.minuteValue} Uhr`;
-    fillLeistungsSelect(ls);
+    //fillLeistungsSelect(ls);
     ls.value = t.leistung.name;
     f.addEventListener("submit", function(e){
         e.preventDefault();

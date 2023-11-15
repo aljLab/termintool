@@ -6,6 +6,10 @@ body{
     margin:0;
     inset: 0;
     background-color: rgb(206, 219, 233);
+    height: auto;
+    min-height: 100vh;
+    background-image: url("./resources/images/favicon.png");
+    background-size:cover;
 }
 :root{
     --darkest-color:#5585b5;
@@ -25,6 +29,7 @@ body{
     border: 7px solid black;
     border-radius:10px;
     width: 100%;
+    max-width: 750px;
     height: auto;
     background-color: white;
 }
