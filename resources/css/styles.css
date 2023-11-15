@@ -239,7 +239,6 @@ form{
 #bookingbox{
     position:absolute;
     z-index: 99;
-    left: 20%;
     display: none;
     justify-content: flex-start;
     top: 50px;
