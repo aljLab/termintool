@@ -40,7 +40,7 @@
         $mail->setFrom('naturheilpraxis.labonte@gmail.com', 'Martina La Bonté');
         //$mail->setSender('naturheilpraxis.labonte@gmail.com');
         // Add a recipient
-        $mail->addAddress('aljoschalabonte@rocketmail.de', "Frau Martina La Bonté");
+        $mail->addAddress('aljoschalabonte@rocketmail.com', "Frau Martina La Bonté");
 
         // Content
         $mail->isHTML(true);
