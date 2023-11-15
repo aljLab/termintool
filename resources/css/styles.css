@@ -7,7 +7,7 @@ body{
     inset: 0;
     height: auto;
     min-height: 100vh;
-    background-image: url("./resources/images/favicon.png");
+    background-image: url("../images/favicon.png");
     background-size:cover;
 }
 :root{
