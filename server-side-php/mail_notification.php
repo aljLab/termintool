@@ -20,7 +20,7 @@
     $leiPreis=$lei['preis'];
     $anrede=$kun['anrede'];
     $vorname= $kun['vorname'];
-    $nachname= $kun['nachname']
+    $nachname= $kun['nachname'];
     $mailadresse=$kun['mail'];
     $phone = $kun['phone'];
 
@@ -54,7 +54,7 @@
                     <p>Sehr geehrte Frau La Bonté,<br />
                     <strong>$nameString</strong> hat einen Termin bei Ihnen gebucht!
                     </p>
-                    <p>Kontaktieren Sie $anrede $vorname $nachname unter <a href='mailto:$mailaddresse'>$mailadresse</a> oder $phone.</p>
+                    <p>Kontaktieren Sie $anrede $vorname $nachname unter <a href='mailto:$mailadresse'>$mailadresse</a> oder $phone.</p>
                     <h3>Termin-Info</h3>
                     <div style = 'background-color:#ccf5fb;width:100%; display:flex; align-items:center;justify-content:center;'>
                         <p style = 'font-size:15px; margin: 5px;'>$tString.</p>
