@@ -32,7 +32,8 @@ function deliverBooking(e){//handles click on "Buchen"...Open Modal, Set Up Func
         let m = document.getElementById("bookingbox");
         mb.style.display="block";
         m.style.display="flex";
-        m.style.left=`${(window.innerWidth-m.offsetWidth)/2}`;
+        let leftMargin = (window.innerWidth-m.offsetWidth)/2;
+        m.style.left=leftMargin.toString();
         //let b = document.body;
         //b.style.height="100%";
         //b.style.overflow="hidden";
