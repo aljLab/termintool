@@ -28,7 +28,7 @@ body{
     border: 7px solid black;
     border-radius:10px;
     width: 100%;
-    max-width: 750px;
+    max-width: 1000px;
     height: auto;
     background-color: white;
 }
@@ -37,7 +37,11 @@ body{
     flex-direction: row;
     width: 100%;
     justify-content: end;
+    align-items: center;
     background-color: var(--darkest-color);
+}
+#favicon{
+    margin-left: 20px;
 }
 #login{
     width: 50%;
