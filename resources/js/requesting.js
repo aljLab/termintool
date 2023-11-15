@@ -38,7 +38,7 @@ function deliverBooking(e){//handles click on "Buchen"...Open Modal, Set Up Func
         terminstring = e.id;//dd.mm.yyyy, 10:30 Uhr
         displayDateChosen();
         var select = document.getElementById("leistungsselect");
-        fillLeistungsSelect(select, document.getElementById("chooseLeistung").value);
+        fillLeistungsSelectbooking(select, document.getElementById("chooseLeistung").value);
         select.value = document.getElementById("chooseLeistung").value;
         prepareSubmission(terminstring);
     }
@@ -51,7 +51,7 @@ function prepareBookingMobile(){
     let zp = document.getElementById("zeitpunktMobile");
     let ls = document.getElementById("leistungsselectMobile");
     zp.innerHTML=`${t.date}, ${t.hourValue}:${t.minuteValue} Uhr`;
-    fillLeistungsSelect(ls, t.leistung.name);
+    fillLeistungsSelectbooking(ls, t.leistung.name);
     ls.value = t.leistung.name;
     f.addEventListener("submit", function(e){
         e.preventDefault();
@@ -131,7 +131,18 @@ function getPreis(n){
         }
     }
 }
-function fillLeistungsSelect(select, value){
+function fillLeistungsSelect(select){
+    if(select!==null){
+        select.innerHTML="<option selected>--</option>";
+        leistungen.forEach(l=>{
+            let opt = document.createElement("option");
+            opt.innerHTML=`${l.name}: ${l.preis}`;
+            opt.value=`${l.name}`;
+            select.appendChild(opt);
+        })
+    }
+}
+function fillLeistungsSelectbooking(select, value){
     if(select!==null){
         //select.innerHTML="<option selected>--</option>";
         leistungen.forEach(l=>{
