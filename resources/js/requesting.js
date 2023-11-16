@@ -4,8 +4,8 @@ var hour="";
 var minute="";
 var subButton = document.getElementById("submitButton");
 var terminstring ="";
-const phoneRegExp=/(\+49|0)\d*/i;
-const mailRegExp=/[\w\d\.\-]*@\[\w\d\.\-]*\.\w{1,5}/i;
+const phoneRegExp=/(\+49|0)\d*/;
+const mailRegExp=/[\w\d\.\-]*@[\w\d\.\-]*\.\w{1,5}/;
     
 
 //deliver Booking page
