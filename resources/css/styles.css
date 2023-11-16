@@ -59,7 +59,6 @@ body{
     height: auto;
     width: 100%;
     background-color: white;
-    border: 1px solid black;
 }
 #sidebar{
     width: 200px;
@@ -105,7 +104,6 @@ hr{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid black;
     padding: 0;
     inset: 0;
 }
