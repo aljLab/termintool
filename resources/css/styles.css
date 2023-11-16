@@ -25,7 +25,7 @@ body{
 #container{
     display: flex;
     flex-direction: column;
-    box-shadow:0 0 4px 4px var(--darkest-color);
+    box-shadow:0 0 2px 2px rgba(0,0,0,0.3);
     border-radius:10px;
     width: 100%;
     max-width: 1000px;
@@ -39,6 +39,8 @@ body{
     justify-content: end;
     align-items: center;
     background-color: var(--darkest-color);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 #favicon{
     margin-left: 20px;
@@ -58,7 +60,8 @@ body{
     height: auto;
     width: 100%;
     background-color: white;
-    border: 1px solid black;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 #sidebar{
     width: 200px;
@@ -68,6 +71,7 @@ body{
     color: white;
     border: 1px solid black;
     flex-wrap:wrap;
+    border-bottom-left-radius: 10px;
 }
 hr{
     width: 80%;
@@ -103,7 +107,8 @@ hr{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /*border: 3px solid red;*/
+    border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px;
     padding: 0;
     inset: 0;
 }
@@ -212,7 +217,7 @@ hr{
     height: auto;
     max-height: 1000px;
     background-color: #7393B3;
-    box-shadow:0 0 4px 4px var(--darkest-color);
+    box-shadow:0 0 2px 2px rgba(0,0,0,0.3);
     border-radius: 15px;
     display: flex;
     flex-direction: column;
