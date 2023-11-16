@@ -25,7 +25,7 @@ body{
 #container{
     display: flex;
     flex-direction: column;
-    border: 7px solid black;
+    box-shadow:0 0 4px 4px var(--darkest-color);
     border-radius:10px;
     width: 100%;
     max-width: 1000px;
@@ -172,7 +172,6 @@ hr{
 .day{
     background-color: var(--lightest-color);
     border: 1px solid black;
-    overflow: scroll;
 }
 .timeSlot{
     color: white;
@@ -213,7 +212,7 @@ hr{
     height: auto;
     max-height: 1000px;
     background-color: #7393B3;
-    border: 3px solid black;
+    box-shadow:0 0 4px 4px var(--darkest-color);
     border-radius: 15px;
     display: flex;
     flex-direction: column;
