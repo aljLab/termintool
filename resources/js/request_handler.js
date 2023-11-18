@@ -192,6 +192,23 @@ function sendMail(termin){
         console.error('Fetch error', error);
     });
 }
+function sendMailNotification(termin){
+    fetch("./server-side-php/mail_notification.php", {
+        method:"POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(termin),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not okay.");
+        } else {
+            console.log(response);
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error', error);
+    });
+}
 function setBusinessHours(bh){//Takes Kunden-Objekt als Input und stellt POST-Request an entsprechendes server-side php-Skript
     fetch("./server-side-php/settingBh.php",{
             method:"POST",

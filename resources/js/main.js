@@ -117,7 +117,8 @@ function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an 
         c.appendChild(a);
     }
 }
-function fillDaySlots(){
+function fillDaySlots(){//Desktop version of web page, several days on one page
+    //check if Termin not to far in the future (if past ten weeks from now, dont display timeslots)
     if(today.getTime()>currentDate.getTime()+10*7*24*60*60*1000){
         let container = document.getElementById("days");
         container.innerHTML="";
@@ -137,11 +138,12 @@ function fillDaySlots(){
                 let sd = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
                 let ed = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
                 let d = new Date(sd.getTime());
-                while(d<(new Date(ed.getTime()-((currentDauer)*15*60*1000)))){
+                while(d<=(new Date(ed.getTime()-((currentDauer)*15*60*1000)))){//solange das Counter-Date kleiner-gleich dem enddate des Timeslots - currentDauer ist
                         //initialisierungen
                         let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;//datestring: eg. "9.7.2023"
                         let hour=d.getHours();
                         let minutes=`0${d.getMinutes()}`.slice(-2);
+
                         //HTML-Element
                         let temp=document.createElement("div");//timeslot html element
 
@@ -182,7 +184,7 @@ function checkFutureSlots(dauer, date, hourValue, minuteValue){
     }
     return false;
 }
-function taken(d, h, m){
+function taken(d, h, m){//checks if termin is starting on given Date, time and if tru: returns dauer of termin
     for(let t of termine){
         if(t.date == d&&t.hourValue==h&&t.minuteValue == m){
             return t.dauer;
@@ -216,14 +218,10 @@ function setUpNavbar(){
     w.appendChild(week);
     r.appendChild(rbutton); 
 }
-function isMobile() {
-    const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-    return regex.test(navigator.userAgent);
-}
-  
+ 
 function setUpLeistungsDropDown(){
     var s = document.getElementById("chooseLeistung");
-        if(isMobile()||window.innerWidth<1366){
+        if(window.innerWidth<1366){
             let c = s.parentElement;
             let b= document.createElement("button");
             b.innerHTML="Aktualisieren";
@@ -328,20 +326,23 @@ function fillDaySlot(){
     div.id = bhprop;
     c.appendChild(div);
     //durch timeslots für entsprechenden Wochentag loopen und Terminslots erstellen
-    let bhArray = bh[bhprop];
+    let bhArray = bh[bhprop];//bhprop ist der entsprechende Wochentag --> bArray:= die timeslots der Geschäftszeiten an einem bestimmten wochentag
     bhArray.forEach(timeslot=>{
         //pro timeslot: ein Start- (sd) und Enddatum (ed), ein Counterdatum (d)
         let sd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
         let ed = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
         let d = new Date(sd.getTime());
-        while(d<(new Date(ed.getTime()-((currentDauer+1)*15*60*1000)))){
+        while(d<=(new Date(ed.getTime()-((currentDauer)*15*60*1000)))){
                 let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;
                 let hour=d.getHours();
                 let minutes=`0${d.getMinutes()}`.slice(-2);
                 let temp=document.createElement("div");
-                console.log(taken(date, hour, minutes));
+                
                 if(taken(date, hour, minutes)!=false){
-                    d=new Date(d.getTime()+(15*(taken(date, hour, minutes))*60*1000));
+                    d=new Date(d.getTime()+(15*(taken(date, hour, minutes)+1)*60*1000));
+                }else if(checkFutureSlots(currentDauer+1, date, hour, minutes)!=false){
+                    let i = checkFutureSlots(currentDauer+1, date, hour, minutes);
+                    d = new Date(d.getTime()+1000*60*15*i);
                 }else{
                     temp.innerHTML=`${hour}:${minutes}`;
                     temp.setAttribute("class", "timeSlot");
@@ -416,7 +417,4 @@ function decrementDay(){
             fillDaySlot();
         }
     }
-}
-function testKundenInsertion(){
-    insertKunde(new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", []));
 }

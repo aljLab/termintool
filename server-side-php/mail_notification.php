@@ -18,6 +18,11 @@
     $tString = $objectArray['date'] . ', ' . $objectArray['hourValue'] . ':' . $objectArray['minuteValue'] . ' Uhr (' . $lei['name'] . ')';
     $leiNa=$lei['name'];
     $leiPreis=$lei['preis'];
+    $anrede=$kun['anrede'];
+    $vorname= $kun['vorname'];
+    $nachname= $kun['nachname'];
+    $mailadresse=$kun['mail'];
+    $phone = $kun['phone'];
 
     $mail = new PHPMailer(true);
 
@@ -35,31 +40,26 @@
         $mail->setFrom('naturheilpraxis.labonte@gmail.com', 'Martina La Bonté');
         //$mail->setSender('naturheilpraxis.labonte@gmail.com');
         // Add a recipient
-        $mail->addAddress($kun["mail"], $kun["anrede"]." ".$kun["vorname"]." ".$kun["nachname"]);
+        $mail->addAddress('praxisbuero@posteo.de', "Frau Martina La Bonté");
 
         // Content
         $mail->isHTML(true);
         $mail->CharSet = "UTF-8";
-        $mail->Subject = "Terminbestätigung $tString";
+        $mail->Subject = "Terminbenachrichtigung $tString";
         $mail->Body = "
                 <div style = 'background-color:white;'>
                     <div style ='background-color:#79c2d0;width:100%;padding:5px;text-align:center'>
                         <strong style='font-size:16px;'>Terminbestätigung</strong><br><br>
                     </div>
-                    <p>Sehr geehrte/r <strong>$nameString</strong>,</p>
-                    Hiermit bestätige ich Ihnen den gebuchten Termin:<br><br>
-                    <div style = 'background-color:#ccf5fb;width:100%; display:flex; align-items:center;justify-content:center;border-radius:5px;'>
+                    <p>Sehr geehrte Frau La Bonté,<br />
+                    <strong>$nameString</strong> hat einen Termin bei Ihnen gebucht!
+                    </p>
+                    <p>Kontaktieren Sie $anrede $vorname $nachname unter <a href='mailto:$mailadresse'>$mailadresse</a> oder $phone.</p>
+                    <h3>Termin-Info</h3>
+                    <div style = 'background-color:#ccf5fb;width:100%; display:flex; align-items:center;justify-content:center;'>
                         <p style = 'font-size:15px; margin: 5px;'>$tString.</p>
                     </div>
                     <p>Gebucht wurde Leistung: <em>$leiNa ($leiPreis)</em>.</p>
-
-                    <p>Informationen und weitere Angebote finden sie auf <a>https://martinalabonte.de</a></p>
-
-                    <p><em>Dies ist eine automatisierte Nachricht, bitte antworten sie nicht auf diese Mail.</em><br>
-                    Im Falle weiterer Fragen oder sollten Sie den Termin stornieren wollen, wenden Sie sich bitte an praxisbuero@posteo.de.<br>
-                    Telefonisch erreichen Sie mich unter: (0341) 3034 384.<br></p>
-
-                    <p style='color: maroon'>Wird ein Termin nicht wahrgenommen und nicht mindestens 24 Stunden vor Terminbeginn abgesagt, behalte ich mir vor, eine Ausfallgebühr von 50€ zu berechnen.</p>
                 </div>
             ";
 

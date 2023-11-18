@@ -5,15 +5,14 @@ var minute="";
 var subButton = document.getElementById("submitButton");
 var terminstring ="";
 const phoneRegExp=/(\+49|0)\d*/;
-const mailRegExp=/\w*@\w*\.\w{1,5}/;
-
-//make POST-Request
+const mailRegExp=/[\w\d\.\-]*@[\w\d\.\-]*\.\w{1,5}/;
     
 
 //deliver Booking page
-function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
-    if(window.innerWidth<=767){
-        //mobile logic here
+function deliverBooking(e){//handles click on "Buchen"...Open Modal, Set Up Functionality of Booking modal
+    if(window.innerWidth<=1024){
+        //mobile logic here: store Leistung und Termin in local-storage to navigate to new page to avoid
+        //using the modal, as it is bugged on mobile in browser
         let lei = document.getElementById("chooseLeistung").value.split(":")[0];
         let leiObject;
         leistungen.forEach(l=>{
@@ -21,22 +20,27 @@ function deliverBooking(e){//Open Modal, Set Up Functionality of Booking modal
                 leiObject = l;
             }
         })
+        //store termin without customer data in local storage
         let t = new Termin(e.id.split(",")[1].split(" ")[1].split(":")[0], e.id.split(",")[1].split(" ")[1].split(":")[1], e.id.split(",")[0], leiObject, leiObject.dauer, "");
         sessionStorage.setItem("termin", JSON.stringify(t));
+        //navigate to booking page for mobile phones
         window.location="mobileBooking.html";
     }else{
+        //logic for laptop
         window.scrollTo(0,0);
         let mb =document.getElementById("modalBack");
         let m = document.getElementById("bookingbox");
         mb.style.display="block";
         m.style.display="flex";
-        let b = document.body;
-        b.style.height="100%";
-        b.style.overflow="hidden";
+        let leftMargin = (window.innerWidth-m.offsetWidth)/2;
+        m.style.left=leftMargin.toString()+"px";
+        //let b = document.body;
+        //b.style.height="100%";
+        //b.style.overflow="hidden";
         terminstring = e.id;//dd.mm.yyyy, 10:30 Uhr
         displayDateChosen();
         var select = document.getElementById("leistungsselect");
-        fillLeistungsSelect(select);
+        fillLeistungsSelectbooking(select, document.getElementById("chooseLeistung").value);
         select.value = document.getElementById("chooseLeistung").value;
         prepareSubmission(terminstring);
     }
@@ -49,9 +53,9 @@ function prepareBookingMobile(){
     let zp = document.getElementById("zeitpunktMobile");
     let ls = document.getElementById("leistungsselectMobile");
     zp.innerHTML=`${t.date}, ${t.hourValue}:${t.minuteValue} Uhr`;
-    fillLeistungsSelect(ls);
+    fillLeistungsSelectbooking(ls, t.leistung.name);
     ls.value = t.leistung.name;
-    f.addEventListener("submit", function(e){
+    f.addEventListener("submit", function(e){//Logik, die überprüft ob Eingaben korrekt waren etc. und anschließend bucht
         e.preventDefault();
         anrede = f.elements.anrede.value;
         vorname = f.elements.vorname.value;
@@ -96,7 +100,10 @@ function prepareBookingMobile(){
                             insertTermin(t);
                             insertKunde(t.kunde);
                             sendMail(t);
+                            sendMailNotification(t);
                             f.reset();
+                            let buchenButton = document.getElementById("submitButtonMobile");
+                            buchenButton.style="display:none;";
                             let bb = document.getElementById("backButtonMobile");
                             bb.innerHTML="Zurück zum Kalender";
                             bb.addEventListener("click", ()=>{
@@ -137,6 +144,19 @@ function fillLeistungsSelect(select){
             opt.innerHTML=`${l.name}: ${l.preis}`;
             opt.value=`${l.name}`;
             select.appendChild(opt);
+        })
+    }
+}
+function fillLeistungsSelectbooking(select, value){
+    if(select!==null){
+        //select.innerHTML="<option selected>--</option>";
+        leistungen.forEach(l=>{
+            if(l.name==value){
+                let opt = document.createElement("option");
+                opt.innerHTML=`${l.name}: ${l.preis}`;
+                opt.value=`${l.name}`;
+                select.appendChild(opt);
+            }
         })
     }
 }
@@ -193,7 +213,10 @@ function prepareSubmission(terminstring){//Adding eventlistener to button which 
                             insertTermin(t);
                             insertKunde(t.kunde);
                             sendMail(t);
+                            sendMailNotification(t);
                             f.reset();
+                            let buchenButton = document.getElementById("submitButton");
+                            buchenButton.style="display:none;";
                         }else{
                             box.innerHTML="Termin überschneidet sich mit bereits gebuchtem Termin!";
                         }
