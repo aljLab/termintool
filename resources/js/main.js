@@ -122,7 +122,7 @@ function fillDaySlots(){
         let container = document.getElementById("days");
         container.innerHTML="";
         let pastTenWeeks = document.createElement("div");
-        pastTenWeeks.innerHTML="Noch keine freien Termine.";
+        pastTenWeeks.innerHTML="<p>Noch keine freien Termine.</p>";
         pastTenWeeks.classList.add("pastTenWeeks");
         container.appendChild(pastTenWeeks);
         return;
@@ -313,7 +313,7 @@ function fillDaySlot(){
         let container = document.getElementById("days");
         container.innerHTML="";
         let pastTenWeeks = document.createElement("div");
-        pastTenWeeks.innerHTML="Noch keine freien Termine.";
+        pastTenWeeks.innerHTML="<p>Noch keine freien Termine.</p>";
         pastTenWeeks.classList.add("pastTenWeeks");
         container.appendChild(pastTenWeeks);
         return;

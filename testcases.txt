@@ -1,0 +1,12 @@
+Testcases TT:
+• Termine
+	- Buchung:
+		- Termin beginnt an bh
+		- Termin endet an Beginn bh
+		- T überlappt grenze bh
+		- T liegt in 
+	- fetch/display
+	- 
+• Mailing
+• Browser-comp.
+• Device-comp.

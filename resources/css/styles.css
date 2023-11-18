@@ -284,6 +284,9 @@ form{
     width: 100%;
     height: 30px;
 }
+.pastTenWeeks > p{
+    margin: 5px;
+}
 /*-------------------------------------Zeitmanagement-----------------------------------*/
 #timecontainer{
     width: 100%;

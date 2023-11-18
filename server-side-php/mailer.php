@@ -48,7 +48,7 @@
                     </div>
                     <p>Sehr geehrte/r <strong>$nameString</strong>,</p>
                     Hiermit bestätige ich Ihnen den gebuchten Termin:<br><br>
-                    <div style = 'background-color:#ccf5fb;width:100%; display:flex; align-items:center;justify-content:center;'>
+                    <div style = 'background-color:#ccf5fb;width:100%; display:flex; align-items:center;justify-content:center;border-radius:5px;'>
                         <p style = 'font-size:15px; margin: 5px;'>$tString.</p>
                     </div>
                     <p>Gebucht wurde Leistung: <em>$leiNa ($leiPreis €)</em>.</p>
