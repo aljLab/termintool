@@ -70,11 +70,6 @@ function FerienZeit(d1, d2){
         let date1=new Date(d1.split(".")[2], (d1.split(".")[1])-1,d1.split(".")[0]);
         let date2=new Date(d2.split(".")[2], (d2.split(".")[1])-1, d2.split(".")[0]);
         let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, datestr.split(".")[0]);
-        console.log(date1.toLocaleString());
-        console.log(date2.toLocaleString());
-        console.log(compDate.toLocaleString())
-        console.log(date1 <= compDate);
-        console.log(compDate.getTime()<=date2.getTime());
         return (date1.getTime() <= compDate.getTime())&&(compDate.getTime()<=date2.getTime());
     }
 }
@@ -144,7 +139,7 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
         return;
     } 
     for(l=0;l<5;l++){
-        //check if Ferienzeiten are not 
+        //check if datum in Ferien
             let compareDateString= `${monday.getDate()+l}.${monday.getMonth()+1}.${monday.getFullYear()}`;
             let available = true;
             ferienZeiten.forEach(fz=>{
@@ -203,6 +198,7 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
                 let ferienSpan = document.createElement("div");
                 ferienSpan.innerHTML = "<p>Datum liegt innerhalb der Betriebsferien.</p>";
                 ferienSpan.classList.add("ferien-span-message");
+                div.appendChild(ferienSpan);
             }
         }
 }
@@ -352,7 +348,6 @@ function fillDaySlot(){
         return;
     }
     ferienZeiten.forEach(fz=>{
-        console.log(fz);
         if(fz.checkIfWithin(compareDateString)){
             let container = document.getElementById("days");
             container.innerHTML="";
