@@ -156,6 +156,9 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
                 let date1=new Date(fz.d1.split(".")[2], (fz.d1.split(".")[1])-1,fz.d1.split("."[0]));
                 let date2=new Date(fz.d2.split(".")[2], (fz.d2.split(".")[1])-1, fz.d2.split("."[0]));
                 let compDate= new Date(compareDateString.split(".")[2], compareDateString.split(".")[1]-1, compareDateString.split("."[0]));
+                console.log(date1);
+                console.log(date2);
+                console.log(compDate);
             });
             if(available){
                 let div = document.getElementById(`${bhweekdays[l]}`);
