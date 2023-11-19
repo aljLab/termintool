@@ -275,7 +275,7 @@ form{
     width: 100%;
     height: 30px;
 }
-.pastTenWeeks > p{
+.pastTenWeeks > p, .ferien-span-message> p{
     margin: 5px;
 }
 /*-------------------------------------Zeitmanagement-----------------------------------*/
