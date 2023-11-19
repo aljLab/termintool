@@ -69,7 +69,7 @@ function FerienZeit(d1, d2){
     this.checkIfWithin=(datestr)=>{
         let date1=new Date(d1.split(".")[2], (d1.split(".")[1])-1,d1.split("."[0]));
         let date2=new Date(d2.split(".")[2], (d2.split(".")[1])-1, d2.split("."[0]));
-        let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, date.split("."[0]));
+        let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, datestr.split("."[0]));
         console.log(datestr.split("."));
         console.log(d1.split("."));
         console.log(d2.split("."));
@@ -155,7 +155,7 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
                 }
                 let date1=new Date(fz.d1.split(".")[2], (fz.d1.split(".")[1])-1,fz.d1.split("."[0]));
                 let date2=new Date(fz.d2.split(".")[2], (fz.d2.split(".")[1])-1, fz.d2.split("."[0]));
-                let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, date.split("."[0]));
+                let compDate= new Date(compareDateString.split(".")[2], compareDateString.split(".")[1]-1, compareDateString.split("."[0]));
             });
             if(available){
                 let div = document.getElementById(`${bhweekdays[l]}`);
