@@ -146,13 +146,16 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
     } 
     for(l=0;l<5;l++){
         //check if Ferienzeiten are not 
-            let compareDateString= `${monday.getFullYear()}.${monday.getMonth()}.${monday.getDate()+1}`;
+            let compareDateString= `${monday.getDate()+l}.${monday.getMonth()}.${monday.getFullYear()}`;
             let available = true;
             ferienZeiten.forEach(fz=>{
                 console.log(fz); 
                 if(fz.checkIfWithin(compareDateString)){
                     available = false;
                 }
+                let date1=new Date(fz.d1.split(".")[2], (fz.d1.split(".")[1])-1,fz.d1.split("."[0]));
+                let date2=new Date(fz.d2.split(".")[2], (fz.d2.split(".")[1])-1, fz.d2.split("."[0]));
+                let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, date.split("."[0]));
             });
             if(available){
                 let div = document.getElementById(`${bhweekdays[l]}`);
