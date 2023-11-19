@@ -268,7 +268,7 @@ form{
 #feedback{
     font-size: 20px;
 }
-.pastTenWeeks{
+.pastTenWeeks, .ferien-span-message{
     background-color: var(--light-color);
     font-size: 18px;
     text-align: center;

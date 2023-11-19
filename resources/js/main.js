@@ -26,6 +26,7 @@ const leistungen=[
 var bh= new BusinessHours(["-"],["-"],["-"],["-"],["-"]);
 const kunden =[];//[new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", []), new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", [])];
 const bhweekdays =["mo", "di", "mi", "don", "fr"];
+const ferienZeiten=[new FerienZeit("21.12.2023", "4.1.2023")]; 
 var currentDauer = 4;
 const imageRefs=["/termintool/resources/images/calendar-blank-icon.svg", "/termintool/resources/images/clock-line-icon.svg","/termintool/resources/images/diary-icon.svg","/termintool/resources/images/boys-icon.svg","/termintool/resources/images/service-provider-icon.svg"];
 /*------------------------------------------Konstruktoren--------------------------------------------*/
@@ -62,7 +63,14 @@ function Kunde(anrede, vorname, nachname, mail, phone){
     this.mail=mail;
     this.phone=phone;
 }
-
+function FerienZeit(d1, d2){
+    this.d1= new Date(Number(d1.split(".")[2]), Number(d1.split(".")[1]), Number(d1.split("."[0])));
+    this.d2= new Date(Number(d2.split(".")[2]), Number(d2.split(".")[1]), Number(d2.split("."[0])));
+    this.checkIfWithin=(datestr)=>{
+        let compDate= new Date(Number(datestr.split(".")[2]), Number(datestr.split(".")[1]), Number(date.split("."[0])));
+        return d1 <= compDate <=d2;
+    }
+}
 /*------------------------Index Page handling------------------------------*/
 function setUp(){
     if(window.innerWidth<=767){
@@ -119,7 +127,7 @@ function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an 
 }
 function fillDaySlots(){//Desktop version of web page, several days on one page
     //check if Termin not to far in the future (if past ten weeks from now, dont display timeslots)
-    if(today.getTime()>currentDate.getTime()+10*7*24*60*60*1000){
+    if(today.getTime()>currentDate.getTime()+8*7*24*60*60*1000){
         let container = document.getElementById("days");
         container.innerHTML="";
         let pastTenWeeks = document.createElement("div");
@@ -127,49 +135,66 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
         pastTenWeeks.classList.add("pastTenWeeks");
         container.appendChild(pastTenWeeks);
         return;
-    }  
+    } 
     for(l=0;l<5;l++){
-            let div = document.getElementById(`${bhweekdays[l]}`);
-            while (div.childNodes.length > 1) {
-                div.removeChild(div.lastChild);
-            }
-            let bhArray=bh[bhweekdays[l]];
-            bhArray.forEach(timeslot=>{
-                let sd = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
-                let ed = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
-                let d = new Date(sd.getTime());
-                while(d<=(new Date(ed.getTime()-((currentDauer)*15*60*1000)))){//solange das Counter-Date kleiner-gleich dem enddate des Timeslots - currentDauer ist
-                        //initialisierungen
-                        let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;//datestring: eg. "9.7.2023"
-                        let hour=d.getHours();
-                        let minutes=`0${d.getMinutes()}`.slice(-2);
+            let compareDateString= `${monday.getFullYear()}.${monday.getMonth()}.${monday.getDate()+1}`;
+            let available = true;
+            ferienZeiten.forEach(fz=>{
+                if(fz.checkIfWithin(compareDateString)){
+                    available = false;
+                }
+            });
+            if(available){
+                let div = document.getElementById(`${bhweekdays[l]}`);
+                while (div.childNodes.length > 1) {
+                    div.removeChild(div.lastChild);
+                }
+                let bhArray=bh[bhweekdays[l]];
+                bhArray.forEach(timeslot=>{
+                    let sd = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
+                    let ed = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l, timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
+                    let d = new Date(sd.getTime());
+                    while(d<=(new Date(ed.getTime()-((currentDauer)*15*60*1000)))){//solange das Counter-Date kleiner-gleich dem enddate des Timeslots - currentDauer ist
+                            //initialisierungen
+                            let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;//datestring: eg. "9.7.2023"
+                            let hour=d.getHours();
+                            let minutes=`0${d.getMinutes()}`.slice(-2);
 
-                        //HTML-Element
-                        let temp=document.createElement("div");//timeslot html element
+                            //HTML-Element
+                            let temp=document.createElement("div");//timeslot html element
 
-                        //Logic
-                        if(taken(date, hour, minutes)){//wenn timeslot taken by termin -> counter um die Dauer (+1) inkrementieren
-                            d=new Date(d.getTime()+((taken(date, hour, minutes)+1)*15*60*1000));
-                        }else if(checkFutureSlots(currentDauer+1, date, hour, minutes)!=false){
-                            let i = checkFutureSlots(currentDauer+1, date, hour, minutes);
-                            d = new Date(d.getTime()+1000*60*15*i);
-                        }else{
-                            temp.innerHTML=`${hour}:${minutes}`;
-                            temp.setAttribute("class", "timeSlot");
-                            if(window.location.pathname==="/termintool/index.html"){
-                                let sel = document.getElementById("chooseLeistung");
-                                temp.classList.toggle("invalidTimeSlot", sel.value === "--");
-                                temp.setAttribute("onclick","deliverBooking(this)");
+                            //Logic
+                            if(taken(date, hour, minutes)){//wenn timeslot taken by termin -> counter um die Dauer (+1) inkrementieren
+                                d=new Date(d.getTime()+((taken(date, hour, minutes)+1)*15*60*1000));
+                            }else if(checkFutureSlots(currentDauer+1, date, hour, minutes)!=false){
+                                let i = checkFutureSlots(currentDauer+1, date, hour, minutes);
+                                d = new Date(d.getTime()+1000*60*15*i);
+                            }else{
+                                temp.innerHTML=`${hour}:${minutes}`;
+                                temp.setAttribute("class", "timeSlot");
+                                if(window.location.pathname==="/termintool/index.html"){
+                                    let sel = document.getElementById("chooseLeistung");
+                                    temp.classList.toggle("invalidTimeSlot", sel.value === "--");
+                                    temp.setAttribute("onclick","deliverBooking(this)");
+                                }
+                                temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
+                                if(pastToday(d)){
+                                    div.appendChild(temp);
+                                }
+                                d = new Date(d.getTime()+(15*60*1000));
                             }
-                            temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
-                            if(pastToday(d)){
-                                div.appendChild(temp);
-                            }
-                            d = new Date(d.getTime()+(15*60*1000));
-                        }
+                    }
+                });
+            }else{//Falls in den Ferien
+                let div = document.getElementById(`${bhweekdays[l]}`);
+                while (div.childNodes.length > 1) {
+                    div.removeChild(div.lastChild);
+                }
+                let ferienSpan = document.createElement("div");
+                ferienSpan.innerHTML = "Datum liegt innerhalb der Betriebsferien.";
+                ferienSpan.classList.add("ferien-span-message");
             }
-        });
-    }
+        }
 }
 function checkFutureSlots(dauer, date, hourValue, minuteValue){
     let h = hourValue;let m=minuteValue;
@@ -307,7 +332,7 @@ function adaptSideBar(){
     })
 }
 function fillDaySlot(){
-    if(today.getTime()>currentDate.getTime()+10*7*24*60*60*1000){
+    if(today.getTime()>currentDate.getTime()+8*7*24*60*60*1000){
         let container = document.getElementById("days");
         container.innerHTML="";
         let pastTenWeeks = document.createElement("div");
