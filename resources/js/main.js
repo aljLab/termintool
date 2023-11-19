@@ -64,8 +64,8 @@ function Kunde(anrede, vorname, nachname, mail, phone){
     this.phone=phone;
 }
 function FerienZeit(d1, d2){
-    this.d1= new Date(Number(d1.split(".")[2]), Number(d1.split(".")[1]), Number(d1.split("."[0])));
-    this.d2= new Date(Number(d2.split(".")[2]), Number(d2.split(".")[1]), Number(d2.split("."[0])));
+    this.d1= new Date(Number(d1.split(".")[2]), Number(d1.split(".")[1])-1, Number(d1.split("."[0])));
+    this.d2= new Date(Number(d2.split(".")[2]), Number(d2.split(".")[1])-1, Number(d2.split("."[0])));
     this.checkIfWithin=(datestr)=>{
         let compDate= new Date(Number(datestr.split(".")[2]), Number(datestr.split(".")[1]), Number(date.split("."[0])));
         return (d1 <= compDate)&&( compDate<=d2);
