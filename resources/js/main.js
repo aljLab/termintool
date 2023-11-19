@@ -71,7 +71,7 @@ function FerienZeit(d1, d2){
         let date2=new Date(d2.split(".")[2], (d2.split(".")[1])-1, d2.split("."[0]));
         let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, date.split("."[0]));
         console.log(datestr.split("."));
-        cosole.log(d1.split("."));
+        console.log(d1.split("."));
         console.log(d2.split("."));
         console.log(date1);
         console.log(date2);
