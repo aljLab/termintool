@@ -141,7 +141,7 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
     } 
     for(l=0;l<5;l++){
         //check if Ferienzeiten are not 
-            let compareDateString= `${monday.getDate()+l}.${monday.getMonth()}.${monday.getFullYear()}`;
+            let compareDateString= `${monday.getDate()+l}.${monday.getMonth()+1}.${monday.getFullYear()}`;
             let available = true;
             ferienZeiten.forEach(fz=>{
                 console.log(fz); 
