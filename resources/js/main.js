@@ -70,6 +70,7 @@ function FerienZeit(d1, d2){
         let date1=new Date(d1.split(".")[2], (d1.split(".")[1])-1,d1.split(".")[0]);
         let date2=new Date(d2.split(".")[2], (d2.split(".")[1])-1, d2.split(".")[0]);
         let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, datestr.split("."[0]));
+        console.log("(date1 <= compDate)&&(compDate<=date2): "+(date1 <= compDate)&&(compDate<=date2));
         return (date1 <= compDate)&&(compDate<=date2);
     }
 }
@@ -144,6 +145,7 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
             let available = true;
             ferienZeiten.forEach(fz=>{
                 console.log(fz); 
+                console.log("Date to test: "+compareDateString)
                 if(fz.checkIfWithin(compareDateString)){
                     available = false;
                 }
