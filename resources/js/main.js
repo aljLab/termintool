@@ -350,6 +350,8 @@ function fillDaySlot(){
     let compareDateString= `${today.getDate()}.${today.getMonth()+1}.${today.getFullYear()}`;
     ferienZeiten.forEach(fz=>{
         if(fz.checkIfWithin(compareDateString)){
+            console.log(`today: ${today}`);
+            console.log(fz);
             let container = document.getElementById("days");
             container.innerHTML="";
             let ferienSpan = document.createElement("div");
