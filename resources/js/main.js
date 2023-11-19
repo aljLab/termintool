@@ -358,57 +358,58 @@ function fillDaySlot(){
             ferienSpan.innerHTML="<p>Datum liegt innerhalb der Betriebsferien.</p>";
             ferienSpan.classList.add("ferien-span-message");
             container.appendChild(ferienSpan);
-            return;
-        }
-    });
-    c.innerHTML="";
-    let bhprop = bhweekdays[convertToMoSo(today.getDay())];
-    let div = document.createElement("div");
-    div.style.width="100%";
-    div.style.display="flex";
-    div.style.flexDirection="column";
-    div.style.alignItems="center";
-    div.id = bhprop;
-    c.appendChild(div);
-    //durch timeslots für entsprechenden Wochentag loopen und Terminslots erstellen
-    let bhArray = bh[bhprop];//bhprop ist der entsprechende Wochentag --> bArray:= die timeslots der Geschäftszeiten an einem bestimmten wochentag
-    bhArray.forEach(timeslot=>{
-        //pro timeslot: ein Start- (sd) und Enddatum (ed), ein Counterdatum (d)
-        let sd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
-        let ed = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
-        let d = new Date(sd.getTime());
-        while(d<=(new Date(ed.getTime()-((currentDauer)*15*60*1000)))){
-                let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;
-                let hour=d.getHours();
-                let minutes=`0${d.getMinutes()}`.slice(-2);
-                let temp=document.createElement("div");
-                
-                if(taken(date, hour, minutes)!=false){
-                    d=new Date(d.getTime()+(15*(taken(date, hour, minutes)+1)*60*1000));
-                }else if(checkFutureSlots(currentDauer+1, date, hour, minutes)!=false){
-                    let i = checkFutureSlots(currentDauer+1, date, hour, minutes);
-                    d = new Date(d.getTime()+1000*60*15*i);
-                }else{
-                    temp.innerHTML=`${hour}:${minutes}`;
-                    temp.setAttribute("class", "timeSlot");
-                    if(window.location.pathname==="/termintool/index.html"){
-                        let sel = document.getElementById("chooseLeistung");
-                        temp.classList.toggle("invalidTimeSlot", sel.value === "--");
-                        temp.setAttribute("onclick","deliverBooking(this)");
+        }else{
+            c.innerHTML="";
+            let bhprop = bhweekdays[convertToMoSo(today.getDay())];
+            let div = document.createElement("div");
+            div.style.width="100%";
+            div.style.display="flex";
+            div.style.flexDirection="column";
+            div.style.alignItems="center";
+            div.id = bhprop;
+            c.appendChild(div);
+            //durch timeslots für entsprechenden Wochentag loopen und Terminslots erstellen
+            let bhArray = bh[bhprop];//bhprop ist der entsprechende Wochentag --> bArray:= die timeslots der Geschäftszeiten an einem bestimmten wochentag
+            bhArray.forEach(timeslot=>{
+                //pro timeslot: ein Start- (sd) und Enddatum (ed), ein Counterdatum (d)
+                let sd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[0].split(".")[0], timeslot.split("-")[0].split(".")[1]);
+                let ed = new Date(today.getFullYear(), today.getMonth(), today.getDate(), timeslot.split("-")[1].split(".")[0], timeslot.split("-")[1].split(".")[1]);
+                let d = new Date(sd.getTime());
+                while(d<=(new Date(ed.getTime()-((currentDauer)*15*60*1000)))){
+                        let date= `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;
+                        let hour=d.getHours();
+                        let minutes=`0${d.getMinutes()}`.slice(-2);
+                        let temp=document.createElement("div");
+                        
+                        if(taken(date, hour, minutes)!=false){
+                            d=new Date(d.getTime()+(15*(taken(date, hour, minutes)+1)*60*1000));
+                        }else if(checkFutureSlots(currentDauer+1, date, hour, minutes)!=false){
+                            let i = checkFutureSlots(currentDauer+1, date, hour, minutes);
+                            d = new Date(d.getTime()+1000*60*15*i);
+                        }else{
+                            temp.innerHTML=`${hour}:${minutes}`;
+                            temp.setAttribute("class", "timeSlot");
+                            if(window.location.pathname==="/termintool/index.html"){
+                                let sel = document.getElementById("chooseLeistung");
+                                temp.classList.toggle("invalidTimeSlot", sel.value === "--");
+                                temp.setAttribute("onclick","deliverBooking(this)");
+                            }
+                            temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
+                            if(pastToday(d)){div.appendChild(temp);}
+                            d = new Date(d.getTime()+(15*60*1000));
+                        }
                     }
-                    temp.setAttribute("id", `${date}, ${hour}:${minutes} Uhr`);//Format: 'dd.mm.yyyy, 10:30 Uhr'
-                    if(pastToday(d)){div.appendChild(temp);}
-                    d = new Date(d.getTime()+(15*60*1000));
+                });
+                if(div.innerHTML===""){
+                    let s = document.createElement("span");
+                    s.innerHTML="Keine verfügbaren Termine.";
+                    s.style.fontSize="20px";
+                    s.style.margin='5px';
+                    div.appendChild(s);
                 }
-            }
-        });
-        if(div.innerHTML===""){
-            let s = document.createElement("span");
-            s.innerHTML="Keine verfügbaren Termine.";
-            s.style.fontSize="20px";
-            s.style.margin='5px';
-            div.appendChild(s);
-        }
+                }
+    });
+    
 }
 function setUpNavbarSmartphone(){
     //get Divs from HTMl file
