@@ -68,7 +68,7 @@ function FerienZeit(d1, d2){
     this.d2= new Date(Number(d2.split(".")[2]), Number(d2.split(".")[1]), Number(d2.split("."[0])));
     this.checkIfWithin=(datestr)=>{
         let compDate= new Date(Number(datestr.split(".")[2]), Number(datestr.split(".")[1]), Number(date.split("."[0])));
-        return d1 <= compDate <=d2;
+        return (d1 <= compDate)&&( compDate<=d2);
     }
 }
 /*------------------------Index Page handling------------------------------*/
@@ -137,9 +137,11 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
         return;
     } 
     for(l=0;l<5;l++){
+        //check if Ferienzeiten are not 
             let compareDateString= `${monday.getFullYear()}.${monday.getMonth()}.${monday.getDate()+1}`;
             let available = true;
             ferienZeiten.forEach(fz=>{
+                console.log(fz); 
                 if(fz.checkIfWithin(compareDateString)){
                     available = false;
                 }
@@ -191,7 +193,7 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
                     div.removeChild(div.lastChild);
                 }
                 let ferienSpan = document.createElement("div");
-                ferienSpan.innerHTML = "Datum liegt innerhalb der Betriebsferien.";
+                ferienSpan.innerHTML = "<p>Datum liegt innerhalb der Betriebsferien.</p>";
                 ferienSpan.classList.add("ferien-span-message");
             }
         }
@@ -340,7 +342,19 @@ function fillDaySlot(){
         pastTenWeeks.classList.add("pastTenWeeks");
         container.appendChild(pastTenWeeks);
         return;
-    }  
+    }
+    ferienZeiten.forEach(fz=>{
+        console.log(fz);
+        if(fz.checkIfWithin(compareDateString)){
+            let container = document.getElementById("days");
+            container.innerHTML="";
+            let ferienSpan = document.createElement("div");
+            ferienSpan.innerHTML="<p>Datum liegt innerhalb der Betriebsferien.</p>";
+            ferienSpan.classList.add("ferien-span-message");
+            container.appendChild(ferienSpan);
+            return;
+        }
+    });
     c.innerHTML="";
     let bhprop = bhweekdays[convertToMoSo(today.getDay())];
     let div = document.createElement("div");
