@@ -70,7 +70,7 @@ function FerienZeit(d1, d2){
         let date1=new Date(d1.split(".")[2], (d1.split(".")[1])-1,d1.split(".")[0]);
         let date2=new Date(d2.split(".")[2], (d2.split(".")[1])-1, d2.split(".")[0]);
         let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, datestr.split(".")[0]);
-        return (date1.getTime() <= compDate.getTime())&&(compDate.getTime()<=date2.getTime());
+        return (date1.getTime() <= compDate.getTime())&&(compDate.getTime()<date2.getTime());
     }
 }
 /*------------------------Index Page handling------------------------------*/
