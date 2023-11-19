@@ -347,6 +347,7 @@ function fillDaySlot(){
         container.appendChild(pastTenWeeks);
         return;
     }
+    let compareDateString= `${today.getDate()}.${today.getMonth()+1}.${today.getFullYear()}`;
     ferienZeiten.forEach(fz=>{
         if(fz.checkIfWithin(compareDateString)){
             let container = document.getElementById("days");
