@@ -96,13 +96,7 @@
                     </div>
                 <div class= "ferien-zeiten-container">
                     <div id="ferien-zeiten-display">
-                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
-                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
-                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
-                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
-                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
-                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
-                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
+                        
                     </div>
                     <div id= "ferien-zeiten-form">
                         <form action="">

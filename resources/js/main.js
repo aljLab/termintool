@@ -78,6 +78,10 @@ function setUp(){
     if(window.innerWidth<=767){
         Promise.all([fetchKunden(), fetchTermine(), fetchFerienZeiten(), fetchBusinessHours()])
         .then(()=>{
+            console.log(kunden);
+            console.log(termine);
+            console.log(ferienZeiten);
+            console.log(bh);
             setUpNavbarSmartphone();
             fillDaySlot();
             var sel = document.getElementById("chooseLeistung");
@@ -87,6 +91,10 @@ function setUp(){
     }else{
         Promise.all([fetchKunden(), fetchTermine(), fetchFerienZeiten(), fetchBusinessHours()])
         .then(()=>{
+            console.log(kunden);
+            console.log(termine);
+            console.log(ferienZeiten);
+            console.log(bh);
             setUpNavbar();
             setUpDays();
             fillDaySlots();
@@ -103,16 +111,22 @@ function setUpCalendar(){
         console.log("Smartphone set up finished.");*/
         adaptSideBar();
         setUpNavbarSmartphone();
-        Promise(fetchBusinessHours()).then(()=>{
+        fetchBusinessHours().then(()=>{
             fillDaySlot();
+        })
+        .catch(error => {
+            console.error('Error fetching business hours:', error);
         });
     }else{
         /*fetchTermine(setUpDays);
         fetchKunden();*/
         setUpNavbar();
         setUpDays();
-        Promise.all(fetchBusinessHours()).then(()=>{
+        fetchBusinessHours().then(()=>{
             fillDaySlots();
+        })
+        .catch(error => {
+            console.error('Error fetching business hours:', error);
         });
     }
 }
