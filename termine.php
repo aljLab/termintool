@@ -20,7 +20,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Termintool</title>
     </header>
-    <body onload="fetchTermine(displayTermine)">
+    <body onload="displayTermine()">
     <div id="back">
         <div id="container">
         <div id="navbar">

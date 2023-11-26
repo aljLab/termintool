@@ -19,7 +19,7 @@
         console.error('Fetch error', error);
     });
 }*/
-function fetchTermine(callback) {
+function fetchTermine() {
     fetch('./server-side-php/termin_handle.php')
         .then(response => {
             if (!response.ok) {
@@ -33,13 +33,13 @@ function fetchTermine(callback) {
             data.forEach(obj=>{
                 orderInAsc(JSON.parse(obj.termin));
             })
-            callback();
+            //callback();
         })
         .catch(error => {
             console.error('Fetch error', error);
         });
 }
-function fetchKunden(callback){
+function fetchKunden(){
     fetch('./server-side-php/kunden_handle.php')
     .then(response =>{
         if(!response.ok){
@@ -52,7 +52,7 @@ function fetchKunden(callback){
         data.forEach(e=>{
             kunden.push(JSON.parse(e.kunde));
         })
-        callback();
+        //callback();
     })
     .catch(error=>{
         console.error('Fetch error', error);
@@ -61,7 +61,7 @@ function fetchKunden(callback){
 function fetchLeistungen(){
 
 }
-function fetchBusinessHours(callback){
+function fetchBusinessHours(){
         fetch('./server-side-php/bh_handle.php')
             .then(response => {
                 if (!response.ok) {
@@ -74,13 +74,32 @@ function fetchBusinessHours(callback){
                 //{bh: JSON-String}
                 data.forEach(obj=>{
                     bh = JSON.parse(obj.bh);
-                    console.log(bh);
                 })
-                callback();
+                //callback();
             })
             .catch(error => {
                 console.error('Fetch error', error);
             });
+}
+function fetchFerienZeiten(){
+    fetch('./server-side-php/fz_handle.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not okay.");
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            //{bh: JSON-String}
+            data.forEach(obj=>{
+                ferienZeiten = JSON.parse(obj.bh);
+            })
+            //callback();
+        })
+        .catch(error => {
+            console.error('Fetch error', error);
+        });
 }
 
 /*----------------------------pushing-------------------------------*/
@@ -230,4 +249,49 @@ function setBusinessHours(bh){//Takes Kunden-Objekt als Input und stellt POST-Re
         console.error('Fetch error:', error);
     });
 }
+function setFerienZeiten(fzObject){
+    fetch("./server-side-php/setFz.php", 
+    {
+        method: "POST", 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(fzObject)
+    })
+    .then(function(responsetext){
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(function(responsetext) {
+        // Handle the response from the server
+        console.log(responsetext);
+    })
+    .catch(function(error){
+        // Handle any errors that occurred during the fetch
+        console.error('Fetch error:', error);
+    });
+}
+function deleteFz(fzstr){
+    fetch("./server-side-php/delete_ferienzeit.php", 
+    {
+        method: "POST", 
+        headers: {'Content-Type': 'application/json'},
+        body: fzstr
+    })
+    .then(function(responsetext){
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(function(responsetext) {
+        // Handle the response from the server
+        console.log(responsetext);
+    })
+    .catch(function(error){
+        // Handle any errors that occurred during the fetch
+        console.error('error: fz not deleted', error);
+    });
+}
+
 

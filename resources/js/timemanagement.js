@@ -3,9 +3,11 @@ const timeRegEx="([0-2]?[0-9]\.[0-5][0-9])";
 //business hours werden in db gespeichert: spalten=timeSlots, zeilen=weekdays?
 
 function setUpTimeManagement(){//called onload of body, 
-    fetchKunden(()=>{console.log("kunden fetched.")});
-    fetchBusinessHours(setUpTimeTable);
-    setUpBlockTermin();
+    Promise.all([fetchTermine(), fetchKunden(), fetchBusinessHours(), fetchFerienZeiten()]).then(()=>{
+        setUpTimeTable();
+        setUpFerienZeiten();
+        setUpBlockTermin();
+    })
 }
 
 function setUpTimeTable(){//sets up time Table for Business hours
@@ -74,6 +76,37 @@ function setUpBlockTermin(){
         changeSubmitButtonAppearance1(e, but);
     });
 }
+function setUpFerienZeiten(){
+    let fbut= document.getElementById("submit-button-fz");
+    fbut.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        let s = e.getElementById("ferien-zeit-start-datum");
+        let end = e.getElementById("ferien-zeit-end-datum");
+        let fz = new FerienZeit(s.value, end.value);
+        setFerienZeiten(fz);
+    });
+    fillFzDisplay();
+}
+function fillFzDisplay(){
+    let c = document.getElementById("ferien-zeiten-display");
+    ferienZeiten.forEach(fz=>{
+        let div = document.createElement("div");
+        div.classList.add("ferien-zeit-div");
+        let delButton = document.createElement("button");
+        delButton.classList.add ("fz-delete-button");
+        delButton.id=JSON.stringify(fz);
+        delButton.addEventListener("click", (e)=>{
+            deleteFz(e.target.id);
+        })
+        let dis = document.createElement("div");
+        dis.innerHTML =`${fz.d1} - ${fz.d2}`;
+        div.style.display="flex";
+        div.appendChild(dis);
+        div.appendChild(delButton);
+        c.appendChild(div);
+    })
+}
+
 function checkTermin(){
     //make Termin
     let message;

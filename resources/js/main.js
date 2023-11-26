@@ -26,7 +26,7 @@ const leistungen=[
 var bh= new BusinessHours(["-"],["-"],["-"],["-"],["-"]);
 const kunden =[];//[new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", []), new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", [])];
 const bhweekdays =["mo", "di", "mi", "don", "fr"];
-const ferienZeiten=[new FerienZeit("21.12.2023", "4.1.2024")]; 
+const ferienZeiten=[];//[new FerienZeit("21.12.2023", "4.1.2024")]; 
 var currentDauer = 4;
 const imageRefs=["/termintool/resources/images/calendar-blank-icon.svg", "/termintool/resources/images/clock-line-icon.svg","/termintool/resources/images/diary-icon.svg","/termintool/resources/images/boys-icon.svg","/termintool/resources/images/service-provider-icon.svg"];
 /*------------------------------------------Konstruktoren--------------------------------------------*/
@@ -76,21 +76,24 @@ function FerienZeit(d1, d2){
 /*------------------------Index Page handling------------------------------*/
 function setUp(){
     if(window.innerWidth<=767){
-        fetchKunden(()=>{console.log("kunden fetched.")});
-        setUpNavbarSmartphone();
-        //Leistungsselect
-        fetchBusinessHours(fillDaySlot);
-        var sel = document.getElementById("chooseLeistung");
-        setUpLeistungsDropDown();
-        fillLeistungsSelect(sel);
+        Promise.all([fetchKunden(), fetchTermine(), fetchFerienZeiten(), fetchBusinessHours()])
+        .then(()=>{
+            setUpNavbarSmartphone();
+            fillDaySlot();
+            var sel = document.getElementById("chooseLeistung");
+            setUpLeistungsDropDown();
+            fillLeistungsSelect(sel);
+        })
     }else{
-        fetchKunden(()=>{console.log("kunden fetched.")});
-        setUpNavbar();
-        setUpDays();
-        fetchBusinessHours(fillDaySlots);
-        var sel = document.getElementById("chooseLeistung");
-        setUpLeistungsDropDown();
-        fillLeistungsSelect(sel);
+        Promise.all([fetchKunden(), fetchTermine(), fetchFerienZeiten(), fetchBusinessHours()])
+        .then(()=>{
+            setUpNavbar();
+            setUpDays();
+            fillDaySlots();
+            var sel = document.getElementById("chooseLeistung");
+            setUpLeistungsDropDown();
+            fillLeistungsSelect(sel);
+        })
     }
 }
 function setUpCalendar(){
@@ -100,13 +103,17 @@ function setUpCalendar(){
         console.log("Smartphone set up finished.");*/
         adaptSideBar();
         setUpNavbarSmartphone();
-        fetchBusinessHours(fillDaySlot);
+        Promise.all(fetchBusinessHours()).then(()=>{
+            fillDaySlot();
+        });
     }else{
         /*fetchTermine(setUpDays);
         fetchKunden();*/
         setUpNavbar();
         setUpDays();
-        fetchBusinessHours(fillDaySlots);
+        Promise.all(fetchBusinessHours()).then(()=>{
+            fillDaySlots();
+        });
     }
 }
 function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an #days, erstellt header und setzt id auf =bhweekdays[i]

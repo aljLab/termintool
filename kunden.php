@@ -19,7 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Kundenübersicht</title>
     </header>
-    <body onload="fetchKunden(fillKundenTabelle)">
+    <body onload="fillKundenTabelle()">
     <div id="back">
         <div id="container">
         <div id="navbar">

@@ -1,9 +1,11 @@
 <?php
     session_start();
-    if(!isset($_SESSION["u"])){
-        header("Location: server-side-php/login.php");
-        exit;
-    }
+    /**
+     * if(!isset($_SESSION["u"])){
+      *  header("Location: server-side-php/login.php");
+       * exit;
+    *}
+     */
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +22,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Termintool</title>
     </header>
-    <body onload="fetchTermine(setUpTimeManagement)">
+    <body onload="setUpTimeManagement()">
     <div id="back">
         <div id="container">
         <div id="navbar">
@@ -37,60 +39,80 @@
                     <a class="listItem" href="leistungen.php">Leistungen</a><br />
                     <!--button onclick = "checkFetching()">testen</button-->
             </div>
-            <div id="timecontainer">
-                <div id="setBusinessHours">
-                    <h4>Geschäftszeiten festlegen:</h4>
-                    <p id="currentTimeDisplay"></p>
-                    <table id="timeTable">
-                        <tr id="thead">
-                            <th>Tag</th>
-                        </tr>
-                        <tr id="tmo">
-                            <td>Mo</td>
-                        </tr>
-                        <tr id="tdi">
-                            <td>Di</td>
-                        </tr>
-                        <tr id="tmi">
-                            <td>Mi</td>
-                        </tr>
-                        <tr id="tdon">
-                            <td>Do</td>
-                        </tr>
-                        <tr id="tfr">
-                            <td>Fr</td>
-                        </tr>
-                    </table>
-                    <button id="updateBusinessHours" onclick="updateBusinessHours()">Geschäftszeiten ändern</button>
-                    <span id="feedbackBusinessHours"></span>
-                </div>
-                <div id="makeReservation">
-                    <h4>Termine blockieren:</h4>
-                    <form id="makeReservationForm">
-                    <div class="lineContainer">
-                        <label class="dateInputLabel" for="reserveDay">Datum:</label>
-                        <div class="dateContainer">
-                            <input class="dateInputs" id ="reserveDay" name="day" type="text" size="4" placeholder="TT" pattern="[0-3]\d" required>.
-                            <input class="dateInputs" id="reserveMonth" name ="month" type="text" size="4" placeholder="MM" pattern="(0|1)\d" required>.
-                            <input class="dateInputs" id ="reserveYear" name = "year" type="text" size="6" placeholder="JJJJ" pattern ="\d{4}" required>
-                        </div>    
-                    </div><br />
-                    <div class="lineContainer">
-                        <label class="dateInputLabel" for="startTime"> Uhrzeit Beginn:</label>
-                        <div class="dateContainer"> 
-                            <input class="dateInputs" id ="startTime" name="startTime" type="text" size="6" placeholder="hh.mm" pattern="([0-2]?[0-9]\.[0,1,3,4][0,5])" required>
-                        </div>
-                    </div><br />
-                    <div class="lineContainer">
-                        <label class="dateInputLabel" for="endTime"> Uhrzeit Ende:</label>
-                        <div class="dateContainer">
-                            <input class="dateInputs" id="endTime" name="endTime" type="text" size="6" placeholder="hh.mm" pattern="([0-2]?[0-9]\.[0,1,3,4][0,5])" required>
-                        </div>
-                    </div><br />
-                       <input type="button" name="sub" id="blockDateSubmit" value="Termin blockieren"><br />
-                    </form>
-                    <span id="feedbackBlockTermin"></span>
-                    <!--button id="testBlockTermin" onclick="testBlockTermin()">Funktionalität testen</button-->
+                <div id="timecontainer">
+                    <div id="setBusinessHours">
+                        <h4>Geschäftszeiten festlegen:</h4>
+                        <p id="currentTimeDisplay"></p>
+                        <table id="timeTable">
+                            <tr id="thead">
+                                <th>Tag</th>
+                            </tr>
+                            <tr id="tmo">
+                                <td>Mo</td>
+                            </tr>
+                            <tr id="tdi">
+                                <td>Di</td>
+                            </tr>
+                            <tr id="tmi">
+                                <td>Mi</td>
+                            </tr>
+                            <tr id="tdon">
+                                <td>Do</td>
+                            </tr>
+                            <tr id="tfr">
+                                <td>Fr</td>
+                            </tr>
+                        </table>
+                        <button id="updateBusinessHours" onclick="updateBusinessHours()">Geschäftszeiten ändern</button>
+                        <span id="feedbackBusinessHours"></span>
+                    </div>
+                    <div id="makeReservation">
+                        <h4>Termine blockieren:</h4>
+                        <form id="makeReservationForm">
+                        <div class="lineContainer">
+                            <label class="dateInputLabel" for="reserveDay">Datum:</label>
+                            <div class="dateContainer">
+                                <input class="dateInputs" id ="reserveDay" name="day" type="text" size="4" placeholder="TT" pattern="[0-3]\d" required>.
+                                <input class="dateInputs" id="reserveMonth" name ="month" type="text" size="4" placeholder="MM" pattern="(0|1)\d" required>.
+                                <input class="dateInputs" id ="reserveYear" name = "year" type="text" size="6" placeholder="JJJJ" pattern ="\d{4}" required>
+                            </div>    
+                        </div><br />
+                        <div class="lineContainer">
+                            <label class="dateInputLabel" for="startTime"> Uhrzeit Beginn:</label>
+                            <div class="dateContainer"> 
+                                <input class="dateInputs" id ="startTime" name="startTime" type="text" size="6" placeholder="hh.mm" pattern="([0-2]?[0-9]\.[0,1,3,4][0,5])" required>
+                            </div>
+                        </div><br />
+                        <div class="lineContainer">
+                            <label class="dateInputLabel" for="endTime"> Uhrzeit Ende:</label>
+                            <div class="dateContainer">
+                                <input class="dateInputs" id="endTime" name="endTime" type="text" size="6" placeholder="hh.mm" pattern="([0-2]?[0-9]\.[0,1,3,4][0,5])" required>
+                            </div>
+                        </div><br />
+                        <input type="button" name="sub" id="blockDateSubmit" value="Termin blockieren"><br />
+                        </form>
+                        <span id="feedbackBlockTermin"></span>
+                        <!--button id="testBlockTermin" onclick="testBlockTermin()">Funktionalität testen</button-->
+                    </div>
+                <div class= "ferien-zeiten-container">
+                    <div id="ferien-zeiten-display">
+                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
+                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
+                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
+                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
+                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
+                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
+                        <div class= "ferien-zeit-div"><div>21.2.2023-24.12.2023</div><button class="fz-delete-button">X</button></div>
+                    </div>
+                    <div id= "ferien-zeiten-form">
+                        <form action="">
+                            <label for="ferien-zeit-start-datum">Startdatum (erster Ferientag)</label>
+                            <input type ="text" id="ferien-zeit-start-datum" name ="start-date-fz" pattern="[0-3]\d\.(0|1)\d\.\d{4}" required></input>
+                            <label for="ferien-zeit-end-datum">Enddatum (erster Arbeitstag)</label>
+                            <input type ="text" id="ferien-zeit-end-datum" name ="end-date-fz" pattern="[0-3]\d\.(0|1)\d\.\d{4}" required></input>
+                            <button type="submit" id="submit-button-fz">Ferienzeit hinzufügen</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

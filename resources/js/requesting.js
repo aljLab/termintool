@@ -47,79 +47,81 @@ function deliverBooking(e){//handles click on "Buchen"...Open Modal, Set Up Func
 }
 //for mobile only: normal is below, almost exact copy
 function prepareBookingMobile(){
-    //get Termin-Object (OHNE KUNDENINFO) aus session Storage!
-    let f = document.getElementById("bformMobile");
-    let t = JSON.parse(sessionStorage.getItem("termin"));
-    let zp = document.getElementById("zeitpunktMobile");
-    let ls = document.getElementById("leistungsselectMobile");
-    zp.innerHTML=`${t.date}, ${t.hourValue}:${t.minuteValue} Uhr`;
-    fillLeistungsSelectbooking(ls, t.leistung.name);
-    ls.value = t.leistung.name;
-    f.addEventListener("submit", function(e){//Logik, die überprüft ob Eingaben korrekt waren etc. und anschließend bucht
-        e.preventDefault();
-        anrede = f.elements.anrede.value;
-        vorname = f.elements.vorname.value;
-        nachname = f.elements.nachname.value;
-        mail = f.elements.mail.value;
-        phone = f.elements.phone.value;
-        leistung = f.elements.leistung.value;
-        if(nachname == ""||vorname==""){
-            let box = document.getElementById("feedbackMobile");
-            box.innerHTML="";
-            box.innerHTML=`* Vor- und Nachname sind Pflichtfelder.`;
-        }else{ 
-            if(!validMail(mail)){
-                let box = document.getElementById("feedbackMobile");
-                box.innerHTML="";
-                let div = document.createElement("div");
-                let i = document.getElementById("mailinputMobile");
-                i.style.border = "2px solid red";
-                div.innerHTML=`* ${mail} ist keine gültige E-Mail-Adresse.`;
-                box.appendChild(div);
-            }else{
-                let i = document.getElementById("mailinputMobile");
-                i.style.border = "";
-                if(!validPhone(sanitizePhone(phone))){
-                    let box = document.getElementById("feedbackMobile");
-                    box.innerHTML="";
-                    let div = document.createElement("div");
-                    let i = document.getElementById("phoneinputMobile");
-                    i.style.border = "2px solid red";
-                    div.innerHTML=`* ${phone} ist keine gültige Telefonnummer.`;
-                    box.appendChild(div);
-                }else{
-                    let i = document.getElementById("phoneinputMobile");
-                    i.style.border = "";
-                    let box = document.getElementById("feedbackMobile");
-                    box.innerHTML="";
-                    //make POST-Request to enter Termin into database
-                    if(withinBusinessHours(t, bh)){
-                        if(noTerminConflicts(t)){
-                            box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
-                            t.kunde = new Kunde(anrede, sanitizeText(vorname), sanitizeText(nachname), mail.toLowerCase(), sanitizePhone(phone));
-                            insertTermin(t);
-                            insertKunde(t.kunde);
-                            sendMail(t);
-                            sendMailNotification(t);
-                            f.reset();
-                            let buchenButton = document.getElementById("submitButtonMobile");
-                            buchenButton.style="display:none;";
-                            let bb = document.getElementById("backButtonMobile");
-                            bb.innerHTML="Zurück zum Kalender";
-                            bb.addEventListener("click", ()=>{
-                                window.location="index.html";
-                            });
-                            bb.style.display="block";
-                        }else{
-                            box.innerHTML="Termin überschneidet sich mit bereits gebuchtem Termin!";
-                        }
-                    }else{
-                        box.innerHTML="Termin außerhalb der Betriebszeiten.";
-                    }
-                }
-            }
-        }
-    })
+   Promise(fetchBusinessHours()).then(()=>{
+     //get Termin-Object (OHNE KUNDENINFO) aus session Storage!
+     let f = document.getElementById("bformMobile");
+     let t = JSON.parse(sessionStorage.getItem("termin"));
+     let zp = document.getElementById("zeitpunktMobile");
+     let ls = document.getElementById("leistungsselectMobile");
+     zp.innerHTML=`${t.date}, ${t.hourValue}:${t.minuteValue} Uhr`;
+     fillLeistungsSelectbooking(ls, t.leistung.name);
+     ls.value = t.leistung.name;
+     f.addEventListener("submit", function(e){//Logik, die überprüft ob Eingaben korrekt waren etc. und anschließend bucht
+         e.preventDefault();
+         anrede = f.elements.anrede.value;
+         vorname = f.elements.vorname.value;
+         nachname = f.elements.nachname.value;
+         mail = f.elements.mail.value;
+         phone = f.elements.phone.value;
+         leistung = f.elements.leistung.value;
+         if(nachname == ""||vorname==""){
+             let box = document.getElementById("feedbackMobile");
+             box.innerHTML="";
+             box.innerHTML=`* Vor- und Nachname sind Pflichtfelder.`;
+         }else{ 
+             if(!validMail(mail)){
+                 let box = document.getElementById("feedbackMobile");
+                 box.innerHTML="";
+                 let div = document.createElement("div");
+                 let i = document.getElementById("mailinputMobile");
+                 i.style.border = "2px solid red";
+                 div.innerHTML=`* ${mail} ist keine gültige E-Mail-Adresse.`;
+                 box.appendChild(div);
+             }else{
+                 let i = document.getElementById("mailinputMobile");
+                 i.style.border = "";
+                 if(!validPhone(sanitizePhone(phone))){
+                     let box = document.getElementById("feedbackMobile");
+                     box.innerHTML="";
+                     let div = document.createElement("div");
+                     let i = document.getElementById("phoneinputMobile");
+                     i.style.border = "2px solid red";
+                     div.innerHTML=`* ${phone} ist keine gültige Telefonnummer.`;
+                     box.appendChild(div);
+                 }else{
+                     let i = document.getElementById("phoneinputMobile");
+                     i.style.border = "";
+                     let box = document.getElementById("feedbackMobile");
+                     box.innerHTML="";
+                     //make POST-Request to enter Termin into database
+                     if(withinBusinessHours(t, bh)){
+                         if(noTerminConflicts(t)){
+                             box.innerHTML=`Vielen Dank für Ihre Buchung ${anrede} ${nachname}.`;
+                             t.kunde = new Kunde(anrede, sanitizeText(vorname), sanitizeText(nachname), mail.toLowerCase(), sanitizePhone(phone));
+                             insertTermin(t);
+                             insertKunde(t.kunde);
+                             sendMail(t);
+                             sendMailNotification(t);
+                             f.reset();
+                             let buchenButton = document.getElementById("submitButtonMobile");
+                             buchenButton.style="display:none;";
+                             let bb = document.getElementById("backButtonMobile");
+                             bb.innerHTML="Zurück zum Kalender";
+                             bb.addEventListener("click", ()=>{
+                                 window.location="index.html";
+                             });
+                             bb.style.display="block";
+                         }else{
+                             box.innerHTML="Termin überschneidet sich mit bereits gebuchtem Termin!";
+                         }
+                     }else{
+                         box.innerHTML="Termin außerhalb der Betriebszeiten.";
+                     }
+                 }
+             }
+         }
+     })
+   })
 
 }
 function getDauer(n){
