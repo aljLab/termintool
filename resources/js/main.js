@@ -103,7 +103,7 @@ function setUpCalendar(){
         console.log("Smartphone set up finished.");*/
         adaptSideBar();
         setUpNavbarSmartphone();
-        Promise.all(fetchBusinessHours()).then(()=>{
+        Promise(fetchBusinessHours()).then(()=>{
             fillDaySlot();
         });
     }else{

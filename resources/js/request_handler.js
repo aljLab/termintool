@@ -20,7 +20,7 @@
     });
 }*/
 function fetchTermine() {
-    fetch('./server-side-php/termin_handle.php')
+    return fetch('./server-side-php/termin_handle.php')
         .then(response => {
             if (!response.ok) {
                 throw new Error("Network response was not okay.");
@@ -40,7 +40,7 @@ function fetchTermine() {
         });
 }
 function fetchKunden(){
-    fetch('./server-side-php/kunden_handle.php')
+    return fetch('./server-side-php/kunden_handle.php')
     .then(response =>{
         if(!response.ok){
             throw new Error("Network response was not okay.");
@@ -62,7 +62,7 @@ function fetchLeistungen(){
 
 }
 function fetchBusinessHours(){
-        fetch('./server-side-php/bh_handle.php')
+    return fetch('./server-side-php/bh_handle.php')
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not okay.");
@@ -82,7 +82,7 @@ function fetchBusinessHours(){
             });
 }
 function fetchFerienZeiten(){
-    fetch('./server-side-php/fz_handle.php')
+    return fetch('./server-side-php/fz_handle.php')
         .then(response => {
             if (!response.ok) {
                 throw new Error("Network response was not okay.");
