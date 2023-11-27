@@ -82,8 +82,8 @@ function setUpFerienZeiten(){
     let fbut= document.getElementById("submit-button-fz");
     fbut.addEventListener("submit",(e)=>{
         e.preventDefault();
-        let s = e.getElementById("ferien-zeit-start-datum");
-        let end = e.getElementById("ferien-zeit-end-datum");
+        let s = document.getElementById("ferien-zeit-start-datum");
+        let end = document.getElementById("ferien-zeit-end-datum");
         let fz = new FerienZeit(s.value, end.value);
         setFerienZeiten(fz);
     });
@@ -94,12 +94,17 @@ function fillFzDisplay(){
     ferienZeiten.forEach(fz=>{
         let div = document.createElement("div");
         div.classList.add("ferien-zeit-div");
+        div.id=JSON.stringify(fz);
         let delButton = document.createElement("button");
         delButton.classList.add ("fz-delete-button");
         delButton.id=JSON.stringify(fz);
         delButton.addEventListener("click", (e)=>{
-            deleteFz(e.target.id);
-        })
+            deleteFz(e.target.parentNode.id, ()=>{
+                    setTimeout(() => {
+                    window.location.reload();
+                    }, 500); // Delay in milliseconds
+                });
+        });
         let dis = document.createElement("div");
         dis.innerHTML =`${fz.d1} - ${fz.d2}`;
         div.style.display="flex";
