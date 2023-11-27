@@ -91,7 +91,7 @@ function fetchFerienZeiten(){
             }
         })
         .then(data => {
-            //{bh: JSON-String}
+            //{fz: JSON-String}
             data.forEach(obj=>{
                 ferienZeiten.push(JSON.parse(obj.fz));
             })
@@ -254,7 +254,7 @@ function setFerienZeiten(fzObject){
     {
         method: "POST", 
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(fzObject)
+        body: JSON.stringify(fzObject),
     })
     .then(function(responsetext){
         if (!response.ok) {
