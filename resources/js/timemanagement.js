@@ -80,7 +80,7 @@ function setUpBlockTermin(){
 }
 function setUpFerienZeiten(){
     let fbut= document.getElementById("submit-button-fz");
-    fbut.addEventListener("click",(e)=>{
+    fbut.addEventListener("click",()=>{
         let s = document.getElementById("ferien-zeit-start-datum");
         let end = document.getElementById("ferien-zeit-end-datum");
         let fz = new FerienZeit(s.value, end.value);
@@ -97,6 +97,7 @@ function fillFzDisplay(){
         let delButton = document.createElement("button");
         delButton.classList.add ("fz-delete-button");
         delButton.id=JSON.stringify(fz);
+        delButton.innerHTML="X";
         delButton.addEventListener("click", (e)=>{
             deleteFz(e.target.parentNode.id, ()=>{
                     setTimeout(() => {
