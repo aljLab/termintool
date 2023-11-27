@@ -271,6 +271,7 @@ function setFerienZeiten(fzObject){
     });
 }
 function deleteFz(fzstr){
+    console.log(fzstr);
     fetch("./server-side-php/delete_ferienzeit.php", 
     {
         method: "POST", 
