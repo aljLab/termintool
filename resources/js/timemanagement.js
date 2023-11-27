@@ -2,12 +2,14 @@ const table = document.getElementById("timeTable");
 const timeRegEx="([0-2]?[0-9]\.[0-5][0-9])";
 //business hours werden in db gespeichert: spalten=timeSlots, zeilen=weekdays?
 
-function setUpTimeManagement(){//called onload of body, 
-    Promise.all([fetchTermine(), fetchKunden(), fetchBusinessHours(), fetchFerienZeiten()]).then(()=>{
-        setUpTimeTable();
-        setUpFerienZeiten();
-        setUpBlockTermin();
-    })
+async function setUpTimeManagement(){//called onload of body, 
+    await fetchKunden();
+    await fetchTermine();
+    await fetchFerienZeiten();
+    await fetchBusinessHours();
+    setUpTimeTable();
+    setUpFerienZeiten();
+    setUpBlockTermin();
 }
 
 function setUpTimeTable(){//sets up time Table for Business hours

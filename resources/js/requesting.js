@@ -46,8 +46,9 @@ function deliverBooking(e){//handles click on "Buchen"...Open Modal, Set Up Func
     }
 }
 //for mobile only: normal is below, almost exact copy
-function prepareBookingMobile(){
-   Promise(fetchBusinessHours()).then(()=>{
+async function prepareBookingMobile(){
+    await fetchTermine();
+    await fetchBusinessHours();
      //get Termin-Object (OHNE KUNDENINFO) aus session Storage!
      let f = document.getElementById("bformMobile");
      let t = JSON.parse(sessionStorage.getItem("termin"));
@@ -117,12 +118,10 @@ function prepareBookingMobile(){
                      }else{
                          box.innerHTML="Termin außerhalb der Betriebszeiten.";
                      }
-                 }
-             }
+                    }
+            }
          }
      })
-   })
-
 }
 function getDauer(n){
     for(i=0;i<leistungen.length;i++){

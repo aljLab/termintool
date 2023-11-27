@@ -93,7 +93,7 @@ function fetchFerienZeiten(){
         .then(data => {
             //{bh: JSON-String}
             data.forEach(obj=>{
-                ferienZeiten = JSON.parse(obj.bh);
+                ferienZeiten.push(JSON.parse(obj.fz));
             })
             //callback();
         })

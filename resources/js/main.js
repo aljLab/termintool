@@ -74,37 +74,35 @@ function FerienZeit(d1, d2){
     }
 }
 /*------------------------Index Page handling------------------------------*/
-function setUp(){
+async function setUp(){
     if(window.innerWidth<=767){
-        Promise.all([fetchKunden(), fetchTermine(), fetchFerienZeiten(), fetchBusinessHours()])
-        .then(()=>{
-            console.log(kunden);
-            console.log(termine);
-            console.log(ferienZeiten);
-            console.log(bh);
-            setUpNavbarSmartphone();
-            fillDaySlot();
-            var sel = document.getElementById("chooseLeistung");
-            setUpLeistungsDropDown();
-            fillLeistungsSelect(sel);
-        })
+        await fetchKunden();
+        await fetchTermine();
+        await fetchFerienZeiten();
+        await fetchBusinessHours();
+        setUpNavbarSmartphone();
+        fillDaySlot();
+        var sel = document.getElementById("chooseLeistung");
+        setUpLeistungsDropDown();
+        fillLeistungsSelect(sel);
     }else{
-        Promise.all([fetchKunden(), fetchTermine(), fetchFerienZeiten(), fetchBusinessHours()])
-        .then(()=>{
-            console.log(kunden);
-            console.log(termine);
-            console.log(ferienZeiten);
-            console.log(bh);
-            setUpNavbar();
-            setUpDays();
-            fillDaySlots();
-            var sel = document.getElementById("chooseLeistung");
-            setUpLeistungsDropDown();
-            fillLeistungsSelect(sel);
-        })
+        await fetchKunden();
+        await fetchTermine();
+        await fetchFerienZeiten();
+        await fetchBusinessHours();
+        console.log(kunden);
+        console.log(termine);
+        console.log(ferienZeiten);
+        console.log(bh);
+        setUpNavbar();
+        setUpDays();
+        fillDaySlots();
+        var sel = document.getElementById("chooseLeistung");
+        setUpLeistungsDropDown();
+        fillLeistungsSelect(sel);
     }
 }
-function setUpCalendar(){
+async function setUpCalendar(){
     if(window.innerWidth<=767){
         /*setUpSmartphoneDays;
         fetchKunden();
