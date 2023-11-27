@@ -101,25 +101,17 @@ async function setUpCalendar(){
         /*setUpSmartphoneDays;
         fetchKunden();
         console.log("Smartphone set up finished.");*/
+        await fetchBusinessHours();
+        await fetchTermine();
         adaptSideBar();
         setUpNavbarSmartphone();
-        fetchBusinessHours().then(()=>{
-            fillDaySlot();
-        })
-        .catch(error => {
-            console.error('Error fetching business hours:', error);
-        });
+        fillDaySlot();
     }else{
-        /*fetchTermine(setUpDays);
-        fetchKunden();*/
+        await fetchBusinessHours();
+        await fetchTermine();
         setUpNavbar();
         setUpDays();
-        fetchBusinessHours().then(()=>{
-            fillDaySlots();
-        })
-        .catch(error => {
-            console.error('Error fetching business hours:', error);
-        });
+        fillDaySlots();
     }
 }
 function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an #days, erstellt header und setzt id auf =bhweekdays[i]
