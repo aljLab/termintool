@@ -80,8 +80,7 @@ function setUpBlockTermin(){
 }
 function setUpFerienZeiten(){
     let fbut= document.getElementById("submit-button-fz");
-    fbut.addEventListener("submit",(e)=>{
-        e.preventDefault();
+    fbut.addEventListener("click",(e)=>{
         let s = document.getElementById("ferien-zeit-start-datum");
         let end = document.getElementById("ferien-zeit-end-datum");
         let fz = new FerienZeit(s.value, end.value);
