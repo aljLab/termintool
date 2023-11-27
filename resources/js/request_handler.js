@@ -250,13 +250,12 @@ function setBusinessHours(bh){//Takes Kunden-Objekt als Input und stellt POST-Re
     });
 }
 function setFerienZeiten(fzObject){
-    fetch("./server-side-php/setFz.php", 
-    {
+    fetch("./server-side-php/setFz.php", {
         method: "POST", 
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(fzObject),
     })
-    .then(function(responsetext){
+    .then(function(response){
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -276,9 +275,9 @@ function deleteFz(fzstr){
     {
         method: "POST", 
         headers: {'Content-Type': 'application/json'},
-        body: fzstr
+        body: fzstr,
     })
-    .then(function(responsetext){
+    .then(function(response){
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
