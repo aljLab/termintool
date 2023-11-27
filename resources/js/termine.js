@@ -75,16 +75,13 @@ function orderInAsc(termin){//sortiert Input termin in 'termine'-Array nach Zeit
             if(getCompDate(termine[i])<compDate){
                 if(i==termine.length-1){
                     termine.push(termin);
-                    console.log("Termin pushed.");
                     return;
                 }else{
                     termine.splice(i+1, 0, termin);
-                    console.log("Termin inserted.");
                     return;
                 }
             }else if(i ==0){
                 termine.splice(0, 0, termin);
-                console.log("Termin inserted.");
                 return;
             }
         }

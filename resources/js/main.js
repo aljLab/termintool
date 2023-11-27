@@ -252,7 +252,7 @@ function setUpNavbar(){
     w.innerHTML="";
     var r = document.getElementById("rbutton");
     r.innerHTML="";
-    //create Button und week dísplay + initiate
+    //create Button und week display + initiate
     var lbutton = document.createElement("button");
     lbutton.innerHTML="<";
     lbutton.style.margin="5px";
