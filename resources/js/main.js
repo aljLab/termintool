@@ -26,7 +26,7 @@ const leistungen=[
 var bh= new BusinessHours(["-"],["-"],["-"],["-"],["-"]);
 const kunden =[];//[new Kunde("Frau", "Amaya", "Papaya", "amalulu@b.com", "017623552e398", []), new Kunde("Frau", "Doris", "Piesler", "example@beta.com", "0176223987239", [])];
 const bhweekdays =["mo", "di", "mi", "don", "fr"];
-const ferienZeiten=[];//[new FerienZeit("21.12.2023", "4.1.2024")]; 
+var ferienZeiten=[];//[new FerienZeit("21.12.2023", "4.1.2024")]; 
 var currentDauer = 4;
 const imageRefs=["/termintool/resources/images/calendar-blank-icon.svg", "/termintool/resources/images/clock-line-icon.svg","/termintool/resources/images/diary-icon.svg","/termintool/resources/images/boys-icon.svg","/termintool/resources/images/service-provider-icon.svg"];
 /*------------------------------------------Konstruktoren--------------------------------------------*/
@@ -66,12 +66,6 @@ function Kunde(anrede, vorname, nachname, mail, phone){
 function FerienZeit(d1, d2){
     this.d1= d1;
     this.d2= d2;
-    this.checkIfWithin=(datestr)=>{
-        let date1=new Date(d1.split(".")[2], (d1.split(".")[1])-1,d1.split(".")[0]);
-        let date2=new Date(d2.split(".")[2], (d2.split(".")[1])-1, d2.split(".")[0]);
-        let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, datestr.split(".")[0]);
-        return (date1.getTime() <= compDate.getTime())&&(compDate.getTime()<date2.getTime());
-    }
 }
 /*------------------------Index Page handling------------------------------*/
 async function setUp(){
@@ -164,7 +158,7 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
             ferienZeiten.forEach(fz=>{
                 console.log(fz); 
                 console.log("Date to test: "+compareDateString)
-                if(fz.checkIfWithin(compareDateString)){
+                if(checkIfWithin(compareDateString, fz)){
                     available = false;
                 }
             });
@@ -368,7 +362,7 @@ function fillDaySlot(){
     }
     let compareDateString= `${today.getDate()}.${today.getMonth()+1}.${today.getFullYear()}`;
     ferienZeiten.forEach(fz=>{
-        if(fz.checkIfWithin(compareDateString)){
+        if(checkIfWithin(compareDateString, fz)){
             console.log(`today: ${today}`);
             console.log(fz);
             let container = document.getElementById("days");
@@ -482,4 +476,10 @@ function decrementDay(){
             fillDaySlot();
         }
     }
+}
+function checkIfWithin(datestr, fz){
+    let date1=new Date(fz.d1.split(".")[2], (fz.d1.split(".")[1])-1,fz.d1.split(".")[0]);
+    let date2=new Date(fz.d2.split(".")[2], (fz.d2.split(".")[1])-1, fz.d2.split(".")[0]);
+    let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, datestr.split(".")[0]);
+    return (date1.getTime() <= compDate.getTime())&&(compDate.getTime()<date2.getTime());
 }

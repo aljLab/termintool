@@ -87,7 +87,6 @@ function orderInAsc(termin){//sortiert Input termin in 'termine'-Array nach Zeit
         }
     }else{
         termine.push(termin);
-        console.log("Termin pushed.");
     }
 }
 function getCompDate(termin){
