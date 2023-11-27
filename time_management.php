@@ -104,7 +104,7 @@
                             <input type ="text" id="ferien-zeit-start-datum" name ="start-date-fz" pattern="[0-3]\d\.(0|1)\d\.\d{4}" required></input>
                             <label for="ferien-zeit-end-datum">Enddatum (erster Arbeitstag)</label>
                             <input type ="text" id="ferien-zeit-end-datum" name ="end-date-fz" pattern="[0-3]\d\.(0|1)\d\.\d{4}" required></input>
-                            <button type="submit" id="submit-button-fz">Ferienzeit hinzufügen</button>
+                            <input type="submit" id="submit-button-fz">Ferienzeit hinzufügen</input>
                         </form>
                     </div>
                 </div>
