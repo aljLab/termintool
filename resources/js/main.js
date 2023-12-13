@@ -75,25 +75,21 @@ async function setUp(){
         await fetchFerienZeiten();
         await fetchBusinessHours();
         setUpNavbarSmartphone();
-        fillDaySlot();
         var sel = document.getElementById("chooseLeistung");
         setUpLeistungsDropDown();
         fillLeistungsSelect(sel);
+        fillDaySlot();
     }else{
         await fetchKunden();
         await fetchTermine();
         await fetchFerienZeiten();
         await fetchBusinessHours();
-        console.log(kunden);
-        console.log(termine);
-        console.log(ferienZeiten);
-        console.log(bh);
         setUpNavbar();
         setUpDays();
-        fillDaySlots();
         var sel = document.getElementById("chooseLeistung");
         setUpLeistungsDropDown();
         fillLeistungsSelect(sel);
+        fillDaySlots();
     }
 }
 async function setUpCalendar(){
