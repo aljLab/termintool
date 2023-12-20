@@ -78,25 +78,25 @@ async function setUp(){
     </div>
   `;
     if(window.innerWidth<=767){
+        setUpNavbarSmartphone();
         await fetchKunden();
         await fetchTermine();
         await fetchFerienZeiten();
         await fetchBusinessHours();
         await timeOutFunction();
         days.innerHTML="";
-        setUpNavbarSmartphone();
         var sel = document.getElementById("chooseLeistung");
         setUpLeistungsDropDown();
         fillLeistungsSelect(sel);
         fillDaySlot();
     }else{
+        setUpNavbar();
         await fetchKunden();
         await fetchTermine();
         await fetchFerienZeiten();
         await fetchBusinessHours();
         await timeOutFunction();
         days.innerHTML="";
-        setUpNavbar();
         setUpDays();
         var sel = document.getElementById("chooseLeistung");
         setUpLeistungsDropDown();
