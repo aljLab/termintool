@@ -69,11 +69,21 @@ function FerienZeit(d1, d2){
 }
 /*------------------------Index Page handling------------------------------*/
 async function setUp(){
+  // Display loading animation
+   var days = document.getElementById('days');
+   days.innerHTML = `
+    <div id="loading" style ="width:100%;height:500px;display:flex;background-color:var(--lightest-color);flex-direction:column;align-items:center;justify-content:center">
+      <img class="loading-animation-index" src="resources/images/animation_image_colored.png"></img>
+      <div>Loading...</div>
+    </div>
+  `;
     if(window.innerWidth<=767){
         await fetchKunden();
         await fetchTermine();
         await fetchFerienZeiten();
         await fetchBusinessHours();
+        await timeOutFunction();
+        days.innerHTML="";
         setUpNavbarSmartphone();
         var sel = document.getElementById("chooseLeistung");
         setUpLeistungsDropDown();
@@ -84,6 +94,8 @@ async function setUp(){
         await fetchTermine();
         await fetchFerienZeiten();
         await fetchBusinessHours();
+        await timeOutFunction();
+        days.innerHTML="";
         setUpNavbar();
         setUpDays();
         var sel = document.getElementById("chooseLeistung");
@@ -470,4 +482,12 @@ function checkIfWithin(datestr, fz){
     let date2=new Date(fz.d2.split(".")[2], (fz.d2.split(".")[1])-1, fz.d2.split(".")[0]);
     let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, datestr.split(".")[0]);
     return (date1.getTime() <= compDate.getTime())&&(compDate.getTime()<date2.getTime());
+}
+
+async function timeOutFunction(){
+    return new Promise(resolve => {
+        setTimeout(() => {
+          resolve('Fetched data');
+        }, 1000); // Simulating a 2-second delay
+      });
 }

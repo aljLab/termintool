@@ -203,6 +203,17 @@ hr{
     box-shadow: #000;
     pointer-events: none;
 }
+.loading-animation-index{
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 50px;
+}
+@keyframes spin {
+    0% { transform: scale(1,1); }
+    50%{ transform: scale(1.5,1.5);}
+    100% { transform: scale(1,1); }
+  }
 /*--------------------loginPage------------------------*/
 
 #loginbox, #bookingbox{
