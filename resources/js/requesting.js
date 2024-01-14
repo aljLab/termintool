@@ -243,18 +243,24 @@ function convertToTermin(tstr, l){//macht aus den Inputdaten einen Termin, Forma
     })
     return new Termin(h, m, date, leiObj, leiObj.dauer, "");
 }
-function withinBusinessHours(termin){//returns true, if selected termin lies within business hours, fals otherwise (booked appointments are NOT considered)
+function withinBusinessHours(termin){//returns true, if selected termin lies within business hours, false otherwise (booked appointments are NOT considered)
+    //Create Two Dates: one for the starting time, one for the ending time
     let startDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);
     let endDate = new Date(startDate.getTime() +termin.dauer*15*60*1000);
+
+    //get Weekday-String from global array
     let weekday=bhweekdays[convertToMoSo(startDate.getDay())];//get weekday string to identify corresponding BusinessHours.property
+    
+    
     var compareDates=[];//Aufbauen von Datum-Paaren (für jeden Timeslot im BusinessHourArray ein Paar)
     if(!weekday){
         return false;
     }else{
+        //format of business hours: [[hh:mm-hh:mm], [hh:mm-hh:mm], [-]] (every bh.property (weekday) contains an array of timeslots)
         bh[weekday].forEach(timeslot => {
             if(timeslot!=="-"){
-            let start=timeslot.split("-")[0];
-            let end=timeslot.split("-")[1];
+            let start=timeslot.split("-")[0];//hh:mm (starting time)
+            let end=timeslot.split("-")[1];//hh:mm (end time)
             let ts = [new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], start.split(".")[0], start.split(".")[1]),
                       new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], end.split(".")[0], end.split(".")[1])];
             compareDates.push(ts);}
@@ -264,8 +270,8 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
     let absUpper=compareDates[compareDates.length-1][1];//oberste timeslot grenze
     let absLower=compareDates[0][0];//untere timeSlotGrenze
     for(i =0;i<compareDates.length;i++){
-        let lowBound = compareDates[i][0];
-        let UpBound=compareDates[i][1];
+        let lowBound = compareDates[i][0];//untere Grenze des TimeSlots
+        let UpBound=compareDates[i][1];//obere grenze des TimeSlots
         let condition1= (lowBound<startDate&&startDate<UpBound)&&(UpBound<endDate);//untere Grenze ist in BH, obere aber nicht <=> ...
         let condition2=(startDate<lowBound)&&(lowBound<endDate)//obere Grenze ist drin, untere nicht
         let condition3=(startDate<absLower||endDate>absUpper);

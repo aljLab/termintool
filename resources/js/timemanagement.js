@@ -117,7 +117,7 @@ function fillFzDisplay(){
 function checkTermin(){
     //make Termin
     let message;
-    let t = getBlockedTermin();
+    let t = getBlockedTermin();//returns Termin Object which is supposed to be blocked
     console.log(t);
     let fb = document.getElementById("feedbackBlockTermin");
     if (typeof t !=="object"){
