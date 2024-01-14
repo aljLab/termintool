@@ -483,7 +483,6 @@ function checkIfWithin(datestr, fz){
     let compDate= new Date(datestr.split(".")[2], datestr.split(".")[1]-1, datestr.split(".")[0]);
     return (date1.getTime() <= compDate.getTime())&&(compDate.getTime()<date2.getTime());
 }
-
 async function timeOutFunction(){
     return new Promise(resolve => {
         setTimeout(() => {
