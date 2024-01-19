@@ -244,7 +244,7 @@ function convertToTermin(tstr, l){//macht aus den Inputdaten einen Termin, Forma
     return new Termin(h, m, date, leiObj, leiObj.dauer, "");
 }
 function withinBusinessHours(termin){//returns true, if selected termin lies within business hours, false otherwise (booked appointments are NOT considered)
-    //Create Two Dates: one for the starting time, one for the ending time
+    //Create Two Dates: one for the starting time, one for the ending time of the appointment
     let startDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);
     let endDate = new Date(startDate.getTime() +termin.dauer*15*60*1000);
 

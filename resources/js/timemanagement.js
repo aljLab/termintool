@@ -129,8 +129,8 @@ function checkTermin(){
 }
 function getBlockedTermin(){//returns new Termin mit den Eingabewerten der Inputs der Termin-Reservierungsform
     var f = document.getElementById("makeReservationForm");
-    let d = f.elements.day.value;
-    let m=f.elements.month.value;
+    let d = Number(f.elements.day.value);
+    let m= Number(f.elements.month.value);
     let y=f.elements.year.value;
     let start=f.elements.startTime.value;
     let end=f.elements.endTime.value;
