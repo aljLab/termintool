@@ -1,8 +1,31 @@
+
+//get timeslot from termin-object
 function getTimeslot(t){
     dateArr = t.date.split(".");
     let startDate = new Date(dateArr[2], dateArr[1], dateArr[0], t.hourValue, t.minuteValue);
     let endDate = new Date(startDate.getTime() + 1000 * 60 * 15 * t.dauer);
     return new Timeslot(t.date, startDate, endDate);
+}
+//get timeslot from date, startime and dauer
+function getTimeSlotFromRaw(date, startHour, startMin, dauer){
+    dateArr = date.split(".");
+    let startDate = new Date(dateArr[2], dateArr[1], dateArr[0], startHour, startMin);
+    let endDate = new Date(startDate.getTime() + 1000 * 60 * 15 * dauer);
+    return new Timeslot(date, startDate, endDate);
+}
+//BUFFERED TS:= normal TS plus 15 min (+ one time unit)
+function getBufferedTimeslot(t){
+    dateArr = t.date.split(".");
+    let startDate = new Date(dateArr[2], dateArr[1], dateArr[0], t.hourValue, t.minuteValue);
+    let endDate = new Date(startDate.getTime() + 1000 * 60 * 15 * (t.dauer+1));
+    return new Timeslot(t.date, startDate, endDate);
+}
+//get buffered timeslot from date, startime and dauer
+function getBufferedTimeSlotFromRaw(date, startHour, startMin, dauer){
+    dateArr = date.split(".");
+    let startDate = new Date(dateArr[2], dateArr[1], dateArr[0], startHour, startMin);
+    let endDate = new Date(startDate.getTime() + 1000 * 60 * 15 * (dauer+1));
+    return new Timeslot(date, startDate, endDate);
 }
 function noOverlap(ts1, ts2){//checks two timeslots for overlaps
     //entweder liegt ts1 komplett vor ts2 oder danach

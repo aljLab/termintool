@@ -247,23 +247,27 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
     //Create Two Dates: one for the starting time, one for the ending time of the appointment
     let startDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);
     let endDate = new Date(startDate.getTime() +termin.dauer*15*60*1000);
+    let TerminTimeslot = new TimeSlot(termin.date, startDate, endDate);
 
     //get Weekday-String from global array
     let weekday=bhweekdays[convertToMoSo(startDate.getDay())];//get weekday string to identify corresponding BusinessHours.property
     
-    
     var compareDates=[];//Aufbauen von Datum-Paaren (für jeden Timeslot im BusinessHourArray ein Paar)
+    var tsArray = [];
     if(!weekday){
         return false;
     }else{
         //format of business hours: [[hh:mm-hh:mm], [hh:mm-hh:mm], [-]] (every bh.property (weekday) contains an array of timeslots)
         bh[weekday].forEach(timeslot => {
             if(timeslot!=="-"){
-            let start=timeslot.split("-")[0];//hh:mm (starting time)
-            let end=timeslot.split("-")[1];//hh:mm (end time)
-            let ts = [new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], start.split(".")[0], start.split(".")[1]),
-                      new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], end.split(".")[0], end.split(".")[1])];
-            compareDates.push(ts);}
+                let start=timeslot.split("-")[0];//hh:mm (starting time)
+                let end=timeslot.split("-")[1];//hh:mm (end time)
+                let date1 = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], start.split(".")[0], start.split(".")[1]);
+                let date2 = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], end.split(".")[0], end.split(".")[1]);
+                let ts = [date1,date2];
+                compareDates.push(ts);
+                tsArray.push(new Timeslot(termin.date, date1, date2));
+            }
         });
     }
     if(!compareDates.length){return false;}
@@ -279,6 +283,11 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
             return false;
         }
     }
+    /*for(i=0;i<tsArray.length;i++){
+        if(!within(TerminTimeslot, tsArray[i])){
+            return false;
+        }
+    }*/
     return true;
 }
 function noTerminConflicts(termin){//returns true, if termin does not conflict with other book appointments, false otherwise
