@@ -156,8 +156,6 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
             let compareDateString= `${monday.getDate()+l}.${monday.getMonth()+1}.${monday.getFullYear()}`;
             let available = true;
             ferienZeiten.forEach(fz=>{
-                console.log(fz); 
-                console.log("Date to test: "+compareDateString)
                 if(checkIfWithin(compareDateString, fz)){
                     available = false;
                 }

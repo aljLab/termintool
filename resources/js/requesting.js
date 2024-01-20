@@ -37,7 +37,7 @@ function deliverBooking(e){//handles click on "Buchen"...Open Modal, Set Up Func
         //let b = document.body;
         //b.style.height="100%";
         //b.style.overflow="hidden";
-        terminstring = e.id;//dd.mm.yyyy, 10:30 Uhr
+        terminstring = e.id;//dd.mm.yyyy, 10:30 Uhr (without leading 0s)
         displayDateChosen();
         var select = document.getElementById("leistungsselect");
         fillLeistungsSelectbooking(select, document.getElementById("chooseLeistung").value);
