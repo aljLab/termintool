@@ -150,7 +150,7 @@ function provideTerminFeedback(termin){
     console.log("termin which is tested: \n");
     console.log(termin);
     if(pastToday(new Date(y, m-1, d))){
-        if(withinBusinessHours(termin, bh)){
+        //if(withinBusinessHours(termin, bh)){
             if(noTerminConflicts(termin)){
                 if(termin.dauer>0){
                     //safeToDB
@@ -162,9 +162,9 @@ function provideTerminFeedback(termin){
             }else{
                 fb="Termin wurde schon gebucht oder überschneidet sich mit einem bereits gebuchten Termin.";
             }
-        }else{
-            fb="Termin liegt außerhalb der Geschäftszeiten.";
-        }
+       // }else{
+           // fb="Termin liegt außerhalb der Geschäftszeiten.";
+       // }
     }else{
         fb="Termin liegt in der Vergangenheit.";
     }
