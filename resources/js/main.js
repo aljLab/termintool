@@ -109,14 +109,18 @@ async function setUpCalendar(){
         /*setUpSmartphoneDays;
         fetchKunden();
         console.log("Smartphone set up finished.");*/
-        await fetchBusinessHours();
+        await fetchKunden();
         await fetchTermine();
+        await fetchFerienZeiten();
+        await fetchBusinessHours();
         adaptSideBar();
         setUpNavbarSmartphone();
         fillDaySlot();
     }else{
-        await fetchBusinessHours();
+        await fetchKunden();
         await fetchTermine();
+        await fetchFerienZeiten();
+        await fetchBusinessHours();
         setUpNavbar();
         setUpDays();
         fillDaySlots();
