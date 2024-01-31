@@ -109,14 +109,18 @@ async function setUpCalendar(){
         /*setUpSmartphoneDays;
         fetchKunden();
         console.log("Smartphone set up finished.");*/
-        await fetchBusinessHours();
+        await fetchKunden();
         await fetchTermine();
+        await fetchFerienZeiten();
+        await fetchBusinessHours();
         adaptSideBar();
         setUpNavbarSmartphone();
         fillDaySlot();
     }else{
-        await fetchBusinessHours();
+        await fetchKunden();
         await fetchTermine();
+        await fetchFerienZeiten();
+        await fetchBusinessHours();
         setUpNavbar();
         setUpDays();
         fillDaySlots();
@@ -156,8 +160,6 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
             let compareDateString= `${monday.getDate()+l}.${monday.getMonth()+1}.${monday.getFullYear()}`;
             let available = true;
             ferienZeiten.forEach(fz=>{
-                console.log(fz); 
-                console.log("Date to test: "+compareDateString)
                 if(checkIfWithin(compareDateString, fz)){
                     available = false;
                 }

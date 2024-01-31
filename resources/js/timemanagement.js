@@ -130,14 +130,14 @@ function checkTermin(){
 function getBlockedTermin(){//returns new Termin mit den Eingabewerten der Inputs der Termin-Reservierungsform
     var f = document.getElementById("makeReservationForm");
     let d = Number(f.elements.day.value);
-    let m= Number(f.elements.month.value);
+    let m = Number(f.elements.month.value);
     let y=f.elements.year.value;
     let start=f.elements.startTime.value;
     let end=f.elements.endTime.value;
     let dauer = (Number(end.split(".")[0])-Number(start.split(".")[0]))*4+(Number(end.split(".")[1])-Number(start.split(".")[1]))/15;
-    console.log(dauer);
+    
     if(d!==""&&m!==""&&y!==""&&start!==""&&end!==""){
-        return new Termin(start.split(".")[0], start.split(".")[1], `${d}.${m}.${y}`, new Leistung("BLOCKED", dauer, "--"),dauer+1, new Kunde("","IT","ADMIN", "praxisbuero@posteo.de", "XXXXXXXXXXXX"));
+        return new Termin(start.split(".")[0], start.split(".")[1], `${d}.${m}.${y}`, new Leistung("BLOCKED", dauer, "--"),dauer, new Kunde("","IT","ADMIN", "praxisbuero@posteo.de", "XXXXXXXXXXXX"));
     }else{
         return -1;
     }
@@ -147,8 +147,10 @@ function provideTerminFeedback(termin){
     let d = termin.date.split(".")[0];
     let m = termin.date.split(".")[1];
     let y = termin.date.split(".")[2];
+    console.log("termin which is tested: \n");
+    console.log(termin);
     if(pastToday(new Date(y, m-1, d))){
-        if(withinBusinessHours(termin, bh)){
+        //if(withinBusinessHours(termin, bh)){
             if(noTerminConflicts(termin)){
                 if(termin.dauer>0){
                     //safeToDB
@@ -160,9 +162,9 @@ function provideTerminFeedback(termin){
             }else{
                 fb="Termin wurde schon gebucht oder überschneidet sich mit einem bereits gebuchten Termin.";
             }
-        }else{
-            fb="Termin liegt außerhalb der Geschäftszeiten.";
-        }
+       // }else{
+           // fb="Termin liegt außerhalb der Geschäftszeiten.";
+       // }
     }else{
         fb="Termin liegt in der Vergangenheit.";
     }

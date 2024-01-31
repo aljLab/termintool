@@ -37,7 +37,7 @@ function deliverBooking(e){//handles click on "Buchen"...Open Modal, Set Up Func
         //let b = document.body;
         //b.style.height="100%";
         //b.style.overflow="hidden";
-        terminstring = e.id;//dd.mm.yyyy, 10:30 Uhr
+        terminstring = e.id;//dd.mm.yyyy, 10:30 Uhr (without leading 0s)
         displayDateChosen();
         var select = document.getElementById("leistungsselect");
         fillLeistungsSelectbooking(select, document.getElementById("chooseLeistung").value);
@@ -247,13 +247,13 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
     //Create Two Dates: one for the starting time, one for the ending time of the appointment
     let startDate = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], termin.hourValue, termin.minuteValue);
     let endDate = new Date(startDate.getTime() +termin.dauer*15*60*1000);
-    let TerminTimeslot = new TimeSlot(termin.date, startDate, endDate);
+    //let TerminTimeslot = new TimeSlot(termin.date, startDate, endDate);
 
     //get Weekday-String from global array
     let weekday=bhweekdays[convertToMoSo(startDate.getDay())];//get weekday string to identify corresponding BusinessHours.property
     
     var compareDates=[];//Aufbauen von Datum-Paaren (für jeden Timeslot im BusinessHourArray ein Paar)
-    var tsArray = [];
+    //var tsArray = [];
     if(!weekday){
         return false;
     }else{
@@ -266,7 +266,7 @@ function withinBusinessHours(termin){//returns true, if selected termin lies wit
                 let date2 = new Date(termin.date.split(".")[2], Number(termin.date.split(".")[1])-1, termin.date.split(".")[0], end.split(".")[0], end.split(".")[1]);
                 let ts = [date1,date2];
                 compareDates.push(ts);
-                tsArray.push(new Timeslot(termin.date, date1, date2));
+                //tsArray.push(new Timeslot(termin.date, date1, date2));
             }
         });
     }
