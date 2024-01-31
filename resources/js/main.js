@@ -146,7 +146,7 @@ function setUpDays(){//erstellt 5 divs (eins für jeden Wochentag), appended an 
 }
 function fillDaySlots(){//Desktop version of web page, several days on one page
     //check if Termin not to far in the future (if past ten weeks from now, dont display timeslots)
-    if(today.getTime()>currentDate.getTime()+8*7*24*60*60*1000){
+    if(today.getTime()>currentDate.getTime()+10*7*24*60*60*1000){
         let container = document.getElementById("days");
         container.innerHTML="";
         let pastTenWeeks = document.createElement("div");
