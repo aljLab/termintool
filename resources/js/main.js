@@ -157,10 +157,14 @@ function fillDaySlots(){//Desktop version of web page, several days on one page
     } 
     for(l=0;l<5;l++){
         //check if datum in Ferien
-            let compareDateString= `${monday.getDate()+l}.${monday.getMonth()+1}.${monday.getFullYear()}`;
+            let dateToCheck = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l);
+            let compareDateString= `${dateToCheck.getDate()}.${dateToCheck.getMonth()+1}.${dateToCheck.getFullYear()}`;
+            let zeroAppDate = `0${dateToCheck.getDate()}`.slice(-2);
+            let zeroAppMonth = `0${dateToCheck.getMonth()+1}`.slice(-2);
+            let compareDateString1= `${zeroAppDate}.${zeroAppMonth}.${dateToCheck.getFullYear()}`;
             let available = true;
             ferienZeiten.forEach(fz=>{
-                if(checkIfWithin(compareDateString, fz)){
+                if(checkIfWithin(compareDateString, fz)||checkIfWithin(compareDateString1, fz)){
                     available = false;
                 }
             });
