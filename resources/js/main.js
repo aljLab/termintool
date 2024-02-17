@@ -366,11 +366,10 @@ function fillDaySlot(){
         container.appendChild(pastTenWeeks);
         return;
     }
-    let dateToCheck = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate()+l);
-    let compareDateString= `${dateToCheck.getDate()}.${dateToCheck.getMonth()+1}.${dateToCheck.getFullYear()}`;
-    let zeroAppDate = `0${dateToCheck.getDate()}`.slice(-2);
-    let zeroAppMonth = `0${dateToCheck.getMonth()+1}`.slice(-2);
-    let compareDateString1= `${zeroAppDate}.${zeroAppMonth}.${dateToCheck.getFullYear()}`;
+    let compareDateString= `${today.getDate()}.${today.getMonth()+1}.${today.getFullYear()}`;
+    let zeroAppDate = `0${today.getDate()}`.slice(-2);
+    let zeroAppMonth = `0${today.getMonth()+1}`.slice(-2);
+    let compareDateString1= `${zeroAppDate}.${zeroAppMonth}.${today.getFullYear()}`;
     ferienZeiten.forEach(fz=>{
         if(checkIfWithin(compareDateString, fz)||checkIfWithin(compareDateString1, fz)){
             console.log(`today: ${today}`);
