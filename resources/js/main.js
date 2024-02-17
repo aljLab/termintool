@@ -367,6 +367,7 @@ function fillDaySlot(){
         container.appendChild(pastTenWeeks);
         return;
     }
+    let available = true;
     let compareDateString= `${today.getDate()}.${today.getMonth()+1}.${today.getFullYear()}`;
     let zeroAppDate = `0${today.getDate()}`.slice(-2);
     let zeroAppMonth = `0${today.getMonth()+1}`.slice(-2);
@@ -381,7 +382,9 @@ function fillDaySlot(){
             ferienSpan.innerHTML="<p>Datum liegt innerhalb der Betriebsferien.</p>";
             ferienSpan.classList.add("ferien-span-message");
             container.appendChild(ferienSpan);
-        }else{
+            available = false;
+        }});
+        if(available){
             c.innerHTML="";
             let bhprop = bhweekdays[convertToMoSo(today.getDay())];
             let div = document.createElement("div");
@@ -431,8 +434,6 @@ function fillDaySlot(){
                     div.appendChild(s);
                 }
                 }
-    });
-    
 }
 function setUpNavbarSmartphone(){
     //get Divs from HTMl file
