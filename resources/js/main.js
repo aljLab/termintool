@@ -1,5 +1,6 @@
 const c = document.getElementById("days");
 const dayNames= ["Mo", "Di", "Mi", "Do", "Fr"]; 
+let today;
 if(convertToMoSo(new Date().getDay())<5){
     today = new Date();
 }else{
