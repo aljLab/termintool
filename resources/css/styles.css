@@ -224,7 +224,7 @@ hr{
     background-color: #7393B3;
     border: 3px solid black;
     border-radius: 15px;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
