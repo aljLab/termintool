@@ -228,6 +228,9 @@ hr{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    inset:0;
+    margin: auto;
+    bottom: 50px;
 }
 #loginbox{
  font-size: 20px;
@@ -260,7 +263,6 @@ form{
 #bookingbox{
     position:absolute;
     z-index: 99;
-    display: none;
     justify-content: flex-start;
     top: 50px;
 }
@@ -689,11 +691,13 @@ form:invalid > button{
         height: 100%;
         top: 0;
         left: 0;
+        display: none;
     }
     #bookingbox{
         left: 10%;
         width: 80%;
         height: 80%;
+        display: none;
     }
     #bform{
         font-size: 20px;
