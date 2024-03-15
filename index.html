@@ -8,6 +8,7 @@
         <script src="./resources/js/timemanagement.js" defer></script>
         <script src="./resources/js/termine.js" defer></script>
         <script src="resources/js/slotHandle.js" defer></script>
+        <script type="module" src="resources/js/notis.js" defer></script>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
@@ -71,6 +72,11 @@
                 Telefonnummer: <br /><input type="text" name = "phone" id ="phoneinput"><br />
                 Leistung: <br /> <select name="leistung" id="leistungsselect">
                 </select><br/>
+                <div id="datenschutz-info">
+                    <p>Hiermit gebe ich meine Einwilligung, dass meine Daten begrenzt gespeichert werden. 
+                        Informationen stehen in der <a href="./dse.html">Datenschutzerklärung</a></p>
+                    <input type="checkbox" name="datenschutz-checkbox" id="datenschutz-checkbox">
+                </div>
                 <input type="submit" name="submit" value = "Verbindlich buchen" id = "submitButton"><br/>
                 <span id="feedback"></span><br />
              </form>
