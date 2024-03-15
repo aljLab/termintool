@@ -260,12 +260,12 @@ form{
 #bookingbox{
     position:absolute;
     z-index: 99;
-    display: flex;
+    display: none;
     justify-content: flex-start;
     top: 50px;
 }
 #modalBack{
-    display:flex;
+    display:none;
     position: absolute;
     z-index: 98;
     height:auto;
