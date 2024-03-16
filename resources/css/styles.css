@@ -628,7 +628,6 @@ form:invalid > button{
     padding: 15px;
     border-radius: 15px;
     box-sizing: border-box;
-    
 }
 /*----------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------
@@ -795,6 +794,14 @@ form:invalid > button{
         height: 80px;
         margin: 5px;
         font-size: 18px;
+    }
+    /*-----Datenschutz------*/
+    #datenschutz-info-mobile{
+        background-color: var(--light-color);
+        margin: 15px;
+        padding: 15px;
+        border-radius: 15px;
+        box-sizing: border-box;
     }
   }
  
