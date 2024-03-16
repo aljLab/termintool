@@ -125,7 +125,11 @@ async function prepareBookingMobile(){
                }
             }
         }else{
-
+            let box = document.getElementById("feedbackMobile");
+                        box.innerHTML="";
+                        let div = document.createElement("div");
+                        div.innerHTML=`Bitte stimmen Sie der Speicherung der nötigen Daten zu.`;
+                        box.appendChild(div);
         }
      })
 }
