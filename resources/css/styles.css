@@ -234,6 +234,7 @@ hr{
 }
 #loginbox{
  font-size: 20px;
+ display: flex;
 }
 form{
     display: flex;
